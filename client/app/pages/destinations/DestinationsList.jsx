@@ -1,6 +1,7 @@
 import { isEmpty, reject } from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
+import i18n from "@/i18n";
 
 import Button from "antd/lib/button";
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
@@ -95,13 +96,13 @@ class DestinationsList extends React.Component {
 
     return isEmpty(destinations) ? (
       <div className="text-center">
-        There are no alert destinations yet.
+        {i18n.t("destinations.noDestinations")}
         {policy.isCreateDestinationEnabled() && (
           <div className="m-t-5">
             <PlainButton type="link" onClick={this.showCreateSourceDialog}>
-              Click here
+              {i18n.t("destinations.clickHere")}
             </PlainButton>{" "}
-            to add one.
+            {i18n.t("destinations.toAddOne")}
           </div>
         )}
       </div>
@@ -122,7 +123,7 @@ class DestinationsList extends React.Component {
         <div className="m-b-15">
           <Button {...newDestinationProps}>
             <i className="fa fa-plus m-r-5" aria-hidden="true" />
-            New Alert Destination
+            {i18n.t("destinations.newDestination")}
           </Button>
         </div>
         {this.state.loading ? <LoadingState className="" /> : this.renderDestinations()}

@@ -1,5 +1,7 @@
 import React, { useMemo } from "react";
 import { first, includes } from "lodash";
+import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
 import Menu from "antd/lib/menu";
 import Link from "@/components/Link";
 import PlainButton from "@/components/PlainButton";
@@ -63,6 +65,7 @@ function useNavbarActiveState() {
 }
 
 export default function DesktopNavbar() {
+  const { t } = useTranslation();
   const firstSettingsTab = first(settingsMenu.getAvailableItems());
 
   const activeState = useNavbarActiveState();
@@ -76,7 +79,7 @@ export default function DesktopNavbar() {
       <NavbarSection className="desktop-navbar-logo">
         <div role="menuitem">
           <Link href="./">
-            <img src={logoUrl} alt="Redash" />
+            <img src={logoUrl} alt="WE BOARD" />
           </Link>
         </div>
       </NavbarSection>
@@ -86,7 +89,7 @@ export default function DesktopNavbar() {
           <Menu.Item key="dashboards" className={activeState.dashboards ? "navbar-active-item" : null}>
             <Link href="dashboards">
               <DesktopOutlinedIcon aria-label="Dashboard navigation button" />
-              <span className="desktop-navbar-label">Dashboards</span>
+              <span className="desktop-navbar-label">{t("navbar.dashboards")}</span>
             </Link>
           </Menu.Item>
         )}
@@ -94,7 +97,7 @@ export default function DesktopNavbar() {
           <Menu.Item key="queries" className={activeState.queries ? "navbar-active-item" : null}>
             <Link href="queries">
               <CodeOutlinedIcon aria-label="Queries navigation button" />
-              <span className="desktop-navbar-label">Queries</span>
+              <span className="desktop-navbar-label">{t("navbar.queries")}</span>
             </Link>
           </Menu.Item>
         )}
@@ -102,7 +105,7 @@ export default function DesktopNavbar() {
           <Menu.Item key="alerts" className={activeState.alerts ? "navbar-active-item" : null}>
             <Link href="alerts">
               <AlertOutlinedIcon aria-label="Alerts navigation button" />
-              <span className="desktop-navbar-label">Alerts</span>
+              <span className="desktop-navbar-label">{t("navbar.alerts")}</span>
             </Link>
           </Menu.Item>
         )}
@@ -118,27 +121,27 @@ export default function DesktopNavbar() {
             title={
               <React.Fragment>
                 <PlusOutlinedIcon />
-                <span className="desktop-navbar-label">Create</span>
+                <span className="desktop-navbar-label">{t("navbar.create")}</span>
               </React.Fragment>
             }>
             {canCreateQuery && (
               <Menu.Item key="new-query">
                 <Link href="queries/new" data-test="CreateQueryMenuItem">
-                  New Query
+                  {t("navbar.newQuery")}
                 </Link>
               </Menu.Item>
             )}
             {canCreateDashboard && (
               <Menu.Item key="new-dashboard">
                 <PlainButton data-test="CreateDashboardMenuItem" onClick={() => CreateDashboardDialog.showModal()}>
-                  New Dashboard
+                  {t("navbar.newDashboard")}
                 </PlainButton>
               </Menu.Item>
             )}
             {canCreateAlert && (
               <Menu.Item key="new-alert">
                 <Link data-test="CreateAlertMenuItem" href="alerts/new">
-                  New Alert
+                  {t("navbar.newAlert")}
                 </Link>
               </Menu.Item>
             )}
@@ -150,14 +153,14 @@ export default function DesktopNavbar() {
         <Menu.Item key="help">
           <HelpTrigger showTooltip={false} type="HOME" tabIndex={0}>
             <QuestionCircleOutlinedIcon />
-            <span className="desktop-navbar-label">Help</span>
+            <span className="desktop-navbar-label">{t("navbar.help")}</span>
           </HelpTrigger>
         </Menu.Item>
         {firstSettingsTab && (
           <Menu.Item key="settings" className={activeState.dataSources ? "navbar-active-item" : null}>
             <Link href={firstSettingsTab.path} data-test="SettingsLink">
               <SettingOutlinedIcon />
-              <span className="desktop-navbar-label">Settings</span>
+              <span className="desktop-navbar-label">{t("navbar.settings")}</span>
             </Link>
           </Menu.Item>
         )}
@@ -174,17 +177,25 @@ export default function DesktopNavbar() {
             </span>
           }>
           <Menu.Item key="profile">
-            <Link href="users/me">Profile</Link>
+            <Link href="users/me">{t("navbar.profile")}</Link>
           </Menu.Item>
           {currentUser.hasPermission("super_admin") && (
             <Menu.Item key="status">
-              <Link href="admin/status">System Status</Link>
+              <Link href="admin/status">{t("navbar.systemStatus")}</Link>
             </Menu.Item>
           )}
+          <Menu.SubMenu key="language" title={t("navbar.language")}>
+            <Menu.Item key="lang-vi" onClick={() => i18n.changeLanguage("vi")}>
+              Tiếng Việt
+            </Menu.Item>
+            <Menu.Item key="lang-en" onClick={() => i18n.changeLanguage("en")}>
+              English
+            </Menu.Item>
+          </Menu.SubMenu>
           <Menu.Divider />
           <Menu.Item key="logout">
             <PlainButton data-test="LogOutButton" onClick={() => Auth.logout()}>
-              Log out
+              {t("navbar.logout")}
             </PlainButton>
           </Menu.Item>
           <Menu.Divider />

@@ -1,10 +1,10 @@
-Redash failed to run the following queries:
+WE BOARD không chạy được các truy vấn sau:
 
 {% for failure in failures %}
 
 {{failure.name}} ({{base_url}}/queries/{{failure.id}})
-Last failed: {{failure.failed_at}}{% if failure.failure_count > 1 %} + {{failure.failure_count - 1}} more failures since last report{% endif %}
-Exception:
+Lần lỗi gần nhất: {{failure.failed_at}}{% if failure.failure_count > 1 %} + {{failure.failure_count - 1}} lần lỗi nữa kể từ báo cáo trước{% endif %}
+Lỗi:
 
 {{failure.failure_reason}}
 

@@ -1,4 +1,5 @@
 import React from "react";
+import i18n from "@/i18n";
 
 import Button from "antd/lib/button";
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
@@ -32,7 +33,7 @@ class GroupsList extends React.Component {
       (text, group) => (
         <div>
           <Link href={"groups/" + group.id}>{group.name}</Link>
-          {group.type === "builtin" && <span className="label label-default m-l-10">built-in</span>}
+          {group.type === "builtin" && <span className="label label-default m-l-10">{i18n.t("groups.builtIn")}</span>}
         </div>
       ),
       {
@@ -43,8 +44,8 @@ class GroupsList extends React.Component {
     Columns.custom(
       (text, group) => (
         <Button.Group>
-          <Link.Button href={`groups/${group.id}`}>Members</Link.Button>
-          {currentUser.isAdmin && <Link.Button href={`groups/${group.id}/data_sources`}>Data Sources</Link.Button>}
+          <Link.Button href={`groups/${group.id}`}>{i18n.t("groups.members")}</Link.Button>
+          {currentUser.isAdmin && <Link.Button href={`groups/${group.id}/data_sources`}>{i18n.t("groups.dataSources")}</Link.Button>}
         </Button.Group>
       ),
       {
@@ -60,9 +61,9 @@ class GroupsList extends React.Component {
             className="w-100"
             disabled={!canRemove}
             group={group}
-            title={canRemove ? null : "Cannot delete built-in group"}
+            title={canRemove ? null : i18n.t("groups.cannotDeleteBuiltIn")}
             onClick={() => this.onGroupDeleted()}>
-            Delete
+            {i18n.t("common.delete")}
           </DeleteGroupButton>
         );
       },
@@ -94,7 +95,7 @@ class GroupsList extends React.Component {
           <div className="m-b-15">
             <Button type="primary" onClick={this.createGroup}>
               <i className="fa fa-plus m-r-5" aria-hidden="true" />
-              New Group
+              {i18n.t("groups.newGroup")}
             </Button>
           </div>
         )}

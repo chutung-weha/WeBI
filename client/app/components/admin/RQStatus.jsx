@@ -1,6 +1,7 @@
 import { map } from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
+import i18n from "@/i18n";
 
 import Badge from "antd/lib/badge";
 import Card from "antd/lib/card";
@@ -34,21 +35,31 @@ CounterCard.defaultProps = {
 // Tables
 
 const queryJobsColumns = [
-  { title: "Queue", dataIndex: "origin" },
-  { title: "Query ID", dataIndex: ["meta", "query_id"] },
-  { title: "Org ID", dataIndex: ["meta", "org_id"] },
-  { title: "Data Source ID", dataIndex: ["meta", "data_source_id"] },
-  { title: "User ID", dataIndex: ["meta", "user_id"] },
-  Columns.custom(scheduled => scheduled.toString(), { title: "Scheduled", dataIndex: ["meta", "scheduled"] }),
-  Columns.timeAgo({ title: "Start Time", dataIndex: "started_at" }),
-  Columns.timeAgo({ title: "Enqueue Time", dataIndex: "enqueued_at" }),
+  { title: i18n.t("admin.queue"), dataIndex: "origin" },
+  { title: i18n.t("admin.queryId"), dataIndex: ["meta", "query_id"] },
+  { title: i18n.t("admin.orgId"), dataIndex: ["meta", "org_id"] },
+  { title: i18n.t("admin.dataSourceId"), dataIndex: ["meta", "data_source_id"] },
+  { title: i18n.t("admin.userId"), dataIndex: ["meta", "user_id"] },
+  Columns.custom(scheduled => scheduled.toString(), { title: i18n.t("admin.scheduled"), dataIndex: ["meta", "scheduled"] }),
+  Columns.timeAgo({ title: i18n.t("admin.startTime"), dataIndex: "started_at" }),
+  Columns.timeAgo({ title: i18n.t("admin.enqueueTime"), dataIndex: "enqueued_at" }),
 ];
 
 const otherJobsColumns = [
-  { title: "Queue", dataIndex: "origin" },
-  { title: "Job Name", dataIndex: "name" },
-  Columns.timeAgo({ title: "Start Time", dataIndex: "started_at" }),
-  Columns.timeAgo({ title: "Enqueue Time", dataIndex: "enqueued_at" }),
+  { title: i18n.t("admin.queue"), dataIndex: "origin" },
+  { title: i18n.t("admin.jobName"), dataIndex: "name" },
+  Columns.timeAgo({ title: i18n.t("admin.startTime"), dataIndex: "started_at" }),
+  Columns.timeAgo({ title: i18n.t("admin.enqueueTime"), dataIndex: "enqueued_at" }),
+];
+
+const workerColumnDefs = [
+  ["Hostname", "hostname", "admin.hostname"],
+  ["PID", "pid", "admin.pid"],
+  ["Name", "name", "admin.name"],
+  ["Queues", "queues", "admin.queues"],
+  ["Current Job", "current_job", "admin.currentJob"],
+  ["Successful Jobs", "successful_jobs", "admin.successfulJobs"],
+  ["Failed Jobs", "failed_jobs", "admin.failedJobs"],
 ];
 
 const workersColumns = [
@@ -59,21 +70,25 @@ const workersColumns = [
         {value}
       </span>
     ),
-    { title: "State", dataIndex: "state" }
+    { title: i18n.t("admin.state"), dataIndex: "state" }
   ),
 ]
   .concat(
-    map(["Hostname", "PID", "Name", "Queues", "Current Job", "Successful Jobs", "Failed Jobs"], c => ({
-      title: c,
-      dataIndex: c.toLowerCase().replace(/\s/g, "_"),
+    workerColumnDefs.map(([, dataIndex, key]) => ({
+      title: i18n.t(key),
+      dataIndex,
     }))
   )
   .concat([
-    Columns.dateTime({ title: "Birth Date", dataIndex: "birth_date" }),
-    Columns.duration({ title: "Total Working Time", dataIndex: "total_working_time" }),
+    Columns.dateTime({ title: i18n.t("admin.birthDate"), dataIndex: "birth_date" }),
+    Columns.duration({ title: i18n.t("admin.totalWorkingTime"), dataIndex: "total_working_time" }),
   ]);
 
-const queuesColumns = map(["Name", "Started", "Queued"], c => ({ title: c, dataIndex: c.toLowerCase() }));
+const queuesColumns = [
+  { title: i18n.t("admin.name"), dataIndex: "name" },
+  { title: i18n.t("admin.started"), dataIndex: "started" },
+  { title: "Queued", dataIndex: "queued" },
+];
 
 const TablePropTypes = {
   loading: PropTypes.bool.isRequired,

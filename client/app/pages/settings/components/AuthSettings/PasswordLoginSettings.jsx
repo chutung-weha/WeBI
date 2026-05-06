@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import Alert from "antd/lib/alert";
 import Form from "antd/lib/form";
 import Checkbox from "antd/lib/checkbox";
@@ -9,6 +10,7 @@ import { clientConfig } from "@/services/auth";
 import { SettingsEditorPropTypes, SettingsEditorDefaultProps } from "../prop-types";
 
 export default function PasswordLoginSettings(props) {
+  const { t } = useTranslation();
   const { settings, values, onChange, loading } = props;
 
   const isTheOnlyAuthMethod =
@@ -18,13 +20,12 @@ export default function PasswordLoginSettings(props) {
     <DynamicComponent name="OrganizationSettings.PasswordLoginSettings" {...props}>
       {!loading && !settings.auth_password_login_enabled && (
         <Alert
-          message="Password based login is currently disabled and users will
-            be able to login only with the enabled SSO options."
+          message={t("auth.passwordLoginDisabled")}
           type="warning"
           className="m-t-15 m-b-15"
         />
       )}
-      <Form.Item label="Password Login">
+      <Form.Item label={t("auth.passwordLogin")}>
         {loading ? (
           <Skeleton title={{ width: 300 }} paragraph={false} active />
         ) : (
@@ -34,10 +35,10 @@ export default function PasswordLoginSettings(props) {
             onChange={e => onChange({ auth_password_login_enabled: e.target.checked })}>
             <Tooltip
               title={
-                isTheOnlyAuthMethod ? "Password login can be disabled only if another login method is enabled." : null
+                isTheOnlyAuthMethod ? t("auth.passwordLoginCanDisable") : null
               }
               placement="right">
-              Password Login Enabled
+              {t("auth.passwordLoginEnabled")}
             </Tooltip>
           </Checkbox>
         )}

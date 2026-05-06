@@ -60,7 +60,7 @@ SECRET_KEY = os.environ.get("REDASH_COOKIE_SECRET")
 
 if SECRET_KEY is None:
     raise Exception(
-        "You must set the REDASH_COOKIE_SECRET environment variable. Visit http://redash.io/help/open-source/admin-guide/secrets for more information."
+        "You must set the REDASH_COOKIE_SECRET environment variable. Visit http://board.weha.vn/help/open-source/admin-guide/secrets for more information."
     )
 
 # The secret key to use when encrypting data source options

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import cx from "classnames";
 import { useDebouncedCallback } from "use-debounce";
 import useMedia from "use-media";
+import { useTranslation } from "react-i18next";
 import Button from "antd/lib/button";
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
 import Resizable from "@/components/Resizable";
@@ -52,6 +53,7 @@ function chooseDataSourceId(dataSourceIds, availableDataSources) {
 }
 
 function QuerySource(props) {
+  const { t } = useTranslation();
   const { query, setQuery, isDirty, saveQuery } = useQuery(props.query);
   const { dataSourcesLoaded, dataSources, dataSource } = useQueryDataSources(query);
   const [schema, setSchema] = useState([]);
@@ -270,14 +272,14 @@ function QuerySource(props) {
 
                     <QueryEditor.Controls
                       addParameterButtonProps={{
-                        title: "Add New Parameter",
+                        title: t("queries.addNewParameter"),
                         shortcut: "mod+p",
                         onClick: openAddNewParameterDialog,
                       }}
                       formatButtonProps={{
                         title: isFormatQueryAvailable
-                          ? "Format Query"
-                          : "Query formatting is not supported for your Data Source syntax",
+                          ? t("queries.formatQuery")
+                          : t("queries.formatNotSupported"),
                         disabled: !dataSource || !isFormatQueryAvailable,
                         shortcut: isFormatQueryAvailable ? "mod+shift+f" : null,
                         onClick: formatQuery,
@@ -286,7 +288,7 @@ function QuerySource(props) {
                         queryFlags.canEdit && {
                           text: (
                             <React.Fragment>
-                              <span className="hidden-xs">Save</span>
+                              <span className="hidden-xs">{t("queries.save")}</span>
                               {isDirty && !isQuerySaving ? "*" : null}
                             </React.Fragment>
                           ),
@@ -300,7 +302,7 @@ function QuerySource(props) {
                         shortcut: "mod+enter, alt+enter, ctrl+enter, shift+enter",
                         onClick: doExecuteQuery,
                         text: (
-                          <span className="hidden-xs">{selectedText === null ? "Execute" : "Execute Selected"}</span>
+                          <span className="hidden-xs">{selectedText === null ? t("queries.execute") : t("queries.executeSelected")}</span>
                         ),
                       }}
                       autocompleteToggleProps={{
@@ -368,7 +370,7 @@ function QuerySource(props) {
                 <React.Fragment>
                   {queryResultData.log.length > 0 && (
                     <div className="query-results-log">
-                      <p>Log Information:</p>
+                      <p>{t("queries.logInformation")}</p>
                       {map(queryResultData.log, (line, index) => (
                         <p key={`log-line-${index}`} className="query-log-line">
                           {line}
@@ -393,7 +395,7 @@ function QuerySource(props) {
                           loading={isQueryExecuting}
                           onClick={doExecuteQuery}>
                           {!isQueryExecuting && <i className="zmdi zmdi-refresh m-r-5" aria-hidden="true" />}
-                          Refresh Now
+                          {t("queries.refreshNow")}
                         </Button>
                       }
                     />

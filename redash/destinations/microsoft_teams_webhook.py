@@ -31,10 +31,10 @@ class MicrosoftTeamsWebhook(BaseDestination):
             "@type": "MessageCard",
             "@context": "http://schema.org/extensions",
             "themeColor": "0076D7",
-            "summary": "A Redash Alert was Triggered",
+            "summary": "A WE BOARD Alert was Triggered",
             "sections": [
                 {
-                    "activityTitle": "A Redash Alert was Triggered",
+                    "activityTitle": "A WE BOARD Alert was Triggered",
                     "facts": [
                         {"name": "Alert Name", "value": "{alert_name}"},
                         {"name": "Alert URL", "value": "{alert_url}"},

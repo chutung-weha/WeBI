@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import Form from "antd/lib/form";
 import Checkbox from "antd/lib/checkbox";
 import Skeleton from "antd/lib/skeleton";
@@ -7,6 +8,7 @@ import DynamicComponent from "@/components/DynamicComponent";
 import { SettingsEditorPropTypes, SettingsEditorDefaultProps } from "../prop-types";
 
 export default function BeaconConsentSettings(props) {
+  const { t } = useTranslation();
   const { values, onChange, loading } = props;
 
   return (
@@ -14,7 +16,7 @@ export default function BeaconConsentSettings(props) {
       <Form.Item
         label={
           <span>
-            Anonymous Usage Data Sharing
+            {t("settings.anonymousUsage")}
             <HelpTrigger className="m-l-5 m-r-5" type="USAGE_DATA_SHARING" />
           </span>
         }
@@ -27,7 +29,7 @@ export default function BeaconConsentSettings(props) {
             checked={values.beacon_consent}
             onChange={(e) => onChange({ beacon_consent: e.target.checked })}
           >
-            Help Redash improve by automatically sending anonymous usage data
+            {t("settings.anonymousUsageHelp")}
           </Checkbox>
         )}
       </Form.Item>

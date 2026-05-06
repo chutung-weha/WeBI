@@ -90,11 +90,11 @@ class PublicDashboardPage extends React.Component {
         )}
         <div id="footer">
           <div className="text-center">
-            <Link href="https://redash.io">
-              <img alt="Redash Logo" src={logoUrl} width="38" />
+            <Link href="http://board.weha.vn">
+              <img alt="WE BOARD Logo" src={logoUrl} width="38" />
             </Link>
           </div>
-          Powered by <Link href="https://redash.io/?ref=public-dashboard">Redash</Link>
+          Powered by <Link href="http://board.weha.vn/?ref=public-dashboard">WE BOARD</Link>
         </div>
       </div>
     );

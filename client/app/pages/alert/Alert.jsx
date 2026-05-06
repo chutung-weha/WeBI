@@ -1,6 +1,7 @@
 import { head, includes, trim, template, values } from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
+import i18n from "@/i18n";
 
 import LoadingState from "@/components/items-list/components/LoadingState";
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
@@ -28,7 +29,7 @@ const defaultNameBuilder = template("<%= query.name %>: <%= options.column %> <%
 
 export function getDefaultName(alert) {
   if (!alert.query) {
-    return "New Alert";
+    return i18n.t("alerts.newAlertTitle");
   }
   return defaultNameBuilder(alert);
 }
@@ -85,8 +86,8 @@ class Alert extends React.Component {
             if (!canEdit) {
               this.setState({ mode: MODES.VIEW });
               notification.warn(
-                "You cannot edit this alert",
-                "You do not have sufficient permissions to edit this alert, and have been redirected to the view-only page.",
+                i18n.t("alerts.cannotEditTitle"),
+                i18n.t("alerts.cannotEditMessage"),
                 { duration: 0 }
               );
             }
@@ -115,12 +116,12 @@ class Alert extends React.Component {
 
     return AlertService.save(alert)
       .then((alert) => {
-        notification.success("Saved.");
+        notification.success(i18n.t("alerts.savedSuccess"));
         navigateTo(`alerts/${alert.id}`, true);
         this.setState({ alert, mode: MODES.VIEW });
       })
       .catch(() => {
-        notification.error("Failed saving alert.");
+        notification.error(i18n.t("alerts.savedFailed"));
       });
   };
 
@@ -171,11 +172,11 @@ class Alert extends React.Component {
     const { alert } = this.state;
     return AlertService.delete(alert)
       .then(() => {
-        notification.success("Alert deleted successfully.");
+        notification.success(i18n.t("alerts.deletedSuccess"));
         navigateTo("alerts");
       })
       .catch(() => {
-        notification.error("Failed deleting alert.");
+        notification.error(i18n.t("alerts.deletedFailed"));
       });
   };
 
@@ -183,10 +184,10 @@ class Alert extends React.Component {
     const { alert } = this.state;
     return AlertService.evaluate(alert)
       .then(() => {
-        notification.success("Alert evaluated. Refresh page for updated status.");
+        notification.success(i18n.t("alerts.evaluatedSuccess"));
       })
       .catch(() => {
-        notifications.error("Failed to evaluate alert.");
+        notifications.error(i18n.t("alerts.evaluatedFailed"));
       });
   };
 
@@ -195,10 +196,10 @@ class Alert extends React.Component {
     return AlertService.mute(alert)
       .then(() => {
         this.setAlertOptions({ muted: true });
-        notification.warn("Notifications have been muted.");
+        notification.warn(i18n.t("alerts.mutedSuccess"));
       })
       .catch(() => {
-        notification.error("Failed muting notifications.");
+        notification.error(i18n.t("alerts.mutedFailed"));
       });
   };
 
@@ -207,10 +208,10 @@ class Alert extends React.Component {
     return AlertService.unmute(alert)
       .then(() => {
         this.setAlertOptions({ muted: false });
-        notification.success("Notifications have been restored.");
+        notification.success(i18n.t("alerts.unmutedSuccess"));
       })
       .catch(() => {
-        notification.error("Failed restoring notifications.");
+        notification.error(i18n.t("alerts.unmutedFailed"));
       });
   };
 

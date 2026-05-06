@@ -1,5 +1,6 @@
 import { includes, map } from "lodash";
 import React from "react";
+import i18n from "@/i18n";
 import Button from "antd/lib/button";
 
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
@@ -40,19 +41,19 @@ class GroupMembers extends React.Component {
     {
       key: "users",
       href: `groups/${this.groupId}`,
-      title: "Members",
+      title: i18n.t("groups.members"),
     },
     {
       key: "datasources",
       href: `groups/${this.groupId}/data_sources`,
-      title: "Data Sources",
+      title: i18n.t("groups.dataSources"),
       isAvailable: () => currentUser.isAdmin,
     },
   ];
 
   listColumns = [
     Columns.custom((text, user) => <UserPreviewCard user={user} withLink />, {
-      title: "Name",
+      title: i18n.t("groups.name"),
       field: "name",
       width: null,
     }),
@@ -68,7 +69,7 @@ class GroupMembers extends React.Component {
         }
         return (
           <Button className="w-100" type="danger" onClick={event => this.removeGroupMember(event, user)}>
-            Remove
+            {i18n.t("groups.remove")}
           </Button>
         );
       },
@@ -97,15 +98,15 @@ class GroupMembers extends React.Component {
         this.props.controller.update();
       })
       .catch(() => {
-        notification.error("Failed to remove member from group.");
+        notification.error(i18n.t("groups.failedRemoveMember"));
       });
 
   addMembers = () => {
     const alreadyAddedUsers = map(this.props.controller.allItems, u => u.id);
     SelectItemsDialog.showModal({
-      dialogTitle: "Add Members",
-      inputPlaceholder: "Search users...",
-      selectedItemsTitle: "New Members",
+      dialogTitle: i18n.t("groups.addMembers"),
+      inputPlaceholder: i18n.t("groups.searchUsers"),
+      selectedItemsTitle: i18n.t("groups.newMembers"),
       searchItems: searchTerm => User.query({ q: searchTerm }).then(({ results }) => results),
       renderItem: (item, { isSelected }) => {
         const alreadyInGroup = includes(alreadyAddedUsers, item.id);
@@ -152,11 +153,11 @@ class GroupMembers extends React.Component {
             {!controller.isLoaded && <LoadingState className="" />}
             {controller.isLoaded && controller.isEmpty && (
               <div className="text-center">
-                <p>There are no members in this group yet.</p>
+                <p>{i18n.t("groups.noMembersYet")}</p>
                 {currentUser.isAdmin && (
                   <Button type="primary" onClick={this.addMembers}>
                     <i className="fa fa-plus m-r-5" aria-hidden="true" />
-                    Add Members
+                    {i18n.t("groups.addMembers")}
                   </Button>
                 )}
               </div>

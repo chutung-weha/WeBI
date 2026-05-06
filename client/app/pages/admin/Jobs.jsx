@@ -1,6 +1,7 @@
 import { partition, flatMap, values } from "lodash";
 import React from "react";
 import moment from "moment";
+import i18n from "@/i18n";
 
 import Alert from "antd/lib/alert";
 import Tabs from "antd/lib/tabs";
@@ -93,30 +94,30 @@ class Jobs extends React.Component {
     return (
       <Layout activeTab="jobs">
         <div className="p-15">
-          {error && <Alert type="error" message="Failed loading status. Please refresh." />}
+          {error && <Alert type="error" message={i18n.t("admin.loadingFailed")} />}
 
           {!error && (
             <React.Fragment>
               <Grid.Row gutter={15} className="m-b-15">
                 <Grid.Col span={8}>
-                  <CounterCard title="Started Jobs" value={overallCounters.started} loading={isLoading} />
+                  <CounterCard title={i18n.t("admin.startedJobs")} value={overallCounters.started} loading={isLoading} />
                 </Grid.Col>
                 <Grid.Col span={8}>
-                  <CounterCard title="Queued Jobs" value={overallCounters.queued} loading={isLoading} />
+                  <CounterCard title={i18n.t("admin.queuedJobs")} value={overallCounters.queued} loading={isLoading} />
                 </Grid.Col>
               </Grid.Row>
 
               <Tabs activeKey={activeTab || "queues"} onTabClick={changeTab} animated={false}>
-                <Tabs.TabPane key="queues" tab="Queues">
+                <Tabs.TabPane key="queues" tab={i18n.t("admin.queues")}>
                   <QueuesTable loading={isLoading} items={queueCounters} />
                 </Tabs.TabPane>
-                <Tabs.TabPane key="workers" tab="Workers">
+                <Tabs.TabPane key="workers" tab={i18n.t("admin.workers")}>
                   <WorkersTable loading={isLoading} items={workers} />
                 </Tabs.TabPane>
-                <Tabs.TabPane key="queries" tab="Queries">
+                <Tabs.TabPane key="queries" tab={i18n.t("admin.queriesJobs")}>
                   <QueryJobsTable loading={isLoading} items={startedQueryJobs} />
                 </Tabs.TabPane>
-                <Tabs.TabPane key="other" tab="Other Jobs">
+                <Tabs.TabPane key="other" tab={i18n.t("admin.otherJobs")}>
                   <OtherJobsTable loading={isLoading} items={otherStartedJobs} />
                 </Tabs.TabPane>
               </Tabs>

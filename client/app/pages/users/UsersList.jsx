@@ -1,6 +1,7 @@
 import { isString, map, get, find } from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
+import i18n from "@/i18n";
 
 import Button from "antd/lib/button";
 import Modal from "antd/lib/modal";
@@ -40,17 +41,17 @@ function UsersListActions({ user, enableUser, disableUser, deleteUser }) {
   if (user.is_invitation_pending) {
     return (
       <Button type="danger" className="w-100" onClick={event => deleteUser(event, user)}>
-        Delete
+        {i18n.t("users.delete")}
       </Button>
     );
   }
   return user.is_disabled ? (
     <Button type="primary" className="w-100" onClick={event => enableUser(event, user)}>
-      Enable
+      {i18n.t("users.enable")}
     </Button>
   ) : (
     <Button className="w-100" onClick={event => disableUser(event, user)}>
-      Disable
+      {i18n.t("users.disable")}
     </Button>
   );
 }
@@ -75,24 +76,24 @@ class UsersList extends React.Component {
     {
       key: "active",
       href: "users",
-      title: "Active Users",
+      title: i18n.t("users.active"),
     },
     {
       key: "pending",
       href: "users/pending",
-      title: "Pending Invitations",
+      title: i18n.t("users.pending"),
     },
     {
       key: "disabled",
       href: "users/disabled",
-      title: "Disabled Users",
+      title: i18n.t("users.disabled"),
       isAvailable: () => policy.canCreateUser(),
     },
   ];
 
   listColumns = [
     Columns.custom.sortable((text, user) => <UserPreviewCard user={user} withLink />, {
-      title: "Name",
+      title: i18n.t("users.name"),
       field: "name",
       width: null,
     }),
@@ -104,18 +105,18 @@ class UsersList extends React.Component {
           </Link>
         )),
       {
-        title: "Groups",
+        title: i18n.t("users.groups"),
         field: "groups",
       }
     ),
     Columns.timeAgo.sortable({
-      title: "Joined",
+      title: i18n.t("users.joined"),
       field: "created_at",
       className: "text-nowrap",
       width: "1%",
     }),
     Columns.timeAgo.sortable({
-      title: "Last Active At",
+      title: i18n.t("users.lastActiveAt"),
       field: "active_at",
       className: "text-nowrap",
       width: "1%",
@@ -145,14 +146,14 @@ class UsersList extends React.Component {
   createUser = values =>
     User.create(values)
       .then(user => {
-        notification.success("Saved.");
+        notification.success(i18n.t("common.saved"));
         if (user.invite_link) {
           Modal.warning({
-            title: "Email not sent!",
+            title: i18n.t("users.emailNotSent"),
             content: (
               <React.Fragment>
                 <p>
-                  The mail server is not configured, please send the following link to <b>{user.name}</b>:
+                  {i18n.t("users.emailNotSentHint", { name: user.name })}
                 </p>
                 <InputWithCopy value={absoluteUrl(user.invite_link)} aria-label="Invite link" readOnly />
               </React.Fragment>
@@ -161,7 +162,7 @@ class UsersList extends React.Component {
         }
       })
       .catch(error => {
-        const message = find([get(error, "response.data.message"), get(error, "message"), "Failed saving."], isString);
+        const message = find([get(error, "response.data.message"), get(error, "message"), i18n.t("common.savedFailed")], isString);
         return Promise.reject(new Error(message));
       });
 
@@ -198,7 +199,7 @@ class UsersList extends React.Component {
       <div className="m-b-15">
         <Button type="primary" disabled={!policy.isCreateUserEnabled()} onClick={this.showCreateUserDialog}>
           <i className="fa fa-plus m-r-5" aria-hidden="true" />
-          New User
+          {i18n.t("users.newUser")}
         </Button>
         <DynamicComponent name="UsersListExtra" />
       </div>
@@ -215,7 +216,7 @@ class UsersList extends React.Component {
             <Sidebar.SearchInput
               value={controller.searchTerm}
               onChange={controller.updateSearch}
-              label="Search users"
+              label={i18n.t("users.search")}
             />
             <Sidebar.Menu items={this.sidebarMenu} selected={controller.params.currentPage} />
           </Layout.Sidebar>

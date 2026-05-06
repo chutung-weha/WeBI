@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import cx from "classnames";
+import { useTranslation } from "react-i18next";
 
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
 import Link from "@/components/Link";
@@ -28,70 +29,77 @@ import QueriesListEmptyState from "./QueriesListEmptyState";
 
 import "./queries-list.css";
 
-const sidebarMenu = [
-  {
-    key: "all",
-    href: "queries",
-    title: "All Queries",
-    icon: () => <Sidebar.MenuIcon icon="fa fa-code" />,
-  },
-  {
-    key: "my",
-    href: "queries/my",
-    title: "My Queries",
-    icon: () => <Sidebar.ProfileImage user={currentUser} />,
-  },
-  {
-    key: "favorites",
-    href: "queries/favorites",
-    title: "Favorites",
-    icon: () => <Sidebar.MenuIcon icon="fa fa-star" />,
-  },
-  {
-    key: "archive",
-    href: "queries/archive",
-    title: "Archived",
-    icon: () => <Sidebar.MenuIcon icon="fa fa-archive" />,
-  },
-];
-
-const listColumns = [
-  Columns.favorites({ className: "p-r-0" }),
-  Columns.custom.sortable(
-    (text, item) => (
-      <React.Fragment>
-        <Link className="table-main-title" href={"queries/" + item.id}>
-          {item.name}
-        </Link>
-        <QueryTagsControl className="d-block" tags={item.tags} isDraft={item.is_draft} isArchived={item.is_archived} />
-      </React.Fragment>
-    ),
+function buildSidebarMenu(t) {
+  return [
     {
-      title: "Name",
-      field: "name",
-      width: null,
-    }
-  ),
-  Columns.custom((text, item) => item.user.name, { title: "Created By", width: "1%" }),
-  Columns.dateTime.sortable({ title: "Created At", field: "created_at", width: "1%" }),
-  Columns.dateTime.sortable({
-    title: "Last Executed At",
-    field: "retrieved_at",
-    orderByField: "executed_at",
-    width: "1%",
-  }),
-  Columns.custom.sortable((text, item) => <SchedulePhrase schedule={item.schedule} isNew={item.isNew()} />, {
-    title: "Refresh Schedule",
-    field: "schedule",
-    width: "1%",
-  }),
-];
+      key: "all",
+      href: "queries",
+      title: t("queries.all"),
+      icon: () => <Sidebar.MenuIcon icon="fa fa-code" />,
+    },
+    {
+      key: "my",
+      href: "queries/my",
+      title: t("queries.my"),
+      icon: () => <Sidebar.ProfileImage user={currentUser} />,
+    },
+    {
+      key: "favorites",
+      href: "queries/favorites",
+      title: t("queries.favorites"),
+      icon: () => <Sidebar.MenuIcon icon="fa fa-star" />,
+    },
+    {
+      key: "archive",
+      href: "queries/archive",
+      title: t("queries.archived"),
+      icon: () => <Sidebar.MenuIcon icon="fa fa-archive" />,
+    },
+  ];
+}
+
+function buildListColumns(t) {
+  return [
+    Columns.favorites({ className: "p-r-0" }),
+    Columns.custom.sortable(
+      (text, item) => (
+        <React.Fragment>
+          <Link className="table-main-title" href={"queries/" + item.id}>
+            {item.name}
+          </Link>
+          <QueryTagsControl className="d-block" tags={item.tags} isDraft={item.is_draft} isArchived={item.is_archived} />
+        </React.Fragment>
+      ),
+      {
+        title: t("queries.name"),
+        field: "name",
+        width: null,
+      }
+    ),
+    Columns.custom((text, item) => item.user.name, { title: t("queries.createdBy"), width: "1%" }),
+    Columns.dateTime.sortable({ title: t("queries.createdAt"), field: "created_at", width: "1%" }),
+    Columns.dateTime.sortable({
+      title: t("queries.lastExecutedAt"),
+      field: "retrieved_at",
+      orderByField: "executed_at",
+      width: "1%",
+    }),
+    Columns.custom.sortable((text, item) => <SchedulePhrase schedule={item.schedule} isNew={item.isNew()} />, {
+      title: t("queries.schedule"),
+      field: "schedule",
+      width: "1%",
+    }),
+  ];
+}
 
 function QueriesListExtraActions(props) {
   return <DynamicComponent name="QueriesList.Actions" {...props} />;
 }
 
 function QueriesList({ controller }) {
+  const { t, i18n: i18nInstance } = useTranslation();
+  const sidebarMenu = useMemo(() => buildSidebarMenu(t), [t, i18nInstance.language]);
+  const baseListColumns = useMemo(() => buildListColumns(t), [t, i18nInstance.language]);
   const controllerRef = useRef();
   controllerRef.current = controller;
 
@@ -115,11 +123,11 @@ function QueriesList({ controller }) {
     };
   }, [updateSearch]);
 
-  let usedListColumns = listColumns;
+  let usedListColumns = baseListColumns;
   if (controller.params.currentPage === "favorites") {
     usedListColumns = [
       ...usedListColumns,
-      Columns.dateTime.sortable({ title: "Starred At", field: "starred_at", width: "1%" }),
+      Columns.dateTime.sortable({ title: t("queries.starredAt"), field: "starred_at", width: "1%" }),
     ];
   }
   const {
@@ -133,12 +141,19 @@ function QueriesList({ controller }) {
     <div className="page-queries-list">
       <div className="container">
         <PageHeader
-          title={controller.params.pageTitle}
+          title={
+            {
+              all: t("queries.pageTitle"),
+              favorites: t("queries.favoritesTitle"),
+              my: t("queries.myTitle"),
+              archive: t("queries.archivedTitle"),
+            }[controller.params.currentPage] || controller.params.pageTitle
+          }
           actions={
             currentUser.hasPermission("create_query") ? (
               <Link.Button block type="primary" href="queries/new">
                 <i className="fa fa-plus m-r-5" aria-hidden="true" />
-                New Query
+                {t("queries.newQuery")}
               </Link.Button>
             ) : null
           }
@@ -146,8 +161,8 @@ function QueriesList({ controller }) {
         <Layout>
           <Layout.Sidebar className="m-b-0">
             <Sidebar.SearchInput
-              placeholder="Search Queries..."
-              label="Search queries"
+              placeholder={t("queries.search")}
+              label={t("queries.searchLabel")}
               value={controller.searchTerm}
               onChange={updateSearch}
             />

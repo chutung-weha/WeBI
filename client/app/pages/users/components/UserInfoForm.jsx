@@ -1,6 +1,7 @@
 import { get, map } from "lodash";
 import React, { useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { UserProfile } from "@/components/proptypes";
 import DynamicComponent from "@/components/DynamicComponent";
 import DynamicForm from "@/components/dynamic-form/DynamicForm";
@@ -13,6 +14,7 @@ import useImmutableCallback from "@/lib/hooks/useImmutableCallback";
 import useUserGroups from "../hooks/useUserGroups";
 
 export default function UserInfoForm(props) {
+  const { t } = useTranslation();
   const { user, onChange } = props;
 
   const { groups, allGroups, isLoading: isLoadingGroups } = useUserGroups(user);
@@ -28,14 +30,14 @@ export default function UserInfoForm(props) {
 
       User.save(data)
         .then(user => {
-          successCallback("Saved.");
+          successCallback(t("common.saved"));
           handleChange(User.convertUserInfo(user));
         })
         .catch(error => {
-          errorCallback(get(error, "response.data.message", "Failed saving."));
+          errorCallback(get(error, "response.data.message", t("common.savedFailed")));
         });
     },
-    [user, handleChange]
+    [user, handleChange, t]
   );
 
   const formFields = useMemo(
@@ -44,38 +46,38 @@ export default function UserInfoForm(props) {
         [
           {
             name: "name",
-            title: "Name",
+            title: t("users.name"),
             type: "text",
             initialValue: user.name,
           },
           {
             name: "email",
-            title: "Email",
+            title: t("users.email"),
             type: "email",
             initialValue: user.email,
           },
           !user.isDisabled && currentUser.id !== user.id
             ? {
                 name: "group_ids",
-                title: "Groups",
+                title: t("users.groups"),
                 type: "select",
                 mode: "multiple",
                 options: map(allGroups, group => ({ name: group.name, value: group.id })),
                 initialValue: user.groupIds,
                 loading: isLoadingGroups,
-                placeholder: isLoadingGroups ? "Loading..." : "",
+                placeholder: isLoadingGroups ? t("users.loading") : "",
               }
             : {
                 name: "group_ids",
-                title: "Groups",
+                title: t("users.groups"),
                 type: "content",
                 required: false,
-                content: isLoadingGroups ? "Loading..." : <UserGroups data-test="Groups" groups={groups} />,
+                content: isLoadingGroups ? t("users.loading") : <UserGroups data-test="Groups" groups={groups} />,
               },
         ],
         field => ({ readOnly: user.isDisabled, required: true, ...field })
       ),
-    [user, groups, allGroups, isLoadingGroups]
+    [user, groups, allGroups, isLoadingGroups, t]
   );
 
   return (

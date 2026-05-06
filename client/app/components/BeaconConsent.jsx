@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation, Trans } from "react-i18next";
 import Card from "antd/lib/card";
 import Button from "antd/lib/button";
 import Typography from "antd/lib/typography";
@@ -11,6 +12,7 @@ import OrgSettings from "@/services/organizationSettings";
 const Text = Typography.Text;
 
 function BeaconConsent() {
+  const { t } = useTranslation();
   const [hide, setHide] = useState(false);
 
   if (!clientConfig.showBeaconConsentMessage || hide) {
@@ -43,31 +45,34 @@ function BeaconConsent() {
         <Card
           title={
             <>
-              Would you be ok with sharing anonymous usage data with the Redash team?{" "}
+              {t("beacon.title")}{" "}
               <HelpTrigger type="USAGE_DATA_SHARING" />
             </>
           }
           bordered={false}
         >
-          <Text>Help Redash improve by automatically sending anonymous usage data:</Text>
+          <Text>{t("beacon.description")}</Text>
           <div className="m-t-5">
             <ul>
-              <li> Number of users, queries, dashboards, alerts, widgets and visualizations.</li>
-              <li> Types of data sources, alert destinations and visualizations.</li>
+              <li> {t("beacon.item1")}</li>
+              <li> {t("beacon.item2")}</li>
             </ul>
           </div>
-          <Text>All data is aggregated and will never include any sensitive or private data.</Text>
+          <Text>{t("beacon.aggregated")}</Text>
           <div className="m-t-5">
             <Button type="primary" className="m-r-5" onClick={() => confirmConsent(true)}>
-              Yes
+              {t("common.yes")}
             </Button>
             <Button type="default" onClick={() => confirmConsent(false)}>
-              No
+              {t("common.no")}
             </Button>
           </div>
           <div className="m-t-15">
             <Text type="secondary">
-              You can change this setting anytime from the <Link href="settings/general">Settings</Link> page.
+              <Trans
+                i18nKey="beacon.settingsHint"
+                components={{ link: <Link href="settings/general" /> }}
+              />
             </Text>
           </div>
         </Card>

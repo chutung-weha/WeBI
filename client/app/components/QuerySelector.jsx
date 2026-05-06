@@ -2,6 +2,7 @@ import { find } from "lodash";
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
+import i18n from "@/i18n";
 import Input from "antd/lib/input";
 import Select from "antd/lib/select";
 import { Query } from "@/services/query";
@@ -30,7 +31,7 @@ export default function QuerySelector(props) {
   const [selectedQuery, setSelectedQuery] = useState();
   const [doSearch, searchResults, searching] = useSearchResults(search, { initialResults: [] });
 
-  const placeholder = "Search a query by name";
+  const placeholder = i18n.t("alerts.searchQueryByName");
   const clearIcon = (
     <i
       className="fa fa-times hide-in-percy"

@@ -1,6 +1,7 @@
 import { get, find } from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
+import i18n from "@/i18n";
 
 import Modal from "antd/lib/modal";
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
@@ -44,9 +45,9 @@ class EditDestination extends React.Component {
     const { destination } = this.state;
     helper.updateTargetWithValues(destination, values);
     Destination.save(destination)
-      .then(() => successCallback("Saved."))
+      .then(() => successCallback(i18n.t("destinations.saved")))
       .catch(error => {
-        const message = get(error, "response.data.message", "Failed saving.");
+        const message = get(error, "response.data.message", i18n.t("destinations.savedFailed"));
         errorCallback(message);
       });
   };
@@ -57,7 +58,7 @@ class EditDestination extends React.Component {
     const doDelete = () => {
       Destination.delete(destination)
         .then(() => {
-          notification.success("Alert destination deleted successfully.");
+          notification.success(i18n.t("destinations.deleted"));
           navigateTo("destinations");
         })
         .catch(() => {
@@ -66,9 +67,9 @@ class EditDestination extends React.Component {
     };
 
     Modal.confirm({
-      title: "Delete Alert Destination",
-      content: "Are you sure you want to delete this alert destination?",
-      okText: "Delete",
+      title: i18n.t("destinations.deleteDestination"),
+      content: i18n.t("destinations.deleteDestinationConfirm"),
+      okText: i18n.t("destinations.delete"),
       okType: "danger",
       onOk: doDelete,
       onCancel: callback,
@@ -83,7 +84,7 @@ class EditDestination extends React.Component {
     const formProps = {
       fields,
       type,
-      actions: [{ name: "Delete", type: "danger", callback: this.deleteDestination }],
+      actions: [{ name: i18n.t("destinations.delete"), type: "danger", callback: this.deleteDestination }],
       onSubmit: this.saveDestination,
       defaultShowExtraFields: helper.hasFilledExtraField(type, destination),
       feedbackIcons: true,

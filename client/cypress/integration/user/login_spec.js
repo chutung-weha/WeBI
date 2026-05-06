@@ -4,7 +4,7 @@ describe("Login", () => {
   });
 
   it("greets the user and take a screenshot", () => {
-    cy.contains("h3", "Login to Redash");
+    cy.contains("h3", "Login to WE BOARD");
 
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.percySnapshot("Login");
@@ -21,7 +21,7 @@ describe("Login", () => {
     cy.getByTestId("Email").type("admin@redash.io");
     cy.getByTestId("Password").type("password{enter}");
 
-    cy.title().should("eq", "Redash");
+    cy.title().should("eq", "WE BOARD");
     cy.get(`img.profile__image_thumb[alt="Example Admin"]`).should("exist");
 
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting

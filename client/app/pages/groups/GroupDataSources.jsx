@@ -1,5 +1,6 @@
 import { filter, map, includes, toLower } from "lodash";
 import React from "react";
+import i18n from "@/i18n";
 import Button from "antd/lib/button";
 import Dropdown from "antd/lib/dropdown";
 import Menu from "antd/lib/menu";
@@ -43,19 +44,19 @@ class GroupDataSources extends React.Component {
     {
       key: "users",
       href: `groups/${this.groupId}`,
-      title: "Members",
+      title: i18n.t("groups.members"),
     },
     {
       key: "datasources",
       href: `groups/${this.groupId}/data_sources`,
-      title: "Data Sources",
+      title: i18n.t("groups.dataSources"),
       isAvailable: () => currentUser.isAdmin,
     },
   ];
 
   listColumns = [
     Columns.custom((text, datasource) => <DataSourcePreviewCard dataSource={datasource} withLink />, {
-      title: "Name",
+      title: i18n.t("groups.name"),
       field: "name",
       width: null,
     }),
@@ -65,15 +66,15 @@ class GroupDataSources extends React.Component {
           <Menu
             selectedKeys={[datasource.view_only ? "viewonly" : "full"]}
             onClick={item => this.setDataSourcePermissions(datasource, item.key)}>
-            <Menu.Item key="full">Full Access</Menu.Item>
-            <Menu.Item key="viewonly">View Only</Menu.Item>
+            <Menu.Item key="full">{i18n.t("groups.fullAccess")}</Menu.Item>
+            <Menu.Item key="viewonly">{i18n.t("groups.viewOnly")}</Menu.Item>
           </Menu>
         );
 
         return (
           <Dropdown trigger={["click"]} overlay={menu}>
-            <Button className="w-100" aria-label="Permissions">
-              {datasource.view_only ? "View Only" : "Full Access"}
+            <Button className="w-100" aria-label={i18n.t("groups.permissions")}>
+              {datasource.view_only ? i18n.t("groups.viewOnly") : i18n.t("groups.fullAccess")}
               <DownOutlinedIcon aria-hidden="true" />
             </Button>
           </Dropdown>
@@ -88,7 +89,7 @@ class GroupDataSources extends React.Component {
     Columns.custom(
       (text, datasource) => (
         <Button className="w-100" type="danger" onClick={() => this.removeGroupDataSource(datasource)}>
-          Remove
+          {i18n.t("groups.remove")}
         </Button>
       ),
       {
@@ -116,7 +117,7 @@ class GroupDataSources extends React.Component {
         this.props.controller.update();
       })
       .catch(() => {
-        notification.error("Failed to remove data source from group.");
+        notification.error(i18n.t("groups.failedRemoveDataSource"));
       });
   };
 
@@ -129,7 +130,7 @@ class GroupDataSources extends React.Component {
         this.forceUpdate();
       })
       .catch(() => {
-        notification.error("Failed change data source permissions.");
+        notification.error(i18n.t("groups.failedChangePermissions"));
       });
   };
 
@@ -137,9 +138,9 @@ class GroupDataSources extends React.Component {
     const allDataSources = DataSource.query();
     const alreadyAddedDataSources = map(this.props.controller.allItems, ds => ds.id);
     SelectItemsDialog.showModal({
-      dialogTitle: "Add Data Sources",
-      inputPlaceholder: "Search data sources...",
-      selectedItemsTitle: "New Data Sources",
+      dialogTitle: i18n.t("groups.addDataSources"),
+      inputPlaceholder: i18n.t("groups.searchDataSources"),
+      selectedItemsTitle: i18n.t("groups.newDataSources"),
       searchItems: searchTerm => {
         searchTerm = toLower(searchTerm);
         return allDataSources.then(items => filter(items, ds => includes(toLower(ds.name), searchTerm)));
@@ -189,11 +190,11 @@ class GroupDataSources extends React.Component {
             {!controller.isLoaded && <LoadingState className="" />}
             {controller.isLoaded && controller.isEmpty && (
               <div className="text-center">
-                <p>There are no data sources in this group yet.</p>
+                <p>{i18n.t("groups.noDataSourcesYet")}</p>
                 {currentUser.isAdmin && (
                   <Button type="primary" onClick={this.addDataSources}>
                     <i className="fa fa-plus m-r-5" aria-hidden="true" />
-                    Add Data Sources
+                    {i18n.t("groups.addDataSources")}
                   </Button>
                 )}
               </div>

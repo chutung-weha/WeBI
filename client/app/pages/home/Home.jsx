@@ -1,5 +1,6 @@
 import { includes } from "lodash";
 import React, { useEffect } from "react";
+import { useTranslation, Trans } from "react-i18next";
 
 import Alert from "antd/lib/alert";
 import Link from "@/components/Link";
@@ -20,20 +21,20 @@ import { DashboardAndQueryFavoritesList } from "./components/FavoritesList";
 import "./Home.less";
 
 function DeprecatedEmbedFeatureAlert() {
+  const { t } = useTranslation();
   return (
     <Alert
       className="m-b-15"
       type="warning"
       message={
         <>
-          You have enabled <code>ALLOW_PARAMETERS_IN_EMBEDS</code>. This setting is now deprecated and should be turned
-          off. Parameters in embeds are supported by default.{" "}
+          <Trans i18nKey="home.deprecatedEmbed" components={{ code: <code /> }} />{" "}
           <Link
-            href="https://discuss.redash.io/t/support-for-parameters-in-embedded-visualizations/3337"
+            href="http://board.weha.vn/discuss/t/support-for-parameters-in-embedded-visualizations/3337"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Read more
+            {t("home.readMore")}
           </Link>
           .
         </>
@@ -43,6 +44,7 @@ function DeprecatedEmbedFeatureAlert() {
 }
 
 function EmailNotVerifiedAlert() {
+  const { t } = useTranslation();
   const verifyEmail = () => {
     axios.post("verification_email/").then((data) => {
       notification.success(data.message);
@@ -55,10 +57,9 @@ function EmailNotVerifiedAlert() {
       type="warning"
       message={
         <>
-          We have sent an email with a confirmation link to your email address. Please follow the link to verify your
-          email address.{" "}
+          {t("home.emailNotVerified")}{" "}
           <PlainButton type="link" onClick={verifyEmail}>
-            Resend email
+            {t("home.resendEmail")}
           </PlainButton>
           .
         </>
@@ -68,6 +69,7 @@ function EmailNotVerifiedAlert() {
 }
 
 export default function Home() {
+  const { t } = useTranslation();
   useEffect(() => {
     recordEvent("view", "page", "personal_homepage");
   }, []);
@@ -79,8 +81,8 @@ export default function Home() {
         {includes(messages, "email-not-verified") && <EmailNotVerifiedAlert />}
         <DynamicComponent name="Home.EmptyState">
           <EmptyState
-            header="Welcome to Redash 👋"
-            description="Connect to any data source, easily visualize and share your data"
+            header={t("home.welcome")}
+            description={t("home.description")}
             illustration="dashboard"
             helpMessage={<EmptyStateHelpMessage helpTriggerType="GETTING_STARTED" />}
             showDashboardStep
@@ -100,7 +102,7 @@ routes.register(
   "Home",
   routeWithUserSession({
     path: "/",
-    title: "Redash",
+    title: "WE BOARD",
     render: (pageProps) => <Home {...pageProps} />,
   })
 );

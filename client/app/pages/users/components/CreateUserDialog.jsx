@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import Button from "antd/lib/button";
 import Modal from "antd/lib/modal";
 import Alert from "antd/lib/alert";
@@ -7,16 +8,20 @@ import { wrap as wrapDialog, DialogPropType } from "@/components/DialogWrapper";
 import recordEvent from "@/services/recordEvent";
 import { useUniqueId } from "@/lib/hooks/useUniqueId";
 
-const formFields = [
-  { required: true, name: "name", title: "Name", type: "text", autoFocus: true },
-  { required: true, name: "email", title: "Email", type: "email" },
-];
-
 function CreateUserDialog({ dialog }) {
+  const { t } = useTranslation();
   const [error, setError] = useState(null);
   useEffect(() => {
     recordEvent("view", "page", "users/new");
   }, []);
+
+  const formFields = useMemo(
+    () => [
+      { required: true, name: "name", title: t("users.name"), type: "text", autoFocus: true },
+      { required: true, name: "email", title: t("users.email"), type: "email" },
+    ],
+    [t]
+  );
 
   const handleSubmit = useCallback(values => dialog.close(values).catch(setError), [dialog]);
   const formId = useUniqueId("userForm");
@@ -24,10 +29,10 @@ function CreateUserDialog({ dialog }) {
   return (
     <Modal
       {...dialog.props}
-      title="Create a New User"
+      title={t("users.createUser")}
       footer={[
         <Button key="cancel" {...dialog.props.cancelButtonProps} onClick={dialog.dismiss}>
-          Cancel
+          {t("users.cancel")}
         </Button>,
         <Button
           key="submit"
@@ -36,7 +41,7 @@ function CreateUserDialog({ dialog }) {
           type="primary"
           form={formId}
           data-test="SaveUserButton">
-          Create
+          {t("users.create")}
         </Button>,
       ]}
       wrapProps={{

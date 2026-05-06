@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { SettingsEditorPropTypes, SettingsEditorDefaultProps } from "../prop-types";
 import Form from "antd/lib/form";
 import Select from "antd/lib/select";
@@ -7,11 +8,12 @@ import DynamicComponent from "@/components/DynamicComponent";
 import { clientConfig } from "@/services/auth";
 
 export default function FormatSettings(props) {
+  const { t } = useTranslation();
   const { values, onChange, loading } = props;
 
   return (
     <DynamicComponent name="OrganizationSettings.FormatSettings" {...props}>
-      <Form.Item label="Date Format">
+      <Form.Item label={t("settings.dateFormat")}>
         {loading ? (
           <Skeleton.Input style={{ width: 300 }} active />
         ) : (
@@ -27,7 +29,7 @@ export default function FormatSettings(props) {
           </Select>
         )}
       </Form.Item>
-      <Form.Item label="Time Format">
+      <Form.Item label={t("settings.timeFormat")}>
         {loading ? (
           <Skeleton.Input style={{ width: 300 }} active />
         ) : (

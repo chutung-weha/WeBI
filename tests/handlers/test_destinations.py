@@ -187,7 +187,7 @@ def test_asana_notify_calls_requests_post():
         ).strip()
 
         expected_payload = {
-            "name": f"[Redash Alert] TRIGGERED: {alert.name}",
+            "name": f"[WE BOARD Alert] TRIGGERED: {alert.name}",
             "notes": notes,
             "projects": ["1234"],
         }

@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Button from "antd/lib/button";
 import DynamicComponent from "@/components/DynamicComponent";
 import { UserProfile } from "@/components/proptypes";
@@ -8,6 +9,7 @@ import User from "@/services/user";
 import useImmutableCallback from "@/lib/hooks/useImmutableCallback";
 
 export default function ToggleUserForm(props) {
+  const { t } = useTranslation();
   const { user, onChange } = props;
 
   const [loading, setLoading] = useState(false);
@@ -33,7 +35,7 @@ export default function ToggleUserForm(props) {
 
   const buttonProps = {
     type: user.isDisabled ? "primary" : "danger",
-    children: user.isDisabled ? "Enable User" : "Disable User",
+    children: user.isDisabled ? t("users.enableUser") : t("users.disableUser"),
   };
 
   return (

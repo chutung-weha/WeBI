@@ -1,10 +1,10 @@
-Hi {{ invited.name }},
+Chào {{ invited.name }},
 
-{{ inviter.name }} ({{inviter.email}}) invited you to join the Redash account of {{org.name}}.
+{{ inviter.name }} ({{inviter.email}}) đã mời bạn tham gia tài khoản WE BOARD của {{org.name}}.
 
-Use the following link to setup your account:
+Dùng liên kết sau để thiết lập tài khoản:
 
 {{ invite_url }}
 
-Your sign-in email: {{invited.email}}
-Your Redash account: {{ url_for('redash.index', org_slug=org.slug, _external=True) }}
+Email đăng nhập của bạn: {{invited.email}}
+Tài khoản WE BOARD của bạn: {{ url_for('redash.index', org_slug=org.slug, _external=True) }}

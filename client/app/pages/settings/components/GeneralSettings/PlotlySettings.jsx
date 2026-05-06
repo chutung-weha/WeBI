@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import Checkbox from "antd/lib/checkbox";
 import Form from "antd/lib/form";
 import Skeleton from "antd/lib/skeleton";
@@ -6,11 +7,12 @@ import DynamicComponent from "@/components/DynamicComponent";
 import { SettingsEditorPropTypes, SettingsEditorDefaultProps } from "../prop-types";
 
 export default function PlotlySettings(props) {
+  const { t } = useTranslation();
   const { values, onChange, loading } = props;
 
   return (
     <DynamicComponent name="OrganizationSettings.PlotlySettings" {...props}>
-      <Form.Item label="Chart Visualization">
+      <Form.Item label={t("settings.chartVisualization")}>
         {loading ? (
           <Skeleton title={{ width: 300 }} paragraph={false} active />
         ) : (
@@ -18,7 +20,7 @@ export default function PlotlySettings(props) {
             name="hide_plotly_mode_bar"
             checked={values.hide_plotly_mode_bar}
             onChange={e => onChange({ hide_plotly_mode_bar: e.target.checked })}>
-            Hide Plotly mode bar
+            {t("settings.hidePlotlyModeBar")}
           </Checkbox>
         )}
       </Form.Item>

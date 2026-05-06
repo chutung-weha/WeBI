@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import Button from "antd/lib/button";
 import DynamicComponent from "@/components/DynamicComponent";
 import { UserProfile } from "@/components/proptypes";
@@ -6,6 +7,7 @@ import User from "@/services/user";
 import PasswordLinkAlert from "./PasswordLinkAlert";
 
 export default function ResendInvitationForm(props) {
+  const { t } = useTranslation();
   const { user } = props;
 
   const [loading, setLoading] = useState(false);
@@ -26,7 +28,7 @@ export default function ResendInvitationForm(props) {
   return (
     <DynamicComponent name="UserProfile.ResendInvitationForm" {...props}>
       <Button className="w-100 m-t-10" onClick={resendInvitation} loading={loading}>
-        Resend Invitation
+        {t("users.resendInvitation")}
       </Button>
       <PasswordLinkAlert user={user} passwordLink={passwordLink} afterClose={() => setPasswordLink(null)} />
     </DynamicComponent>

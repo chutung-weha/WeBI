@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 import Button from "antd/lib/button";
 import Form from "antd/lib/form";
@@ -15,6 +16,7 @@ import GeneralSettings from "./components/GeneralSettings";
 import AuthSettings from "./components/AuthSettings";
 
 function OrganizationSettings({ onError }) {
+  const { t } = useTranslation();
   const { settings, currentValues, isLoading, isSaving, handleSubmit, handleChange } = useOrganizationSettings(onError);
   return (
     <div className="row" data-test="OrganizationSettings">
@@ -27,7 +29,7 @@ function OrganizationSettings({ onError }) {
               <Skeleton.Button active />
             ) : (
               <Button type="primary" htmlType="submit" loading={isSaving} data-test="OrganizationSettingsSaveButton">
-                Save
+                {t("settings.save")}
               </Button>
             )}
           </Form.Item>

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Card from "antd/lib/card";
 import WarningFilledIcon from "@ant-design/icons/WarningFilled";
 import Typography from "antd/lib/typography";
@@ -11,6 +12,7 @@ import useQueryFlags from "../hooks/useQueryFlags";
 import "./QuerySourceAlerts.less";
 
 export default function QuerySourceAlerts({ query, dataSourcesAvailable }) {
+  const { t } = useTranslation();
   const queryFlags = useQueryFlags(query); // we don't use flags that depend on data source
 
   let message = null;
@@ -18,12 +20,11 @@ export default function QuerySourceAlerts({ query, dataSourcesAvailable }) {
     message = (
       <React.Fragment>
         <Typography.Title level={4}>
-          You don't have permission to create new queries on any of the data sources available to you.
+          {t("queries.noPermissionCreate")}
         </Typography.Title>
         <p>
           <Typography.Text type="secondary">
-            You can either <Link href="queries">browse existing queries</Link>, or ask for additional permissions from
-            your Redash admin.
+            <Link href="queries">{t("queries.browseExisting")}</Link> {t("queries.askAdminPermission")}
           </Typography.Text>
         </p>
       </React.Fragment>
@@ -33,18 +34,18 @@ export default function QuerySourceAlerts({ query, dataSourcesAvailable }) {
       message = (
         <React.Fragment>
           <Typography.Title level={4}>
-            Looks like no data sources were created yet or none of them available to the group(s) you're member of.
+            {t("queries.noDataSources")}
           </Typography.Title>
           <p>
-            <Typography.Text type="secondary">Please create one first, and then start querying.</Typography.Text>
+            <Typography.Text type="secondary">{t("queries.createOneFirst")}</Typography.Text>
           </p>
 
           <div className="query-source-alerts-actions">
             <Link.Button type="primary" href="data_sources/new">
-              Create Data Source
+              {t("queries.createDataSource")}
             </Link.Button>
             <Link.Button type="default" href="groups">
-              Manage Group Permissions
+              {t("queries.manageGroupPermissions")}
             </Link.Button>
           </div>
         </React.Fragment>
@@ -53,10 +54,10 @@ export default function QuerySourceAlerts({ query, dataSourcesAvailable }) {
       message = (
         <React.Fragment>
           <Typography.Title level={4}>
-            Looks like no data sources were created yet or none of them available to the group(s) you're member of.
+            {t("queries.noDataSources")}
           </Typography.Title>
           <p>
-            <Typography.Text type="secondary">Please ask your Redash admin to create one first.</Typography.Text>
+            <Typography.Text type="secondary">{t("queries.askAdminCreate")}</Typography.Text>
           </p>
         </React.Fragment>
       );

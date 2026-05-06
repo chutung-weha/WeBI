@@ -6,7 +6,7 @@ exports.seedData = [
       name: "Example Admin",
       email: "admin@redash.io",
       password: "password",
-      org_name: "Redash",
+      org_name: "WE BOARD",
     },
   },
   {

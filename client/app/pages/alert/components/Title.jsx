@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import i18n from "@/i18n";
 import Input from "antd/lib/input";
 import { getDefaultName } from "../Alert";
 
@@ -20,7 +21,7 @@ export default function Title({ alert, editMode, name, onChange, children }) {
               className="f-inherit"
               placeholder={defaultName}
               value={name}
-              aria-label="Alert title"
+              aria-label={i18n.t("alerts.alertTitlePlaceholder")}
               onChange={e => onChange(e.target.value)}
             />
           ) : (

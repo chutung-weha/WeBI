@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "@/config";
+import "@/i18n";
 
 import ApplicationArea from "@/components/ApplicationArea";
 import offlineListener from "@/services/offline-listener";

@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Button from "antd/lib/button";
 import Form from "antd/lib/form";
 import Modal from "antd/lib/modal";
@@ -11,6 +12,7 @@ import useImmutableCallback from "@/lib/hooks/useImmutableCallback";
 import { useUniqueId } from "@/lib/hooks/useUniqueId";
 
 export default function ApiKeyForm(props) {
+  const { t } = useTranslation();
   const { user, onChange } = props;
 
   const [loading, setLoading] = useState(false);
@@ -32,24 +34,24 @@ export default function ApiKeyForm(props) {
     };
 
     Modal.confirm({
-      title: "Regenerate API Key",
-      content: "Are you sure you want to regenerate?",
-      okText: "Regenerate",
+      title: t("users.regenerateApiKey"),
+      content: t("users.regenerateConfirm"),
+      okText: t("users.regenerate"),
       onOk: doRegenerate,
       maskClosable: true,
       autoFocusButton: null,
     });
-  }, [user, handleChange]);
+  }, [user, handleChange, t]);
 
   return (
     <DynamicComponent name="UserProfile.ApiKeyForm" {...props}>
       <Form layout="vertical">
         <hr />
-        <Form.Item label="API Key" className="m-b-10">
+        <Form.Item label={t("users.apiKey")} className="m-b-10">
           <InputWithCopy id={apiKeyInputId} className="hide-in-percy" value={user.apiKey} data-test="ApiKey" readOnly />
         </Form.Item>
         <Button className="w-100" onClick={regenerateApiKey} loading={loading} data-test="RegenerateApiKey">
-          Regenerate
+          {t("users.regenerate")}
         </Button>
       </Form>
     </DynamicComponent>

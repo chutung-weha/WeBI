@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import HelpTrigger from "@/components/HelpTrigger";
 import DynamicComponent from "@/components/DynamicComponent";
 import { clientConfig } from "@/services/auth";
@@ -9,6 +10,7 @@ import GoogleLoginSettings from "./GoogleLoginSettings";
 import SAMLSettings from "./SAMLSettings";
 
 export default function AuthSettings(props) {
+  const { t } = useTranslation();
   const { values, onChange } = props;
   const handleChange = useCallback(
     changes => {
@@ -26,7 +28,7 @@ export default function AuthSettings(props) {
   return (
     <DynamicComponent name="OrganizationSettings.AuthSettings" {...props}>
       <h3 className="m-t-0">
-        Authentication <HelpTrigger type="AUTHENTICATION_OPTIONS" />
+        {t("auth.title")} <HelpTrigger type="AUTHENTICATION_OPTIONS" />
       </h3>
       <hr />
       <PasswordLoginSettings {...props} onChange={handleChange} />

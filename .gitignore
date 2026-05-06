@@ -28,3 +28,6 @@ npm-debug.log
 
 client/cypress/screenshots
 client/cypress/videos
+
+connect_webase.sh
+connect_webase.command

@@ -65,7 +65,7 @@ class TestLogChange(BaseTestCase):
         change = Change.last_change(obj)
 
         self.assertIsNotNone(change)
-        # TODO: https://github.com/getredash/redash/issues/1550
+        # TODO: https://github.com/chutung-weha/WeBI/issues/1550
         # self.assertEqual(change.object_version, 2)
         self.assertEqual(change.object_version, obj.version)
         self.assertIn("name", change.change)

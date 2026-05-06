@@ -2,6 +2,7 @@ import { isEmpty, map } from "lodash";
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
+import { useTranslation } from "react-i18next";
 
 import Button from "antd/lib/button";
 import Checkbox from "antd/lib/checkbox";
@@ -25,6 +26,7 @@ import DashboardHeader from "./components/DashboardHeader";
 import "./DashboardPage.less";
 
 function DashboardSettings({ dashboardConfiguration }) {
+  const { t } = useTranslation();
   const { dashboard, updateDashboard } = dashboardConfiguration;
   return (
     <div className="m-b-10 p-15 bg-white tiled">
@@ -33,7 +35,7 @@ function DashboardSettings({ dashboardConfiguration }) {
         onChange={({ target }) => updateDashboard({ dashboard_filters_enabled: target.checked })}
         data-test="DashboardFiltersCheckbox"
       >
-        Use Dashboard Level Filters
+        {t("dashboardView.useFilters")}
       </Checkbox>
     </div>
   );
@@ -44,22 +46,20 @@ DashboardSettings.propTypes = {
 };
 
 function AddWidgetContainer({ dashboardConfiguration, className, ...props }) {
+  const { t } = useTranslation();
   const { showAddTextboxDialog, showAddWidgetDialog } = dashboardConfiguration;
   return (
     <div className={cx("add-widget-container", className)} {...props}>
       <h2>
         <i className="zmdi zmdi-widgets" aria-hidden="true" />
-        <span className="hidden-xs hidden-sm">
-          Widgets are individual query visualizations or text boxes you can place on your dashboard in various
-          arrangements.
-        </span>
+        <span className="hidden-xs hidden-sm">{t("dashboardView.widgetsHelp")}</span>
       </h2>
       <div>
         <Button className="m-r-15" onClick={showAddTextboxDialog} data-test="AddTextboxButton">
-          Add Textbox
+          {t("dashboardView.addTextbox")}
         </Button>
         <Button type="primary" onClick={showAddWidgetDialog} data-test="AddWidgetButton">
-          Add Widget
+          {t("dashboardView.addWidget")}
         </Button>
       </div>
     </div>

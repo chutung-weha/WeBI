@@ -15,7 +15,7 @@ from rq.worker import (
 
 from redash import statsd_client
 
-# HerokuWorker does not work in OSX https://github.com/getredash/redash/issues/5413
+# HerokuWorker does not work in OSX https://github.com/chutung-weha/WeBI/issues/5413
 if sys.platform == "darwin":
     BaseWorker = Worker
 else:

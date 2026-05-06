@@ -1,6 +1,7 @@
 import { uniqueId } from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
+import i18n from "@/i18n";
 import Alert from "antd/lib/alert";
 import Button from "antd/lib/button";
 import Checkbox from "antd/lib/checkbox";
@@ -49,12 +50,12 @@ class EmbedQueryDialog extends React.Component {
       <Modal
         {...dialog.props}
         className="embed-query-dialog"
-        title="Embed Query"
-        footer={<Button onClick={dialog.dismiss}>Close</Button>}>
+        title={i18n.t("embedQuery.title")}
+        footer={<Button onClick={dialog.dismiss}>{i18n.t("widgets.close")}</Button>}>
         {query.is_safe ? (
           <React.Fragment>
             <h5 id={this.urlEmbedLabelId} className="m-t-0">
-              Public URL
+              {i18n.t("embedQuery.publicUrl")}
             </h5>
             <div className="m-b-30">
               <CodeBlock aria-labelledby={this.urlEmbedLabelId} data-test="EmbedIframe" copyable>
@@ -62,7 +63,7 @@ class EmbedQueryDialog extends React.Component {
               </CodeBlock>
             </div>
             <h5 id={this.iframeEmbedLabelId} className="m-t-0">
-              IFrame Embed
+              {i18n.t("embedQuery.iframe")}
             </h5>
             <div>
               <CodeBlock aria-labelledby={this.iframeEmbedLabelId} copyable>
@@ -75,7 +76,7 @@ class EmbedQueryDialog extends React.Component {
                     onChange={e => this.setState({ enableChangeIframeSize: e.target.checked })}
                   />
                 </Form.Item>
-                <Form.Item label="Width">
+                <Form.Item label={i18n.t("embedQuery.width")}>
                   <InputNumber
                     className="size-input"
                     value={iframeWidth}
@@ -84,7 +85,7 @@ class EmbedQueryDialog extends React.Component {
                     disabled={!enableChangeIframeSize}
                   />
                 </Form.Item>
-                <Form.Item label="Height">
+                <Form.Item label={i18n.t("embedQuery.height")}>
                   <InputNumber
                     className="size-input"
                     value={iframeHeight}
@@ -97,14 +98,14 @@ class EmbedQueryDialog extends React.Component {
             </div>
             {this.snapshotUrl && (
               <React.Fragment>
-                <h5>Image Embed</h5>
+                <h5>{i18n.t("embedQuery.imageEmbed")}</h5>
                 <CodeBlock copyable>{this.snapshotUrl}</CodeBlock>
               </React.Fragment>
             )}
           </React.Fragment>
         ) : (
           <Alert
-            message="Currently it is not possible to embed queries that contain text parameters."
+            message={i18n.t("embedQuery.textParamWarning")}
             type="error"
             data-test="EmbedErrorAlert"
           />

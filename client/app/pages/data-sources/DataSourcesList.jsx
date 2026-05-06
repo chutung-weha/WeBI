@@ -1,6 +1,7 @@
 import { isEmpty, reject } from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
+import i18n from "@/i18n";
 
 import Button from "antd/lib/button";
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
@@ -27,13 +28,13 @@ export function DataSourcesListComponent({ dataSources, onClickCreate }) {
 
   return isEmpty(dataSources) ? (
     <div className="text-center">
-      There are no data sources yet.
+      {i18n.t("dataSources.noDataSources")}
       {policy.isCreateDataSourceEnabled() && (
         <div className="m-t-5">
           <PlainButton type="link" onClick={onClickCreate} data-test="CreateDataSourceLink">
-            Click here
+            {i18n.t("dataSources.clickHere")}
           </PlainButton>{" "}
-          to add one.
+          {i18n.t("dataSources.toAddOne")}
         </div>
       )}
     </div>
@@ -140,7 +141,7 @@ class DataSourcesList extends React.Component {
         <div className="m-b-15">
           <Button {...newDataSourceProps}>
             <i className="fa fa-plus m-r-5" aria-hidden="true" />
-            New Data Source
+            {i18n.t("dataSources.newDataSource")}
           </Button>
           <DynamicComponent name="DataSourcesListExtra" />
         </div>

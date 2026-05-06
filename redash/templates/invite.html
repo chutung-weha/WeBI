@@ -1,15 +1,15 @@
 {% extends "layouts/signed_out.html" %}
 
-{% block title %}Welcome to Redash!{% endblock %}
+{% block title %}Chào mừng đến WE BOARD!{% endblock %}
 
 {% block content %}
 <div class="fixed-width-page">
   <div class="bg-white tiled">
     <div class="m-b-25">
       {% if show_google_openid or show_saml_login or show_remote_user_login or show_ldap_login %}
-        To create your account, please choose a password or login with your SSO provider.
+        Để tạo tài khoản, vui lòng chọn mật khẩu hoặc đăng nhập bằng nhà cung cấp SSO của bạn.
       {% else %}
-        To create your account, please choose a password.
+        Để tạo tài khoản, vui lòng chọn mật khẩu.
       {% endif %}
     </div>
 
@@ -24,20 +24,20 @@
     {% if show_google_openid %}
       <a href="{{ google_auth_url }}" class="login-button btn btn-default btn-block">
         <img src="/static/images/google_logo.svg">
-        Login with Google
+        Đăng nhập bằng Google
       </a>
     {% endif %}
 
     {% if show_saml_login %}
-      <a href="{{ url_for('saml_auth.sp_initiated', org_slug=org_slug) }}" class="login-button btn btn-default btn-block">SAML Login</a>
+      <a href="{{ url_for('saml_auth.sp_initiated', org_slug=org_slug) }}" class="login-button btn btn-default btn-block">Đăng nhập SAML</a>
     {% endif %}
 
     {% if show_remote_user_login %}
-      <a href="{{ url_for('remote_user_auth.login') }}" class="login-button btn btn-default btn-block">Remote User Login</a>
+      <a href="{{ url_for('remote_user_auth.login') }}" class="login-button btn btn-default btn-block">Đăng nhập Remote User</a>
     {% endif %}
 
     {% if show_ldap_login %}
-      <a href="{{ url_for('ldap_auth.login') }}" class="login-button btn btn-default btn-block">LDAP/SSO Login</a>
+      <a href="{{ url_for('ldap_auth.login') }}" class="login-button btn btn-default btn-block">Đăng nhập LDAP/SSO</a>
     {% endif %}
 
     {% if show_google_openid or show_saml_login or show_remote_user_login or show_ldap_login %}
@@ -47,10 +47,10 @@
     <form role="form" method="post" name="invite">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password">Mật khẩu</label>
         <input type="password" class="form-control" id="password" name="password">
       </div>
-      <button type="submit" class="btn btn-primary btn-block m-t-25">Set Password</button>
+      <button type="submit" class="btn btn-primary btn-block m-t-25">Đặt mật khẩu</button>
     </form>
   </div>
 </div>

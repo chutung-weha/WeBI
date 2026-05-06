@@ -1,6 +1,7 @@
 import { map, trim } from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
+import i18n from "@/i18n";
 import Tooltip from "@/components/Tooltip";
 import EditTagsDialog from "./EditTagsDialog";
 import PlainButton from "@/components/PlainButton";
@@ -42,13 +43,13 @@ export class TagsControl extends React.Component {
         {tags.length === 0 && (
           <React.Fragment>
             <i className="zmdi zmdi-plus m-r-5" aria-hidden="true" />
-            Add tag
+            {i18n.t("tags.addTag")}
           </React.Fragment>
         )}
         {tags.length > 0 && (
           <>
             <i className="zmdi zmdi-edit" aria-hidden="true" />
-            <span className="sr-only">Edit</span>
+            <span className="sr-only">{i18n.t("dashboardView.edit")}</span>
           </>
         )}
       </PlainButton>
@@ -81,10 +82,10 @@ function modelTagsControl({ archivedTooltip }) {
   function ModelTagsControl({ isDraft, isArchived, ...props }) {
     return (
       <TagsControl {...props}>
-        {!isArchived && isDraft && <span className="label label-tag-unpublished">Unpublished</span>}
+        {!isArchived && isDraft && <span className="label label-tag-unpublished">{i18n.t("common.unpublished")}</span>}
         {isArchived && (
           <Tooltip placement="right" title={archivedTooltip}>
-            <span className="label label-tag-archived">Archived</span>
+            <span className="label label-tag-archived">{i18n.t("queries.archived")}</span>
           </Tooltip>
         )}
       </TagsControl>
@@ -105,9 +106,9 @@ function modelTagsControl({ archivedTooltip }) {
 }
 
 export const QueryTagsControl = modelTagsControl({
-  archivedTooltip: "This query is archived and can't be used in dashboards, or appear in search results.",
+  get archivedTooltip() { return i18n.t("tags.queryArchived"); },
 });
 
 export const DashboardTagsControl = modelTagsControl({
-  archivedTooltip: "This dashboard is archived and won't be listed in dashboards nor search results.",
+  get archivedTooltip() { return i18n.t("tags.dashboardArchived"); },
 });

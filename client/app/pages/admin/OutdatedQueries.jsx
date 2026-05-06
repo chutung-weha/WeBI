@@ -1,5 +1,6 @@
 import { map, uniqueId } from "lodash";
 import React from "react";
+import i18n from "@/i18n";
 
 import Switch from "antd/lib/switch";
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
@@ -50,17 +51,17 @@ class OutdatedQueries extends React.Component {
         </React.Fragment>
       ),
       {
-        title: "Name",
+        title: i18n.t("admin.name"),
         field: "name",
         width: null,
       }
     ),
-    Columns.avatar({ field: "user", className: "p-l-0 p-r-0" }, name => `Created by ${name}`),
-    Columns.dateTime.sortable({ title: "Created At", field: "created_at" }),
+    Columns.avatar({ field: "user", className: "p-l-0 p-r-0" }, name => `${i18n.t("queries.createdBy")}: ${name}`),
+    Columns.dateTime.sortable({ title: i18n.t("queries.createdAt"), field: "created_at" }),
     Columns.duration.sortable({ title: "Runtime", field: "runtime" }),
-    Columns.dateTime.sortable({ title: "Last Executed At", field: "retrieved_at", orderByField: "executed_at" }),
+    Columns.dateTime.sortable({ title: i18n.t("queries.lastExecutedAt"), field: "retrieved_at", orderByField: "executed_at" }),
     Columns.custom.sortable((text, item) => <SchedulePhrase schedule={item.schedule} isNew={item.isNew()} />, {
-      title: "Update Schedule",
+      title: i18n.t("queries.schedule"),
       field: "schedule",
     }),
   ];
@@ -95,7 +96,7 @@ class OutdatedQueries extends React.Component {
         <div className="m-15">
           <div>
             <label htmlFor={this.autoUpdateSwitchId} className="m-0">
-              Auto update
+              {i18n.t("admin.autoUpdate")}
             </label>
             <Switch
               id={this.autoUpdateSwitchId}
@@ -106,13 +107,13 @@ class OutdatedQueries extends React.Component {
           </div>
           {controller.params.lastUpdatedAt && (
             <div className="m-t-5">
-              Last updated: <TimeAgo date={controller.params.lastUpdatedAt * 1000} />
+              {i18n.t("admin.lastUpdated", { time: "" })}<TimeAgo date={controller.params.lastUpdatedAt * 1000} />
             </div>
           )}
         </div>
         {!controller.isLoaded && <LoadingState />}
         {controller.isLoaded && controller.isEmpty && (
-          <div className="text-center p-15">There are no outdated queries.</div>
+          <div className="text-center p-15">{i18n.t("admin.noOutdatedQueries")}</div>
         )}
         {controller.isLoaded && !controller.isEmpty && (
           <div className="bg-white tiled table-responsive">

@@ -2,7 +2,7 @@
 
 Thank you for taking the time to contribute! :tada::+1:
 
-The following is a set of guidelines for contributing to Redash. These are guidelines, not rules, please use your best judgement and feel free to propose changes to this document in a pull request.
+The following is a set of guidelines for contributing to WE BOARD. These are guidelines, not rules, please use your best judgement and feel free to propose changes to this document in a pull request.
 
 :star: If you're already here and love the project, please make sure to press the Star button. :star:
 ## Table of Contents
@@ -22,8 +22,8 @@ The following is a set of guidelines for contributing to Redash. These are guide
 
 ## Quick Links:
 
-- [User Forum](https://github.com/getredash/redash/discussions)
-- [Documentation](https://redash.io/help/)
+- [User Forum](https://github.com/chutung-weha/WeBI/discussions)
+- [Documentation](http://board.weha.vn/help/)
 
 
 ---
@@ -34,14 +34,14 @@ The following is a set of guidelines for contributing to Redash. These are guide
 When creating a new bug report, please make sure to:
 
 - Search for existing issues first. If you find a previous report of your issue, please update the existing issue with additional information instead of creating a new one.
-- If you are not sure if your issue is really a bug or just some configuration/setup problem, please start a [Q&A discussion](https://github.com/getredash/redash/discussions/new?category=q-a) first. Unless you can provide clear steps to reproduce, it's probably better to start with a discussion and later to open an issue.
+- If you are not sure if your issue is really a bug or just some configuration/setup problem, please start a [Q&A discussion](https://github.com/chutung-weha/WeBI/discussions/new?category=q-a) first. Unless you can provide clear steps to reproduce, it's probably better to start with a discussion and later to open an issue.
 - If you still decide to open an issue, please review the template and guidelines and include as much details as possible.
 
 ### Suggesting Enhancements / Feature Requests
 
 If you would like to suggest an enhancement or ask for a new feature:
 
-- Please check [the Ideas discussions](https://github.com/getredash/redash/discussions/categories/ideas) for existing threads about what you want to suggest/ask. If there is, feel free to upvote it to signal interest or add your comments.
+- Please check [the Ideas discussions](https://github.com/chutung-weha/WeBI/discussions/categories/ideas) for existing threads about what you want to suggest/ask. If there is, feel free to upvote it to signal interest or add your comments.
 - If there is no open thread, you're welcome to start one to have a discussion about what you want to suggest. Try to provide as much details and context as possible and include information about *the problem you want to solve* rather only *your proposed solution*.
 
 ### Pull Requests
@@ -84,7 +84,7 @@ After your pull request has been approved, a member of the core team will merge 
 
 ### Documentation
 
-The project's documentation can be found at [https://redash.io/help/](https://redash.io/help/). The [documentation sources](https://github.com/getredash/website/tree/master/src/pages/kb) are hosted on GitHub. To contribute edits / new pages, you can use GitHub's interface. Click the "Edit on GitHub" link on the documentation page to quickly open the edit interface.
+The project's documentation can be found at [http://board.weha.vn/help/](http://board.weha.vn/help/).
 
 ## Additional Notes
 
@@ -92,10 +92,10 @@ The project's documentation can be found at [https://redash.io/help/](https://re
 
 We publish a stable release every ~3-4 months, although the goal is to get to a stable release every month. 
 
-Every build of the master branch updates the *redash/redash:preview* Docker Image. These releases are usually stable, but might contain regressions and therefore recommended for "advanced users" only.
+Every build of the master branch updates the *weboard/weboard:preview* Docker Image. These releases are usually stable, but might contain regressions and therefore recommended for "advanced users" only.
 
 When we release a new stable release, we also update the *latest* Docker image tag, the EC2 AMIs and GCE images.
 
 ## Code of Conduct
 
-This project adheres to the Contributor Covenant [code of conduct](https://redash.io/community/code_of_conduct). By participating, you are expected to uphold this code. Please report unacceptable behavior to team@redash.io.
+This project adheres to the Contributor Covenant code of conduct. By participating, you are expected to uphold this code. Please report unacceptable behavior to team@weha.vn.

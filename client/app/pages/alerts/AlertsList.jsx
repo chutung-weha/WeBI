@@ -1,5 +1,6 @@
 import { toUpper } from "lodash";
 import React from "react";
+import i18n from "@/i18n";
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
 import Link from "@/components/Link";
 import PageHeader from "@/components/PageHeader";
@@ -30,16 +31,16 @@ class AlertsList extends React.Component {
   listColumns = [
     Columns.custom.sortable(
       (text, alert) => (
-        <span title={alert.options.muted ? "Muted" : "Active"}>
+        <span title={alert.options.muted ? i18n.t("alerts.muted") : i18n.t("alerts.active")}>
           <i className={`fa fa-bell-${alert.options.muted ? "slash" : "o"} p-r-0`} aria-hidden="true" />
-          <span className="sr-only">{alert.options.muted ? "Muted" : "Active"}</span>
+          <span className="sr-only">{alert.options.muted ? i18n.t("alerts.muted") : i18n.t("alerts.active")}</span>
         </span>
       ),
       {
         title: (
           <>
             <i className="fa fa-bell p-r-0" aria-hidden="true" />
-            <span className="sr-only">Sort by notification status.</span>
+            <span className="sr-only">{i18n.t("alerts.sortByStatus")}</span>
           </>
         ),
         field: "muted",
@@ -55,11 +56,11 @@ class AlertsList extends React.Component {
         </div>
       ),
       {
-        title: "Name",
+        title: i18n.t("alerts.name"),
         field: "name",
       }
     ),
-    Columns.custom((text, item) => item.user.name, { title: "Created By", width: "1%" }),
+    Columns.custom((text, item) => item.user.name, { title: i18n.t("alerts.createdBy"), width: "1%" }),
     Columns.custom.sortable(
       (text, alert) => (
         <div>
@@ -67,14 +68,14 @@ class AlertsList extends React.Component {
         </div>
       ),
       {
-        title: "State",
+        title: i18n.t("alerts.state"),
         field: "state",
         width: "1%",
         className: "text-nowrap",
       }
     ),
-    Columns.timeAgo.sortable({ title: "Last Updated At", field: "updated_at", width: "1%" }),
-    Columns.dateTime.sortable({ title: "Created At", field: "created_at", width: "1%" }),
+    Columns.timeAgo.sortable({ title: i18n.t("alerts.lastUpdatedAt"), field: "updated_at", width: "1%" }),
+    Columns.dateTime.sortable({ title: i18n.t("alerts.createdAt"), field: "created_at", width: "1%" }),
   ];
 
   render() {
@@ -84,12 +85,12 @@ class AlertsList extends React.Component {
       <div className="page-alerts-list">
         <div className="container">
           <PageHeader
-            title={controller.params.pageTitle}
+            title={i18n.t("alerts.pageTitle")}
             actions={
               currentUser.hasPermission("list_alerts") ? (
                 <Link.Button block type="primary" href="alerts/new">
                   <i className="fa fa-plus m-r-5" aria-hidden="true" />
-                  New Alert
+                  {i18n.t("alerts.newAlert")}
                 </Link.Button>
               ) : null
             }
@@ -100,7 +101,7 @@ class AlertsList extends React.Component {
                 <EmptyState
                   icon="fa fa-bell-o"
                   illustration="alert"
-                  description="Get notified on certain events"
+                  description={i18n.t("alerts.getNotified")}
                   helpMessage={<EmptyStateHelpMessage helpTriggerType="ALERTS" />}
                   showAlertStep
                 />

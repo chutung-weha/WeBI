@@ -1,6 +1,7 @@
 import { isString } from "lodash";
 import React from "react";
 import PropTypes from "prop-types";
+import i18n from "@/i18n";
 import Button from "antd/lib/button";
 import Modal from "antd/lib/modal";
 import Tooltip from "@/components/Tooltip";
@@ -9,14 +10,14 @@ import Group from "@/services/group";
 
 function deleteGroup(event, group, onGroupDeleted) {
   Modal.confirm({
-    title: "Delete Group",
-    content: "Are you sure you want to delete this group?",
-    okText: "Yes",
+    title: i18n.t("groups.deleteGroup"),
+    content: i18n.t("groups.deleteGroupConfirm"),
+    okText: i18n.t("common.yes"),
     okType: "danger",
-    cancelText: "No",
+    cancelText: i18n.t("common.no"),
     onOk: () => {
       Group.delete(group).then(() => {
-        notification.success("Group deleted successfully.");
+        notification.success(i18n.t("groups.groupDeleted"));
         onGroupDeleted();
       });
     },

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Menu from "antd/lib/menu";
 import PageHeader from "@/components/PageHeader";
 import Link from "@/components/Link";
@@ -7,20 +8,21 @@ import Link from "@/components/Link";
 import "./layout.less";
 
 export default function Layout({ activeTab, children }) {
+  const { t } = useTranslation();
   return (
     <div className="admin-page-layout">
       <div className="container">
-        <PageHeader title="Admin" />
+        <PageHeader title={t("admin.pageTitle")} />
         <div className="bg-white tiled">
           <Menu selectedKeys={[activeTab]} selectable={false} mode="horizontal">
             <Menu.Item key="system_status">
-              <Link href="admin/status">System Status</Link>
+              <Link href="admin/status">{t("admin.systemStatus")}</Link>
             </Menu.Item>
             <Menu.Item key="jobs">
-              <Link href="admin/queries/jobs">RQ Status</Link>
+              <Link href="admin/queries/jobs">{t("admin.rqStatus")}</Link>
             </Menu.Item>
             <Menu.Item key="outdated_queries">
-              <Link href="admin/queries/outdated">Outdated Queries</Link>
+              <Link href="admin/queries/outdated">{t("admin.outdatedQueries")}</Link>
             </Menu.Item>
           </Menu>
           {children}

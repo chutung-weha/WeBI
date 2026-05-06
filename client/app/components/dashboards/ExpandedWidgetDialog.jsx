@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Button from "antd/lib/button";
 import Modal from "antd/lib/modal";
 import { wrap as wrapDialog, DialogPropType } from "@/components/DialogWrapper";
@@ -8,6 +9,7 @@ import VisualizationRenderer from "@/components/visualizations/VisualizationRend
 import VisualizationName from "@/components/visualizations/VisualizationName";
 
 function ExpandedWidgetDialog({ dialog, widget, filters }) {
+  const { t } = useTranslation();
   return (
     <Modal
       {...dialog.props}
@@ -17,7 +19,7 @@ function ExpandedWidgetDialog({ dialog, widget, filters }) {
         </>
       }
       width="95%"
-      footer={<Button onClick={dialog.dismiss}>Close</Button>}>
+      footer={<Button onClick={dialog.dismiss}>{t("widgets.close")}</Button>}>
       <VisualizationRenderer
         visualization={widget.visualization}
         queryResult={widget.getQueryResult()}

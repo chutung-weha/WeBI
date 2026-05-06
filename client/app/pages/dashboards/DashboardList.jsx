@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import cx from "classnames";
+import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
 
 import Button from "antd/lib/button";
 import routeWithUserSession from "@/components/ApplicationArea/routeWithUserSession";
@@ -25,67 +27,74 @@ import DashboardListEmptyState from "./components/DashboardListEmptyState";
 
 import "./dashboard-list.css";
 
-const sidebarMenu = [
-  {
-    key: "all",
-    href: "dashboards",
-    title: "All Dashboards",
-    icon: () => <Sidebar.MenuIcon icon="zmdi zmdi-view-quilt" />,
-  },
-  {
-    key: "my",
-    href: "dashboards/my",
-    title: "My Dashboards",
-    icon: () => <Sidebar.ProfileImage user={currentUser} />,
-  },
-  {
-    key: "favorites",
-    href: "dashboards/favorites",
-    title: "Favorites",
-    icon: () => <Sidebar.MenuIcon icon="fa fa-star" />,
-  },
-];
-
-const listColumns = [
-  Columns.favorites({ className: "p-r-0" }),
-  Columns.custom.sortable(
-    (text, item) => (
-      <React.Fragment>
-        <Link className="table-main-title" href={item.url} data-test={`DashboardId${item.id}`}>
-          {item.name}
-        </Link>
-        <DashboardTagsControl
-          className="d-block"
-          tags={item.tags}
-          isDraft={item.is_draft}
-          isArchived={item.is_archived}
-        />
-      </React.Fragment>
-    ),
+function buildSidebarMenu(t) {
+  return [
     {
-      title: "Name",
-      field: "name",
-      width: null,
-    }
-  ),
-  Columns.custom((text, item) => item.user.name, { title: "Created By", width: "1%" }),
-  Columns.dateTime.sortable({
-    title: "Created At",
-    field: "created_at",
-    width: "1%",
-  }),
-];
+      key: "all",
+      href: "dashboards",
+      title: t("dashboards.all"),
+      icon: () => <Sidebar.MenuIcon icon="zmdi zmdi-view-quilt" />,
+    },
+    {
+      key: "my",
+      href: "dashboards/my",
+      title: t("dashboards.my"),
+      icon: () => <Sidebar.ProfileImage user={currentUser} />,
+    },
+    {
+      key: "favorites",
+      href: "dashboards/favorites",
+      title: t("dashboards.favorites"),
+      icon: () => <Sidebar.MenuIcon icon="fa fa-star" />,
+    },
+  ];
+}
+
+function buildListColumns(t) {
+  return [
+    Columns.favorites({ className: "p-r-0" }),
+    Columns.custom.sortable(
+      (text, item) => (
+        <React.Fragment>
+          <Link className="table-main-title" href={item.url} data-test={`DashboardId${item.id}`}>
+            {item.name}
+          </Link>
+          <DashboardTagsControl
+            className="d-block"
+            tags={item.tags}
+            isDraft={item.is_draft}
+            isArchived={item.is_archived}
+          />
+        </React.Fragment>
+      ),
+      {
+        title: t("dashboards.name"),
+        field: "name",
+        width: null,
+      }
+    ),
+    Columns.custom((text, item) => item.user.name, { title: t("dashboards.createdBy"), width: "1%" }),
+    Columns.dateTime.sortable({
+      title: t("dashboards.createdAt"),
+      field: "created_at",
+      width: "1%",
+    }),
+  ];
+}
 
 function DashboardListExtraActions(props) {
   return <DynamicComponent name="DashboardList.Actions" {...props} />;
 }
 
 function DashboardList({ controller }) {
-  let usedListColumns = listColumns;
+  const { t, i18n: i18nInstance } = useTranslation();
+  const sidebarMenu = useMemo(() => buildSidebarMenu(t), [t, i18nInstance.language]);
+  const baseListColumns = useMemo(() => buildListColumns(t), [t, i18nInstance.language]);
+  let usedListColumns = baseListColumns;
   if (controller.params.currentPage === "favorites") {
     usedListColumns = [
       ...usedListColumns,
-      Columns.dateTime.sortable({ title: "Starred At", field: "starred_at", width: "1%" }),
+      Columns.dateTime.sortable({ title: t("dashboards.starredAt"), field: "starred_at", width: "1%" }),
     ];
   }
   const {
@@ -99,12 +108,18 @@ function DashboardList({ controller }) {
     <div className="page-dashboard-list">
       <div className="container">
         <PageHeader
-          title={controller.params.pageTitle}
+          title={
+            {
+              all: t("dashboards.pageTitle"),
+              favorites: t("dashboards.favoritesTitle"),
+              my: t("dashboards.myTitle"),
+            }[controller.params.currentPage] || controller.params.pageTitle
+          }
           actions={
             currentUser.hasPermission("create_dashboard") ? (
               <Button block type="primary" onClick={() => CreateDashboardDialog.showModal()}>
                 <i className="fa fa-plus m-r-5" aria-hidden="true" />
-                New Dashboard
+                {t("dashboards.newDashboard")}
               </Button>
             ) : null
           }
@@ -112,8 +127,8 @@ function DashboardList({ controller }) {
         <Layout>
           <Layout.Sidebar className="m-b-0">
             <Sidebar.SearchInput
-              placeholder="Search Dashboards..."
-              label="Search dashboards"
+              placeholder={t("dashboards.search")}
+              label={t("dashboards.searchLabel")}
               value={controller.searchTerm}
               onChange={controller.updateSearch}
             />

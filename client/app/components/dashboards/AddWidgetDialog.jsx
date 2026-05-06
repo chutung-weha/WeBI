@@ -1,6 +1,8 @@
 import { map, includes, groupBy, first, find } from "lodash";
 import React, { useState, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
 import Select from "antd/lib/select";
 import Modal from "antd/lib/modal";
 import { wrap as wrapDialog, DialogPropType } from "@/components/DialogWrapper";
@@ -11,6 +13,7 @@ import { Query } from "@/services/query";
 import { useUniqueId } from "@/lib/hooks/useUniqueId";
 
 function VisualizationSelect({ query, visualization, onChange }) {
+  const { t } = useTranslation();
   const visualizationGroups = useMemo(() => {
     return query ? groupBy(query.visualizations, "type") : {};
   }, [query]);
@@ -32,7 +35,7 @@ function VisualizationSelect({ query, visualization, onChange }) {
   return (
     <div>
       <div className="form-group">
-        <label htmlFor={vizSelectId}>Choose Visualization</label>
+        <label htmlFor={vizSelectId}>{t("widgets.chooseVisualization")}</label>
         <Select
           id={vizSelectId}
           className="w-100"
@@ -66,6 +69,7 @@ VisualizationSelect.defaultProps = {
 };
 
 function AddWidgetDialog({ dialog, dashboard }) {
+  const { t } = useTranslation();
   const [selectedQuery, setSelectedQuery] = useState(null);
   const [selectedVisualization, setSelectedVisualization] = useState(null);
   const [parameterMappings, setParameterMappings] = useState([]);
@@ -106,7 +110,7 @@ function AddWidgetDialog({ dialog, dashboard }) {
 
   const saveWidget = useCallback(() => {
     dialog.close({ visualization: selectedVisualization, parameterMappings }).catch(() => {
-      notification.error("Widget could not be added");
+      notification.error(i18n.t("widgets.widgetCouldNotAdd"));
     });
   }, [dialog, selectedVisualization, parameterMappings]);
 
@@ -116,13 +120,13 @@ function AddWidgetDialog({ dialog, dashboard }) {
   return (
     <Modal
       {...dialog.props}
-      title="Add Widget"
+      title={t("widgets.addWidget")}
       onOk={saveWidget}
       okButtonProps={{
         ...dialog.props.okButtonProps,
         disabled: !selectedQuery || dialog.props.okButtonProps.disabled,
       }}
-      okText="Add to Dashboard"
+      okText={t("widgets.addToDashboard")}
       width={700}>
       <div data-test="AddWidgetDialog">
         <QuerySelector onChange={query => selectQuery(query ? query.id : null)} />
@@ -137,7 +141,7 @@ function AddWidgetDialog({ dialog, dashboard }) {
 
         {parameterMappings.length > 0 && [
           <label key="parameters-title" htmlFor={parameterMappingsId}>
-            Parameters
+            {t("widgets.parameters")}
           </label>,
           <ParameterMappingListInput
             key="parameters-list"

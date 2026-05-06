@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import Button from "antd/lib/button";
 import DynamicComponent from "@/components/DynamicComponent";
 import { UserProfile } from "@/components/proptypes";
@@ -9,6 +10,7 @@ import PasswordResetForm from "./PasswordResetForm";
 import ResendInvitationForm from "./ResendInvitationForm";
 
 export default function PasswordForm(props) {
+  const { t } = useTranslation();
   const { user } = props;
 
   const changePassword = useCallback(() => {
@@ -17,10 +19,10 @@ export default function PasswordForm(props) {
 
   return (
     <DynamicComponent name="UserProfile.PasswordForm" {...props}>
-      <h5>Password</h5>
+      <h5>{t("users.password")}</h5>
       {user.id === currentUser.id && (
         <Button className="w-100 m-t-10" onClick={changePassword} data-test="ChangePassword">
-          Change Password
+          {t("users.changePassword")}
         </Button>
       )}
       {user.id !== currentUser.id && currentUser.isAdmin && (

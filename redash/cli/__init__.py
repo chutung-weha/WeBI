@@ -77,7 +77,7 @@ def send_test_mail(email=None):
     if email is None:
         email = settings.MAIL_DEFAULT_SENDER
 
-    mail.send(Message(subject="Test Message from Redash", recipients=[email], body="Test message."))
+    mail.send(Message(subject="Test Message from WE BOARD", recipients=[email], body="Test message."))
 
 
 @manager.command("shell")
