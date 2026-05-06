@@ -48,6 +48,7 @@ export const visualizationsSettings = {
   allowCustomJSVisualizations: false,
   hidePlotlyModeBar: false,
   choroplethAvailableMaps: {},
+  t: (key: string, fallback?: string) => fallback || key,
 };
 
 export function updateVisualizationsSettings(options: any) {

@@ -3,6 +3,9 @@ import React from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { Section, Input, Checkbox, ContextHelp } from "@/components/visualizations/editor";
 import { EditorPropTypes } from "@/visualizations/prop-types";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 export default function DataLabelsSettings({ options, onOptionsChange }: any) {
   const isShowDataLabelsAvailable = includes(
@@ -21,7 +24,7 @@ export default function DataLabelsSettings({ options, onOptionsChange }: any) {
             data-test="Chart.DataLabels.ShowDataLabels"
             defaultChecked={options.showDataLabels}
             onChange={event => onOptionsChange({ showDataLabels: event.target.checked })}>
-            Show Data Labels
+            {t("viz.chart.dataLabels.show", "Show Data Labels")}
           </Checkbox>
         </Section>
       )}
@@ -31,7 +34,7 @@ export default function DataLabelsSettings({ options, onOptionsChange }: any) {
         <Input
           label={
             <React.Fragment>
-              Number Values Format
+              {t("viz.chart.dataLabels.numberFormat", "Number Values Format")}
               <ContextHelp.NumberFormatSpecs />
             </React.Fragment>
           }
@@ -46,7 +49,7 @@ export default function DataLabelsSettings({ options, onOptionsChange }: any) {
         <Input
           label={
             <React.Fragment>
-              Percent Values Format
+              {t("viz.chart.dataLabels.percentFormat", "Percent Values Format")}
               <ContextHelp.NumberFormatSpecs />
             </React.Fragment>
           }
@@ -61,7 +64,7 @@ export default function DataLabelsSettings({ options, onOptionsChange }: any) {
         <Input
           label={
             <React.Fragment>
-              Date/Time Values Format
+              {t("viz.chart.dataLabels.datetimeFormat", "Date/Time Values Format")}
               <ContextHelp.DateTimeFormatSpecs />
             </React.Fragment>
           }
@@ -76,7 +79,7 @@ export default function DataLabelsSettings({ options, onOptionsChange }: any) {
         <Input
           label={
             <React.Fragment>
-              Data Labels
+              {t("viz.chart.dataLabels.textFormat", "Data Labels")}
               {/* @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message */}
               <ContextHelp placement="topRight" arrowPointAtCenter>
                 <div style={{ paddingBottom: 5 }}>Use special names to access additional properties:</div>
@@ -108,7 +111,7 @@ export default function DataLabelsSettings({ options, onOptionsChange }: any) {
             </React.Fragment>
           }
           data-test="Chart.DataLabels.TextFormat"
-          placeholder="(auto)"
+          placeholder={t("viz.chart.dataLabels.auto", "(auto)")}
           defaultValue={options.textFormat}
           onChange={(e: any) => debouncedOnOptionsChange({ textFormat: e.target.value })}
         />

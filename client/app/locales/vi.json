@@ -225,7 +225,458 @@
     "editor": "Trình chỉnh sửa biểu đồ",
     "type": "Loại biểu đồ",
     "name": "Tên biểu đồ",
-    "preview": "Xem trước"
+    "preview": "Xem trước",
+    "save": "Lưu",
+    "cancel": "Huỷ",
+    "saved": "Đã lưu biểu đồ",
+    "saveFailed": "Lưu biểu đồ thất bại",
+    "chart": {
+      "tabs": {
+        "general": "Chung",
+        "xAxis": "Trục X",
+        "yAxis": "Trục Y",
+        "series": "Chuỗi",
+        "colors": "Màu sắc",
+        "dataLabels": "Nhãn dữ liệu"
+      },
+      "general": {
+        "chartType": "Loại biểu đồ",
+        "horizontal": "Biểu đồ ngang",
+        "bubbleSizeCoefficient": "Hệ số kích thước bong bóng",
+        "bubbleSizeProportional": "Kích thước bong bóng tỉ lệ với",
+        "area": "Diện tích",
+        "diameter": "Đường kính",
+        "direction": "Hướng",
+        "counterclockwise": "Ngược chiều kim đồng hồ",
+        "clockwise": "Theo chiều kim đồng hồ",
+        "sort": "Sắp xếp",
+        "true": "Có",
+        "false": "Không",
+        "legendPlacement": "Vị trí chú thích",
+        "hideLegend": "Ẩn chú thích",
+        "right": "Bên phải",
+        "bottom": "Bên dưới",
+        "legendItemsOrder": "Thứ tự mục chú thích",
+        "normal": "Bình thường",
+        "reversed": "Đảo ngược",
+        "showAllPoints": "Hiển thị tất cả điểm",
+        "stacking": "Xếp chồng",
+        "disabled": "Tắt",
+        "stack": "Xếp chồng",
+        "normalizePercent": "Chuẩn hoá giá trị thành phần trăm",
+        "lineShape": "Hình dạng đường",
+        "linear": "Đường thẳng",
+        "spline": "Đường cong",
+        "horizontalVertical": "Ngang-Dọc",
+        "verticalHorizontal": "Dọc-Ngang",
+        "missingValues": "Giá trị thiếu và NULL",
+        "doNotDisplay": "Không hiển thị trên biểu đồ",
+        "convertToZero": "Chuyển thành 0 và hiển thị",
+        "enableClickEvents": "Bật sự kiện click",
+        "openInNewTab": "Mở ở tab mới",
+        "urlTemplate": "Mẫu URL"
+      },
+      "columns": {
+        "x": "Cột X",
+        "y": "Cột Y",
+        "groupBy": "Nhóm theo",
+        "errors": "Cột lỗi",
+        "bubbleSize": "Cột kích thước bong bóng",
+        "color": "Cột màu",
+        "swappedX": "Cột Y",
+        "swappedY": "Cột X",
+        "chooseOne": "Chọn cột...",
+        "chooseMany": "Chọn các cột..."
+      },
+      "axis": {
+        "scale": "Tỷ lệ",
+        "name": "Tên",
+        "linearAxis": "Tuyến tính",
+        "logarithmic": "Logarit",
+        "category": "Phân loại",
+        "datetime": "Thời gian",
+        "rangeMin": "Giá trị tối thiểu",
+        "rangeMax": "Giá trị tối đa",
+        "auto": "Tự động",
+        "sortValues": "Sắp xếp giá trị",
+        "reverseOrder": "Đảo ngược thứ tự",
+        "showLabels": "Hiển thị nhãn",
+        "labelsLength": "Độ dài nhãn",
+        "leftYAxis": "Trục Y trái",
+        "rightYAxis": "Trục Y phải",
+        "alignYAxesAtZero": "Căn các trục Y tại 0"
+      },
+      "series": {
+        "order": "Thứ tự",
+        "label": "Nhãn",
+        "yAxis": "Trục Y",
+        "left": "Trái",
+        "right": "Phải",
+        "type": "Kiểu",
+        "color": "Màu",
+        "title": "Chuỗi"
+      },
+      "colors": {
+        "scheme": "Bảng màu",
+        "minColor": "Màu nhỏ nhất:",
+        "maxColor": "Màu lớn nhất:",
+        "steps": "Số bước",
+        "noScheme": "Tuỳ chỉnh...",
+        "chooseScheme": "Chọn bảng màu..."
+      },
+      "dataLabels": {
+        "show": "Hiển thị nhãn dữ liệu",
+        "numberFormat": "Định dạng số",
+        "percentFormat": "Định dạng phần trăm",
+        "datetimeFormat": "Định dạng ngày/giờ",
+        "textFormat": "Nhãn dữ liệu",
+        "auto": "(tự động)"
+      },
+      "custom": {
+        "code": "Mã tuỳ chỉnh",
+        "rSquared": "Hiển thị R²",
+        "showErrors": "Hiển thị lỗi trong console",
+        "autoUpdate": "Tự động cập nhật biểu đồ"
+      },
+      "types": {
+        "line": "Đường",
+        "column": "Cột",
+        "area": "Vùng",
+        "pie": "Tròn",
+        "scatter": "Tán xạ",
+        "bubble": "Bong bóng",
+        "heatmap": "Nhiệt",
+        "box": "Hộp",
+        "custom": "Tuỳ chỉnh"
+      },
+      "pieColors": {
+        "values": "Giá trị",
+        "color": "Màu"
+      }
+    },
+    "table": {
+      "tabs": {
+        "columns": "Cột",
+        "grid": "Lưới"
+      },
+      "itemsPerPage": "Số dòng mỗi trang",
+      "columns": {
+        "toggleVisibility": "Bật/tắt hiển thị",
+        "useForSearch": "Dùng để tìm kiếm",
+        "description": "Mô tả",
+        "displayAs": "Hiển thị dạng:",
+        "title": "Tiêu đề"
+      },
+      "columnTypes": {
+        "string": "Văn bản",
+        "number": "Số",
+        "datetime": "Ngày/Giờ",
+        "boolean": "Boolean",
+        "link": "Liên kết",
+        "image": "Hình ảnh",
+        "json": "JSON"
+      },
+      "columnEditor": {
+        "valueForFalse": "Giá trị cho",
+        "valueForTrue": "Giá trị cho",
+        "dateTimeFormat": "Định dạng Ngày/Giờ",
+        "urlTemplate": "Mẫu URL",
+        "size": "Kích thước",
+        "width": "Chiều rộng",
+        "height": "Chiều cao",
+        "titleTemplate": "Mẫu tiêu đề",
+        "textTemplate": "Mẫu văn bản",
+        "openInNewTab": "Mở ở tab mới",
+        "numberFormat": "Định dạng số",
+        "allowHTML": "Cho phép nội dung HTML",
+        "highlightLinks": "Tô sáng liên kết",
+        "formatSpecs": "Quy cách định dạng"
+      }
+    },
+    "counter": {
+      "label": "Nhãn số đếm",
+      "valueColumn": "Cột giá trị số đếm",
+      "valueRow": "Số dòng giá trị số đếm",
+      "targetValueColumn": "Cột giá trị mục tiêu",
+      "noTargetValue": "Không có giá trị mục tiêu",
+      "targetValueRow": "Số dòng giá trị mục tiêu",
+      "countRows": "Đếm số dòng",
+      "format": "Định dạng",
+      "tooltipFormat": "Định dạng tooltip",
+      "stringDecimal": "Số chữ số thập phân",
+      "stringDecChar": "Ký tự thập phân",
+      "stringThouSep": "Phân cách hàng nghìn",
+      "stringPrefix": "Tiền tố",
+      "stringSuffix": "Hậu tố"
+    },
+    "pivot": {
+      "showControls": "Hiển thị điều khiển Pivot",
+      "showRowTotals": "Hiển thị tổng theo hàng",
+      "showColumnTotals": "Hiển thị tổng theo cột"
+    },
+    "choropleth": {
+      "tabs": {
+        "general": "Chung",
+        "colors": "Màu sắc",
+        "format": "Định dạng",
+        "bounds": "Phạm vi"
+      },
+      "general": {
+        "map": "Bản đồ",
+        "keyColumn": "Cột khoá",
+        "targetField": "Trường đích",
+        "valueColumn": "Cột giá trị"
+      },
+      "format": {
+        "valueFormat": "Định dạng giá trị",
+        "valuePlaceholder": "Văn bản chỗ trống",
+        "valuePrefix": "Tiền tố giá trị",
+        "valueSuffix": "Hậu tố giá trị",
+        "noValuePlaceholder": "Văn bản khi không có giá trị",
+        "popup": "Cửa sổ Popup",
+        "tooltip": "Tooltip",
+        "showTooltip": "Hiển thị tooltip",
+        "showLegend": "Hiển thị chú thích",
+        "showPopup": "Hiển thị popup",
+        "legendPosition": "Vị trí chú thích",
+        "legendTextAlignment": "Căn lề văn bản chú thích",
+        "tooltipTemplate": "Mẫu tooltip",
+        "popupTemplate": "Mẫu popup",
+        "topLeft": "trên / trái",
+        "topRight": "trên / phải",
+        "bottomLeft": "dưới / trái",
+        "bottomRight": "dưới / phải"
+      },
+      "colors": {
+        "clusteringMode": "Chế độ gom nhóm",
+        "quantile": "phân vị",
+        "equidistant": "cách đều",
+        "kmeans": "k-means",
+        "minColor": "Màu nhỏ nhất",
+        "maxColor": "Màu lớn nhất",
+        "noValueColor": "Màu khi không có giá trị",
+        "backgroundColor": "Màu nền",
+        "bordersColor": "Màu viền",
+        "background": "Nền",
+        "borders": "Viền",
+        "steps": "Số bước",
+        "clustering": "Gom nhóm"
+      },
+      "bounds": {
+        "title": "Phạm vi giá trị",
+        "northEast": "Vĩ độ và Kinh độ Đông Bắc",
+        "southWest": "Vĩ độ và Kinh độ Tây Nam"
+      }
+    },
+    "cohort": {
+      "tabs": {
+        "columns": "Cột",
+        "options": "Tuỳ chọn",
+        "colors": "Màu sắc",
+        "appearance": "Giao diện"
+      },
+      "columns": {
+        "dateBucket": "Ngày (Nhóm)",
+        "stage": "Giai đoạn",
+        "bucketPopulation": "Số lượng nhóm",
+        "stageValue": "Giá trị giai đoạn"
+      },
+      "options": {
+        "timeInterval": "Khoảng thời gian",
+        "mode": "Chế độ",
+        "daily": "Theo ngày",
+        "weekly": "Theo tuần",
+        "monthly": "Theo tháng",
+        "fillGapsWithZeros": "Lấp khoảng trống bằng 0",
+        "showAsIs": "Hiển thị như nguyên bản"
+      },
+      "colors": {
+        "minColor": "Màu nhỏ nhất",
+        "maxColor": "Màu lớn nhất",
+        "steps": "Số bước"
+      },
+      "appearance": {
+        "timeColumnTitle": "Tiêu đề cột thời gian",
+        "peopleColumnTitle": "Tiêu đề cột người",
+        "stageColumnTitle": "Tiêu đề cột giai đoạn",
+        "numberFormat": "Định dạng số",
+        "percentFormat": "Định dạng phần trăm",
+        "noValuePlaceholder": "Văn bản khi không có giá trị",
+        "showTooltips": "Hiển thị tooltip",
+        "normalizeValues": "Chuẩn hoá thành phần trăm"
+      },
+      "timeInterval": "Khoảng thời gian",
+      "mode": "Chế độ",
+      "daily": "Theo ngày",
+      "weekly": "Theo tuần",
+      "monthly": "Theo tháng",
+      "yearly": "Theo năm",
+      "diagonal": "Đường chéo",
+      "horizontal": "Theo hàng",
+      "stage": "Giai đoạn",
+      "total": "Tổng",
+      "value": "Giá trị",
+      "minColor": "Màu nhỏ nhất",
+      "maxColor": "Màu lớn nhất",
+      "dateColumnName": "Tên cột ngày",
+      "stageColumnName": "Tên cột giai đoạn",
+      "totalColumnName": "Tên cột tổng",
+      "valueColumnName": "Tên cột giá trị"
+    },
+    "funnel": {
+      "tabs": {
+        "general": "Chung",
+        "appearance": "Giao diện"
+      },
+      "general": {
+        "stepColumn": "Cột bước",
+        "stepColumnTitle": "Tiêu đề cột bước",
+        "valueColumn": "Cột giá trị",
+        "valueColumnTitle": "Tiêu đề cột giá trị",
+        "customSorting": "Sắp xếp tuỳ chỉnh",
+        "sortColumn": "Cột sắp xếp",
+        "sortOrder": "Thứ tự sắp xếp",
+        "ascending": "tăng dần",
+        "descending": "giảm dần",
+        "chooseColumn": "Chọn cột..."
+      },
+      "appearance": {
+        "numberFormat": "Định dạng số",
+        "percentFormat": "Định dạng phần trăm",
+        "itemsLimit": "Giới hạn số mục",
+        "minPercent": "Phần trăm nhỏ nhất",
+        "maxPercent": "Phần trăm lớn nhất"
+      },
+      "stepColumn": "Cột bước",
+      "valueColumn": "Cột giá trị",
+      "customSort": "Sắp xếp tuỳ chỉnh",
+      "sortColumn": "Cột sắp xếp",
+      "sortReverse": "Sắp xếp giảm dần",
+      "numberFormat": "Định dạng số",
+      "percentFormat": "Định dạng phần trăm",
+      "itemsLimit": "Giới hạn số mục",
+      "percentValuesRange": "Phạm vi phần trăm"
+    },
+    "map": {
+      "tabs": {
+        "general": "Chung",
+        "groups": "Nhóm",
+        "format": "Định dạng",
+        "style": "Kiểu"
+      },
+      "general": {
+        "latitudeColumn": "Tên cột vĩ độ",
+        "longitudeColumn": "Tên cột kinh độ",
+        "groupBy": "Nhóm theo",
+        "none": "không có"
+      },
+      "groups": {
+        "group": "Nhóm",
+        "color": "Màu"
+      },
+      "format": {
+        "showTooltip": "Hiển thị tooltip",
+        "tooltipTemplate": "Mẫu tooltip",
+        "showPopup": "Hiển thị popup",
+        "popupTemplate": "Mẫu popup",
+        "defaultTemplate": "Mẫu mặc định"
+      },
+      "style": {
+        "mapTiles": "Lớp bản đồ",
+        "markers": "Điểm",
+        "clusterMarkers": "Gom nhóm điểm",
+        "overrideDefaultStyle": "Ghi đè kiểu mặc định",
+        "shape": "Hình dạng",
+        "markerIcon": "Biểu tượng + Marker",
+        "circle": "Tròn",
+        "circleDot": "Chấm tròn",
+        "circleIcon": "Tròn + Biểu tượng",
+        "squareDot": "Chấm vuông",
+        "squareIcon": "Vuông + Biểu tượng",
+        "icon": "Biểu tượng",
+        "iconColor": "Màu biểu tượng",
+        "backgroundColor": "Màu nền",
+        "borderColor": "Màu viền"
+      },
+      "latitudeColumn": "Cột vĩ độ",
+      "longitudeColumn": "Cột kinh độ",
+      "groupBy": "Nhóm theo",
+      "classify": "Phân loại theo",
+      "noClassification": "Không phân loại",
+      "tiles": "Lớp bản đồ",
+      "clusterMarkers": "Gom nhóm điểm",
+      "iconShape": "Hình dạng biểu tượng",
+      "iconFont": "Phông biểu tượng",
+      "foregroundColor": "Màu chữ",
+      "backgroundColor": "Màu nền",
+      "borderColor": "Màu viền",
+      "popupTitle": "Tiêu đề popup",
+      "popupContent": "Nội dung popup"
+    },
+    "boxPlot": {
+      "xAxisLabel": "Nhãn trục X",
+      "yAxisLabel": "Nhãn trục Y"
+    },
+    "wordCloud": {
+      "wordsColumn": "Cột từ ngữ",
+      "frequenciesColumn": "Cột tần suất",
+      "wordLengthLimit": "Giới hạn độ dài từ",
+      "wordCountLimit": "Giới hạn số lượng từ",
+      "min": "Nhỏ nhất",
+      "max": "Lớn nhất"
+    },
+    "details": {
+      "tabs": {
+        "columns": "Cột"
+      },
+      "columns": {
+        "toggleVisibility": "Bật/tắt hiển thị"
+      }
+    },
+    "sankey": {
+      "intro": "Trực quan hoá này yêu cầu kết quả truy vấn có các dòng theo định dạng sau:",
+      "stage1": "giá trị giai đoạn 1",
+      "stageN": "giá trị giai đoạn (hoặc null)",
+      "value": "số lần chuỗi này xuất hiện"
+    },
+    "sunburst": {
+      "intro": "Trực quan hoá này yêu cầu kết quả truy vấn có các dòng theo một trong các định dạng sau:",
+      "option1": "Tuỳ chọn 1:",
+      "option2": "Tuỳ chọn 2:",
+      "sequenceId": "ID chuỗi",
+      "stageInSequence": "giai đoạn trong chuỗi (1, 2, ...)",
+      "stageName": "tên giai đoạn",
+      "value": "số lần chuỗi này xuất hiện",
+      "stage1": "giá trị giai đoạn 1",
+      "stageN": "giá trị giai đoạn (hoặc null)"
+    },
+    "shared": {
+      "columns": {
+        "title": "Cột",
+        "name": "Tên",
+        "title2": "Tiêu đề",
+        "visible": "Hiện",
+        "type": "Kiểu",
+        "format": "Định dạng",
+        "stringPrefix": "Tiền tố",
+        "stringSuffix": "Hậu tố",
+        "imageWidth": "Chiều rộng ảnh",
+        "imageHeight": "Chiều cao ảnh",
+        "imageTitle": "Tiêu đề ảnh",
+        "imageUrl": "URL ảnh",
+        "linkUrl": "URL liên kết",
+        "linkText": "Văn bản liên kết",
+        "linkTitle": "Tiêu đề liên kết",
+        "linkOpenInNewTab": "Mở ở tab mới",
+        "useMonospace": "Phông chữ đều",
+        "allowSearch": "Cho phép tìm kiếm",
+        "allowHTML": "Cho phép HTML",
+        "toggleVisibility": "Bật/tắt hiển thị",
+        "useForSearch": "Dùng để tìm kiếm",
+        "description": "Mô tả",
+        "displayAs": "Hiển thị dạng:"
+      }
+    }
   },
   "param": {
     "chooseKeyword": "Chọn từ khoá cho tham số này",

@@ -1,8 +1,11 @@
 import React from "react";
 import { Section, Switch } from "@/components/visualizations/editor";
 import { EditorPropTypes } from "@/visualizations/prop-types";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
 
 import AxisSettings from "./AxisSettings";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 export default function YAxisSettings({ options, onOptionsChange }: any) {
   const [leftYAxis, rightYAxis] = options.yAxis;
@@ -10,7 +13,7 @@ export default function YAxisSettings({ options, onOptionsChange }: any) {
   return (
     <React.Fragment>
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
-      <Section.Title>{!options.swappedAxes ? "Left Y Axis" : "X Axis"}</Section.Title>
+      <Section.Title>{!options.swappedAxes ? t("viz.chart.axis.leftYAxis", "Left Y Axis") : t("viz.chart.tabs.xAxis", "X Axis")}</Section.Title>
 
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
@@ -26,7 +29,7 @@ export default function YAxisSettings({ options, onOptionsChange }: any) {
       {options.globalSeriesType !== "heatmap" && !options.swappedAxes && (
         <React.Fragment>
           {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
-          <Section.Title>Right Y Axis</Section.Title>
+          <Section.Title>{t("viz.chart.axis.rightYAxis", "Right Y Axis")}</Section.Title>
 
           {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
           <Section>
@@ -50,7 +53,7 @@ export default function YAxisSettings({ options, onOptionsChange }: any) {
               defaultChecked={options.alignYAxesAtZero}
               // @ts-expect-error ts-migrate(2322) FIXME: Type '(alignYAxesAtZero: any) => any' is not assig... Remove this comment to see the full error message
               onChange={(alignYAxesAtZero: any) => onOptionsChange({ alignYAxesAtZero })}>
-              Align Y Axes at Zero
+              {t("viz.chart.axis.alignYAxesAtZero", "Align Y Axes at Zero")}
             </Switch>
           </Section>
         </React.Fragment>
@@ -69,7 +72,7 @@ export default function YAxisSettings({ options, onOptionsChange }: any) {
               defaultChecked={options.sortY}
               // @ts-expect-error ts-migrate(2322) FIXME: Type '(sortY: any) => any' is not assignable to ty... Remove this comment to see the full error message
               onChange={(sortY: any) => onOptionsChange({ sortY })}>
-              Sort Values
+              {t("viz.chart.axis.sortValues", "Sort Values")}
             </Switch>
           </Section>
 
@@ -84,7 +87,7 @@ export default function YAxisSettings({ options, onOptionsChange }: any) {
               defaultChecked={options.reverseY}
               // @ts-expect-error ts-migrate(2322) FIXME: Type '(reverseY: any) => any' is not assignable to... Remove this comment to see the full error message
               onChange={(reverseY: any) => onOptionsChange({ reverseY })}>
-              Reverse Order
+              {t("viz.chart.axis.reverseOrder", "Reverse Order")}
             </Switch>
           </Section>
         </React.Fragment>

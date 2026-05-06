@@ -12,9 +12,12 @@ import {
   ContextHelp,
 } from "@/components/visualizations/editor";
 import { EditorPropTypes } from "@/visualizations/prop-types";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
 
 import useLoadGeoJson from "../hooks/useLoadGeoJson";
 import { getGeoJsonFields } from "./utils";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 type OwnTemplateFormatHintProps = {
   geoJsonProperties?: string[];
@@ -72,7 +75,7 @@ export default function GeneralSettings({ options, onOptionsChange }: any) {
             <Input
               label={
                 <React.Fragment>
-                  Value Format
+                  {t("viz.choropleth.format.valueFormat", "Value Format")}
                   <ContextHelp.NumberFormatSpecs />
                 </React.Fragment>
               }
@@ -83,7 +86,7 @@ export default function GeneralSettings({ options, onOptionsChange }: any) {
           </Grid.Col>
           <Grid.Col span={12}>
             <Input
-              label="Value Placeholder"
+              label={t("viz.choropleth.format.valuePlaceholder", "Value Placeholder")}
               data-test="Choropleth.Editor.ValuePlaceholder"
               defaultValue={options.noValuePlaceholder}
               onChange={(event: any) => onOptionsChangeDebounced({ noValuePlaceholder: event.target.value })}
@@ -98,7 +101,7 @@ export default function GeneralSettings({ options, onOptionsChange }: any) {
           data-test="Choropleth.Editor.LegendVisibility"
           checked={options.legend.visible}
           onChange={event => onOptionsChange({ legend: { visible: event.target.checked } })}>
-          Show Legend
+          {t("viz.choropleth.format.showLegend", "Show Legend")}
         </Checkbox>
       </Section>
 
@@ -107,29 +110,29 @@ export default function GeneralSettings({ options, onOptionsChange }: any) {
         <Grid.Row gutter={15}>
           <Grid.Col span={12}>
             <Select
-              label="Legend Position"
+              label={t("viz.choropleth.format.legendPosition", "Legend Position")}
               data-test="Choropleth.Editor.LegendPosition"
               disabled={!options.legend.visible}
               defaultValue={options.legend.position}
               onChange={(position: any) => onOptionsChange({ legend: { position } })}>
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               <Select.Option value="top-left" data-test="Choropleth.Editor.LegendPosition.TopLeft">
-                top / left
+                {t("viz.choropleth.format.topLeft", "top / left")}
                 {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               </Select.Option>
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               <Select.Option value="top-right" data-test="Choropleth.Editor.LegendPosition.TopRight">
-                top / right
+                {t("viz.choropleth.format.topRight", "top / right")}
                 {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               </Select.Option>
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               <Select.Option value="bottom-left" data-test="Choropleth.Editor.LegendPosition.BottomLeft">
-                bottom / left
+                {t("viz.choropleth.format.bottomLeft", "bottom / left")}
                 {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               </Select.Option>
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               <Select.Option value="bottom-right" data-test="Choropleth.Editor.LegendPosition.BottomRight">
-                bottom / right
+                {t("viz.choropleth.format.bottomRight", "bottom / right")}
                 {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               </Select.Option>
             </Select>
@@ -137,7 +140,7 @@ export default function GeneralSettings({ options, onOptionsChange }: any) {
           <Grid.Col span={12}>
             <TextAlignmentSelect
               data-test="Choropleth.Editor.LegendTextAlignment"
-              label="Legend Text Alignment"
+              label={t("viz.choropleth.format.legendTextAlignment", "Legend Text Alignment")}
               disabled={!options.legend.visible}
               defaultValue={options.legend.alignText}
               onChange={(event: any) => onOptionsChange({ legend: { alignText: event.target.value } })}
@@ -152,14 +155,14 @@ export default function GeneralSettings({ options, onOptionsChange }: any) {
           data-test="Choropleth.Editor.TooltipEnabled"
           checked={options.tooltip.enabled}
           onChange={event => onOptionsChange({ tooltip: { enabled: event.target.checked } })}>
-          Show Tooltip
+          {t("viz.choropleth.format.showTooltip", "Show Tooltip")}
         </Checkbox>
       </Section>
 
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <Input
-          label={<React.Fragment>Tooltip Template {templateFormatHint}</React.Fragment>}
+          label={<React.Fragment>{t("viz.choropleth.format.tooltipTemplate", "Tooltip Template")} {templateFormatHint}</React.Fragment>}
           data-test="Choropleth.Editor.TooltipTemplate"
           disabled={!options.tooltip.enabled}
           defaultValue={options.tooltip.template}
@@ -173,14 +176,14 @@ export default function GeneralSettings({ options, onOptionsChange }: any) {
           data-test="Choropleth.Editor.PopupEnabled"
           checked={options.popup.enabled}
           onChange={event => onOptionsChange({ popup: { enabled: event.target.checked } })}>
-          Show Popup
+          {t("viz.choropleth.format.showPopup", "Show Popup")}
         </Checkbox>
       </Section>
 
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <TextArea
-          label={<React.Fragment>Popup Template {templateFormatHint}</React.Fragment>}
+          label={<React.Fragment>{t("viz.choropleth.format.popupTemplate", "Popup Template")} {templateFormatHint}</React.Fragment>}
           data-test="Choropleth.Editor.PopupTemplate"
           disabled={!options.popup.enabled}
           rows={4}

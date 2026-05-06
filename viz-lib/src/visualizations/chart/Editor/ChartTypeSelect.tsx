@@ -3,15 +3,17 @@ import React, { useMemo } from "react";
 import { Select } from "@/components/visualizations/editor";
 import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
 
-const allChartTypes = [
-  { type: "line", name: "Line", icon: "line-chart" },
-  { type: "column", name: "Bar", icon: "bar-chart" },
-  { type: "area", name: "Area", icon: "area-chart" },
-  { type: "pie", name: "Pie", icon: "pie-chart" },
-  { type: "scatter", name: "Scatter", icon: "circle-o" },
-  { type: "bubble", name: "Bubble", icon: "circle-o" },
-  { type: "heatmap", name: "Heatmap", icon: "th" },
-  { type: "box", name: "Box", icon: "square-o" },
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
+
+const getAllChartTypes = () => [
+  { type: "line", name: t("viz.chart.types.line", "Line"), icon: "line-chart" },
+  { type: "column", name: t("viz.chart.types.column", "Bar"), icon: "bar-chart" },
+  { type: "area", name: t("viz.chart.types.area", "Area"), icon: "area-chart" },
+  { type: "pie", name: t("viz.chart.types.pie", "Pie"), icon: "pie-chart" },
+  { type: "scatter", name: t("viz.chart.types.scatter", "Scatter"), icon: "circle-o" },
+  { type: "bubble", name: t("viz.chart.types.bubble", "Bubble"), icon: "circle-o" },
+  { type: "heatmap", name: t("viz.chart.types.heatmap", "Heatmap"), icon: "th" },
+  { type: "box", name: t("viz.chart.types.box", "Box"), icon: "square-o" },
 ];
 
 type OwnProps = {
@@ -26,10 +28,10 @@ type Props = OwnProps & typeof chartTypeSelectDefaultProps;
 
 export default function ChartTypeSelect({ hiddenChartTypes, ...props }: Props) {
   const chartTypes = useMemo(() => {
-    const result = [...allChartTypes];
+    const result = [...getAllChartTypes()];
 
     if (visualizationsSettings.allowCustomJSVisualizations) {
-      result.push({ type: "custom", name: "Custom", icon: "code" });
+      result.push({ type: "custom", name: t("viz.chart.types.custom", "Custom"), icon: "code" });
     }
 
     if (hiddenChartTypes.length > 0) {

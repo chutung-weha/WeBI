@@ -2,6 +2,9 @@ import { isNil, trimStart } from "lodash";
 import React from "react";
 import { Section, Switch, TextArea } from "@/components/visualizations/editor";
 import { EditorPropTypes } from "@/visualizations/prop-types";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 const defaultCustomCode = trimStart(`
 // Available variables are x, ys, element, and Plotly
@@ -16,7 +19,7 @@ export default function CustomChartSettings({ options, onOptionsChange }: any) {
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <TextArea
-          label="Custom code"
+          label={t("viz.chart.custom.code", "Custom code")}
           data-test="Chart.Custom.Code"
           rows="10"
           defaultValue={isNil(options.customCode) ? defaultCustomCode : options.customCode}
@@ -33,7 +36,7 @@ export default function CustomChartSettings({ options, onOptionsChange }: any) {
           defaultChecked={options.enableConsoleLogs}
           // @ts-expect-error ts-migrate(2322) FIXME: Type '(enableConsoleLogs: any) => any' is not assi... Remove this comment to see the full error message
           onChange={(enableConsoleLogs: any) => onOptionsChange({ enableConsoleLogs })}>
-          Show errors in the console
+          {t("viz.chart.custom.showErrors", "Show errors in the console")}
         </Switch>
       </Section>
 
@@ -48,7 +51,7 @@ export default function CustomChartSettings({ options, onOptionsChange }: any) {
           defaultChecked={options.autoRedraw}
           // @ts-expect-error ts-migrate(2322) FIXME: Type '(autoRedraw: any) => any' is not assignable ... Remove this comment to see the full error message
           onChange={(autoRedraw: any) => onOptionsChange({ autoRedraw })}>
-          Auto update graph
+          {t("viz.chart.custom.autoUpdate", "Auto update graph")}
         </Switch>
       </Section>
     </React.Fragment>

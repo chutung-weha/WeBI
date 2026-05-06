@@ -11,7 +11,10 @@ import PropTypes from "prop-types";
 import EyeOutlinedIcon from "@ant-design/icons/EyeOutlined";
 import EyeInvisibleOutlinedIcon from "@ant-design/icons/EyeInvisibleOutlined";
 
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
 import ColumnEditor from "./ColumnEditor";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 const { Text } = Typography;
 
@@ -73,7 +76,7 @@ export default function ColumnsSettings({ options, onOptionsChange, variant }: C
               </React.Fragment>
             }
             extra={
-              <Tooltip title="Toggle visibility" mouseEnterDelay={0} mouseLeaveDelay={0}>
+              <Tooltip title={t("viz.shared.columns.toggleVisibility", "Toggle visibility")} mouseEnterDelay={0} mouseLeaveDelay={0}>
                 {column.visible ? (
                   <EyeOutlinedIcon
                     data-test={`${testPrefix}.Column.${column.name}.Visibility`}

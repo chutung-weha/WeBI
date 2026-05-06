@@ -2,6 +2,9 @@ import React from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { Section, Input, Checkbox, TextArea, ContextHelp } from "@/components/visualizations/editor";
 import { EditorPropTypes } from "@/visualizations/prop-types";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 function TemplateFormatHint() {
   // eslint-disable-line react/prop-types
@@ -29,17 +32,17 @@ export default function FormatSettings({ options, onOptionsChange }: any) {
           data-test="Map.Editor.TooltipEnabled"
           checked={options.tooltip.enabled}
           onChange={event => onOptionsChange({ tooltip: { enabled: event.target.checked } })}>
-          Show tooltip
+          {t("viz.map.format.showTooltip", "Show tooltip")}
         </Checkbox>
       </Section>
 
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <Input
-          label={<React.Fragment>Tooltip template {templateFormatHint}</React.Fragment>}
+          label={<React.Fragment>{t("viz.map.format.tooltipTemplate", "Tooltip template")} {templateFormatHint}</React.Fragment>}
           data-test="Map.Editor.TooltipTemplate"
           disabled={!options.tooltip.enabled}
-          placeholder="Default template"
+          placeholder={t("viz.map.format.defaultTemplate", "Default template")}
           defaultValue={options.tooltip.template}
           onChange={(event: any) => onOptionsChangeDebounced({ tooltip: { template: event.target.value } })}
         />
@@ -51,18 +54,18 @@ export default function FormatSettings({ options, onOptionsChange }: any) {
           data-test="Map.Editor.PopupEnabled"
           checked={options.popup.enabled}
           onChange={event => onOptionsChange({ popup: { enabled: event.target.checked } })}>
-          Show popup
+          {t("viz.map.format.showPopup", "Show popup")}
         </Checkbox>
       </Section>
 
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <TextArea
-          label={<React.Fragment>Popup template {templateFormatHint}</React.Fragment>}
+          label={<React.Fragment>{t("viz.map.format.popupTemplate", "Popup template")} {templateFormatHint}</React.Fragment>}
           data-test="Map.Editor.PopupTemplate"
           disabled={!options.popup.enabled}
           rows={4}
-          placeholder="Default template"
+          placeholder={t("viz.map.format.defaultTemplate", "Default template")}
           defaultValue={options.popup.template}
           onChange={(event: any) => onOptionsChangeDebounced({ popup: { template: event.target.value } })}
         />

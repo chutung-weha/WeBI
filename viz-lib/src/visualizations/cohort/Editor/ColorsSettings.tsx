@@ -2,7 +2,10 @@ import { isFinite } from "lodash";
 import React from "react";
 import { Section, ColorPicker, InputNumber } from "@/components/visualizations/editor";
 import { EditorPropTypes } from "@/visualizations/prop-types";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
 import DefaultColorPalette from "@/visualizations/ColorPalette";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 const ColorPalette = {
   White: "#FFFFFF",
@@ -25,7 +28,7 @@ export default function ColorsSettings({ options, onOptionsChange }: any) {
       <Section>
         <ColorPicker
           layout="horizontal"
-          label="Min Color"
+          label={t("viz.cohort.colors.minColor", "Min Color")}
           presetColors={ColorPalette}
           interactive
           color={options.colors.min}
@@ -38,7 +41,7 @@ export default function ColorsSettings({ options, onOptionsChange }: any) {
       <Section>
         <ColorPicker
           layout="horizontal"
-          label="Max Color"
+          label={t("viz.cohort.colors.maxColor", "Max Color")}
           presetColors={ColorPalette}
           interactive
           color={options.colors.max}
@@ -51,7 +54,7 @@ export default function ColorsSettings({ options, onOptionsChange }: any) {
       <Section>
         <InputNumber
           layout="horizontal"
-          label="Steps"
+          label={t("viz.cohort.colors.steps", "Steps")}
           min={minSteps}
           max={maxSteps}
           value={options.colors.steps}

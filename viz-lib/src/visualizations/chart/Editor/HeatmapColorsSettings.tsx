@@ -3,6 +3,9 @@ import React from "react";
 import { Section, Select, ColorPicker } from "@/components/visualizations/editor";
 import { EditorPropTypes } from "@/visualizations/prop-types";
 import ColorPalette from "@/visualizations/ColorPalette";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 const ColorSchemes = [
   "Blackbody",
@@ -31,9 +34,9 @@ export default function HeatmapColorsSettings({ options, onOptionsChange }: any)
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <Select
-          label="Color Scheme"
+          label={t("viz.chart.colors.scheme", "Color Scheme")}
           data-test="Chart.Colors.Heatmap.ColorScheme"
-          placeholder="Choose Color Scheme..."
+          placeholder={t("viz.chart.colors.chooseScheme", "Choose Color Scheme...")}
           allowClear
           value={options.colorScheme || undefined}
           onChange={(value: any) => onOptionsChange({ colorScheme: value || null })}>
@@ -53,7 +56,7 @@ export default function HeatmapColorsSettings({ options, onOptionsChange }: any)
           <Section>
             <ColorPicker
               layout="horizontal"
-              label="Min Color:"
+              label={t("viz.chart.colors.minColor", "Min Color:")}
               data-test="Chart.Colors.Heatmap.MinColor"
               interactive
               placement="topLeft"
@@ -68,7 +71,7 @@ export default function HeatmapColorsSettings({ options, onOptionsChange }: any)
           <Section>
             <ColorPicker
               layout="horizontal"
-              label="Max Color:"
+              label={t("viz.chart.colors.maxColor", "Max Color:")}
               data-test="Chart.Colors.Heatmap.MaxColor"
               interactive
               placement="topRight"

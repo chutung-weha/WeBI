@@ -3,6 +3,9 @@ import React from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { Section, Input, ControlLabel, ContextHelp } from "@/components/visualizations/editor";
 import { formatSimpleTemplate } from "@/lib/value-format";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 type Props = {
   column: {
@@ -23,7 +26,7 @@ function Editor({ column, onChange }: Props) {
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <Input
-          label="URL template"
+          label={t("viz.table.columnEditor.urlTemplate", "URL template")}
           data-test="Table.ColumnEditor.Image.UrlTemplate"
           defaultValue={column.imageUrlTemplate}
           onChange={(event: any) => onChangeDebounced({ imageUrlTemplate: event.target.value })}
@@ -36,7 +39,7 @@ function Editor({ column, onChange }: Props) {
           // @ts-expect-error ts-migrate(2322) FIXME: Type 'Element' is not assignable to type 'null | u... Remove this comment to see the full error message
           label={
             <React.Fragment>
-              Size
+              {t("viz.table.columnEditor.size", "Size")}
               {/* @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message */}
               <ContextHelp placement="topLeft" arrowPointAtCenter>
                 <div style={{ marginBottom: 5 }}>Any positive integer value that specifies size in pixels.</div>
@@ -48,14 +51,14 @@ function Editor({ column, onChange }: Props) {
           <div className="image-dimension-selector">
             <Input
               data-test="Table.ColumnEditor.Image.Width"
-              placeholder="Width"
+              placeholder={t("viz.table.columnEditor.width", "Width")}
               defaultValue={column.imageWidth}
               onChange={(event: any) => onChangeDebounced({ imageWidth: event.target.value })}
             />
             <span className="image-dimension-selector-spacer">&times;</span>
             <Input
               data-test="Table.ColumnEditor.Image.Height"
-              placeholder="Height"
+              placeholder={t("viz.table.columnEditor.height", "Height")}
               defaultValue={column.imageHeight}
               onChange={(event: any) => onChangeDebounced({ imageHeight: event.target.value })}
             />
@@ -66,7 +69,7 @@ function Editor({ column, onChange }: Props) {
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <Input
-          label="Title template"
+          label={t("viz.table.columnEditor.titleTemplate", "Title template")}
           data-test="Table.ColumnEditor.Image.TitleTemplate"
           defaultValue={column.imageTitleTemplate}
           onChange={(event: any) => onChangeDebounced({ imageTitleTemplate: event.target.value })}
@@ -80,7 +83,7 @@ function Editor({ column, onChange }: Props) {
           placement="topLeft"
           arrowPointAtCenter
           // @ts-expect-error ts-migrate(2322) FIXME: Type 'Element' is not assignable to type 'null | u... Remove this comment to see the full error message
-          icon={<span style={{ cursor: "default" }}>Format specs {ContextHelp.defaultIcon}</span>}>
+          icon={<span style={{ cursor: "default" }}>{t("viz.table.columnEditor.formatSpecs", "Format specs")} {ContextHelp.defaultIcon}</span>}>
           <div>
             All columns can be referenced using <code>{"{{ column_name }}"}</code> syntax.
           </div>

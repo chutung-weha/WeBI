@@ -225,7 +225,458 @@
     "editor": "Visualization Editor",
     "type": "Visualization Type",
     "name": "Visualization Name",
-    "preview": "Preview"
+    "preview": "Preview",
+    "save": "Save",
+    "cancel": "Cancel",
+    "saved": "Visualization saved",
+    "saveFailed": "Visualization could not be saved",
+    "chart": {
+      "tabs": {
+        "general": "General",
+        "xAxis": "X Axis",
+        "yAxis": "Y Axis",
+        "series": "Series",
+        "colors": "Colors",
+        "dataLabels": "Data Labels"
+      },
+      "general": {
+        "chartType": "Chart Type",
+        "horizontal": "Horizontal Chart",
+        "bubbleSizeCoefficient": "Bubble Size Coefficient",
+        "bubbleSizeProportional": "Bubble Size Proportional To",
+        "area": "Area",
+        "diameter": "Diameter",
+        "direction": "Direction",
+        "counterclockwise": "Counterclockwise",
+        "clockwise": "Clockwise",
+        "sort": "Sort",
+        "true": "True",
+        "false": "False",
+        "legendPlacement": "Legend Placement",
+        "hideLegend": "Hide legend",
+        "right": "Right",
+        "bottom": "Bottom",
+        "legendItemsOrder": "Legend Items Order",
+        "normal": "Normal",
+        "reversed": "Reversed",
+        "showAllPoints": "Show All Points",
+        "stacking": "Stacking",
+        "disabled": "Disabled",
+        "stack": "Stack",
+        "normalizePercent": "Normalize values to percentage",
+        "lineShape": "Line Shape",
+        "linear": "Linear",
+        "spline": "Spline",
+        "horizontalVertical": "Horizontal-Vertical",
+        "verticalHorizontal": "Vertical-Horizontal",
+        "missingValues": "Missing and NULL values",
+        "doNotDisplay": "Do not display in chart",
+        "convertToZero": "Convert to 0 and display in chart",
+        "enableClickEvents": "Enable click events",
+        "openInNewTab": "Open in new tab",
+        "urlTemplate": "URL template"
+      },
+      "columns": {
+        "x": "X Column",
+        "y": "Y Columns",
+        "groupBy": "Group by",
+        "errors": "Errors column",
+        "bubbleSize": "Bubble Size Column",
+        "color": "Color Column",
+        "swappedX": "Y Column",
+        "swappedY": "X Columns",
+        "chooseOne": "Choose column...",
+        "chooseMany": "Choose columns..."
+      },
+      "axis": {
+        "scale": "Scale",
+        "name": "Name",
+        "linearAxis": "Linear",
+        "logarithmic": "Logarithmic",
+        "category": "Category",
+        "datetime": "Datetime",
+        "rangeMin": "Range Min",
+        "rangeMax": "Range Max",
+        "auto": "Auto",
+        "sortValues": "Sort Values",
+        "reverseOrder": "Reverse Order",
+        "showLabels": "Show Labels",
+        "labelsLength": "Labels Length",
+        "leftYAxis": "Left Y Axis",
+        "rightYAxis": "Right Y Axis",
+        "alignYAxesAtZero": "Align Y Axes at Zero"
+      },
+      "series": {
+        "order": "Order",
+        "label": "Label",
+        "yAxis": "Y Axis",
+        "left": "Left",
+        "right": "Right",
+        "type": "Type",
+        "color": "Color",
+        "title": "Series"
+      },
+      "colors": {
+        "scheme": "Color Scheme",
+        "minColor": "Min Color:",
+        "maxColor": "Max Color:",
+        "steps": "Steps",
+        "noScheme": "Custom...",
+        "chooseScheme": "Choose Color Scheme..."
+      },
+      "dataLabels": {
+        "show": "Show Data Labels",
+        "numberFormat": "Number Values Format",
+        "percentFormat": "Percent Values Format",
+        "datetimeFormat": "Date/Time Values Format",
+        "textFormat": "Data Labels",
+        "auto": "(auto)"
+      },
+      "custom": {
+        "code": "Custom code",
+        "rSquared": "Show R²",
+        "showErrors": "Show errors in the console",
+        "autoUpdate": "Auto update graph"
+      },
+      "types": {
+        "line": "Line",
+        "column": "Bar",
+        "area": "Area",
+        "pie": "Pie",
+        "scatter": "Scatter",
+        "bubble": "Bubble",
+        "heatmap": "Heatmap",
+        "box": "Box",
+        "custom": "Custom"
+      },
+      "pieColors": {
+        "values": "Values",
+        "color": "Color"
+      }
+    },
+    "table": {
+      "tabs": {
+        "columns": "Columns",
+        "grid": "Grid"
+      },
+      "itemsPerPage": "Items per page",
+      "columns": {
+        "toggleVisibility": "Toggle visibility",
+        "useForSearch": "Use for search",
+        "description": "Description",
+        "displayAs": "Display as:",
+        "title": "Title"
+      },
+      "columnTypes": {
+        "string": "Text",
+        "number": "Number",
+        "datetime": "Date/Time",
+        "boolean": "Boolean",
+        "link": "Link",
+        "image": "Image",
+        "json": "JSON"
+      },
+      "columnEditor": {
+        "valueForFalse": "Value for",
+        "valueForTrue": "Value for",
+        "dateTimeFormat": "Date/Time format",
+        "urlTemplate": "URL template",
+        "size": "Size",
+        "width": "Width",
+        "height": "Height",
+        "titleTemplate": "Title template",
+        "textTemplate": "Text template",
+        "openInNewTab": "Open in new tab",
+        "numberFormat": "Number format",
+        "allowHTML": "Allow HTML content",
+        "highlightLinks": "Highlight links",
+        "formatSpecs": "Format specs"
+      }
+    },
+    "counter": {
+      "label": "Counter Label",
+      "valueColumn": "Counter Value Column Name",
+      "valueRow": "Counter Value Row Number",
+      "targetValueColumn": "Target Value Column Name",
+      "noTargetValue": "No target value",
+      "targetValueRow": "Target Value Row Number",
+      "countRows": "Count Rows",
+      "format": "Formatting",
+      "tooltipFormat": "Tooltip Format",
+      "stringDecimal": "Formatting Decimal Places",
+      "stringDecChar": "Formatting Decimal Character",
+      "stringThouSep": "Formatting Thousands Separator",
+      "stringPrefix": "Formatting String Prefix",
+      "stringSuffix": "Formatting String Suffix"
+    },
+    "pivot": {
+      "showControls": "Show Pivot Controls",
+      "showRowTotals": "Show Row Totals",
+      "showColumnTotals": "Show Column Totals"
+    },
+    "choropleth": {
+      "tabs": {
+        "general": "General",
+        "colors": "Colors",
+        "format": "Format",
+        "bounds": "Bounds"
+      },
+      "general": {
+        "map": "Map",
+        "keyColumn": "Key Column",
+        "targetField": "Target Field",
+        "valueColumn": "Value Column"
+      },
+      "format": {
+        "valueFormat": "Value Format",
+        "valuePlaceholder": "Value Placeholder",
+        "valuePrefix": "Value Prefix",
+        "valueSuffix": "Value Suffix",
+        "noValuePlaceholder": "No Value Placeholder",
+        "popup": "Popup",
+        "tooltip": "Tooltip",
+        "showTooltip": "Show Tooltip",
+        "showLegend": "Show Legend",
+        "showPopup": "Show Popup",
+        "legendPosition": "Legend Position",
+        "legendTextAlignment": "Legend Text Alignment",
+        "tooltipTemplate": "Tooltip Template",
+        "popupTemplate": "Popup Template",
+        "topLeft": "top / left",
+        "topRight": "top / right",
+        "bottomLeft": "bottom / left",
+        "bottomRight": "bottom / right"
+      },
+      "colors": {
+        "clusteringMode": "Clustering Mode",
+        "quantile": "quantile",
+        "equidistant": "equidistant",
+        "kmeans": "k-means",
+        "minColor": "Min Color",
+        "maxColor": "Max Color",
+        "noValueColor": "No Value Color",
+        "backgroundColor": "Background Color",
+        "bordersColor": "Borders Color",
+        "background": "Background",
+        "borders": "Borders",
+        "steps": "Steps",
+        "clustering": "Clustering"
+      },
+      "bounds": {
+        "title": "Value Bounds",
+        "northEast": "North-East Latitude and Longitude",
+        "southWest": "South-West Latitude and Longitude"
+      }
+    },
+    "cohort": {
+      "tabs": {
+        "columns": "Columns",
+        "options": "Options",
+        "colors": "Colors",
+        "appearance": "Appearance"
+      },
+      "columns": {
+        "dateBucket": "Date (Bucket)",
+        "stage": "Stage",
+        "bucketPopulation": "Bucket Population Size",
+        "stageValue": "Stage Value"
+      },
+      "options": {
+        "timeInterval": "Time Interval",
+        "mode": "Mode",
+        "daily": "Daily",
+        "weekly": "Weekly",
+        "monthly": "Monthly",
+        "fillGapsWithZeros": "Fill gaps with zeros",
+        "showAsIs": "Show data as is"
+      },
+      "colors": {
+        "minColor": "Min Color",
+        "maxColor": "Max Color",
+        "steps": "Steps"
+      },
+      "appearance": {
+        "timeColumnTitle": "Time Column Title",
+        "peopleColumnTitle": "People Column Title",
+        "stageColumnTitle": "Stage Column Title",
+        "numberFormat": "Number Values Format",
+        "percentFormat": "Percent Values Format",
+        "noValuePlaceholder": "No Value Placeholder",
+        "showTooltips": "Show Tooltips",
+        "normalizeValues": "Normalize Values to Percentage"
+      },
+      "timeInterval": "Time Interval",
+      "mode": "Mode",
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "diagonal": "Diagonal",
+      "horizontal": "Horizontal",
+      "stage": "Stage",
+      "total": "Total",
+      "value": "Value",
+      "minColor": "Min Color",
+      "maxColor": "Max Color",
+      "dateColumnName": "Date Column Name",
+      "stageColumnName": "Stage Column Name",
+      "totalColumnName": "Total Column Name",
+      "valueColumnName": "Value Column Name"
+    },
+    "funnel": {
+      "tabs": {
+        "general": "General",
+        "appearance": "Appearance"
+      },
+      "general": {
+        "stepColumn": "Step Column",
+        "stepColumnTitle": "Step Column Title",
+        "valueColumn": "Value Column",
+        "valueColumnTitle": "Value Column Title",
+        "customSorting": "Custom Sorting",
+        "sortColumn": "Sort Column",
+        "sortOrder": "Sort Order",
+        "ascending": "ascending",
+        "descending": "descending",
+        "chooseColumn": "Choose column..."
+      },
+      "appearance": {
+        "numberFormat": "Number Values Format",
+        "percentFormat": "Percent Values Format",
+        "itemsLimit": "Items Count Limit",
+        "minPercent": "Min Percent Value",
+        "maxPercent": "Max Percent Value"
+      },
+      "stepColumn": "Step Column",
+      "valueColumn": "Value Column",
+      "customSort": "Custom Sort",
+      "sortColumn": "Sort Column",
+      "sortReverse": "Reverse Order",
+      "numberFormat": "Number Values Format",
+      "percentFormat": "Percent Values Format",
+      "itemsLimit": "Items Limit",
+      "percentValuesRange": "Percent Values Range"
+    },
+    "map": {
+      "tabs": {
+        "general": "General",
+        "groups": "Groups",
+        "format": "Format",
+        "style": "Style"
+      },
+      "general": {
+        "latitudeColumn": "Latitude Column Name",
+        "longitudeColumn": "Longitude Column Name",
+        "groupBy": "Group By",
+        "none": "none"
+      },
+      "groups": {
+        "group": "Group",
+        "color": "Color"
+      },
+      "format": {
+        "showTooltip": "Show tooltip",
+        "tooltipTemplate": "Tooltip template",
+        "showPopup": "Show popup",
+        "popupTemplate": "Popup template",
+        "defaultTemplate": "Default template"
+      },
+      "style": {
+        "mapTiles": "Map Tiles",
+        "markers": "Markers",
+        "clusterMarkers": "Cluster Markers",
+        "overrideDefaultStyle": "Override default style",
+        "shape": "Shape",
+        "markerIcon": "Marker + Icon",
+        "circle": "Circle",
+        "circleDot": "Circle Dot",
+        "circleIcon": "Circle + Icon",
+        "squareDot": "Square Dot",
+        "squareIcon": "Square + Icon",
+        "icon": "Icon",
+        "iconColor": "Icon Color",
+        "backgroundColor": "Background Color",
+        "borderColor": "Border Color"
+      },
+      "latitudeColumn": "Latitude Column",
+      "longitudeColumn": "Longitude Column",
+      "groupBy": "Group by",
+      "classify": "Classify by",
+      "noClassification": "No classification",
+      "tiles": "Tiles",
+      "clusterMarkers": "Cluster markers",
+      "iconShape": "Icon Shape",
+      "iconFont": "Icon Font",
+      "foregroundColor": "Foreground Color",
+      "backgroundColor": "Background Color",
+      "borderColor": "Border Color",
+      "popupTitle": "Popup Title",
+      "popupContent": "Popup Content"
+    },
+    "boxPlot": {
+      "xAxisLabel": "X Axis Label",
+      "yAxisLabel": "Y Axis Label"
+    },
+    "wordCloud": {
+      "wordsColumn": "Words Column",
+      "frequenciesColumn": "Frequencies Column",
+      "wordLengthLimit": "Word Length Limit",
+      "wordCountLimit": "Word Count Limit",
+      "min": "Min",
+      "max": "Max"
+    },
+    "details": {
+      "tabs": {
+        "columns": "Columns"
+      },
+      "columns": {
+        "toggleVisibility": "Toggle visibility"
+      }
+    },
+    "sankey": {
+      "intro": "This visualization expects the query result to have rows in the following format:",
+      "stage1": "stage 1 value",
+      "stageN": "stage value (or null)",
+      "value": "number of times this sequence occurred"
+    },
+    "sunburst": {
+      "intro": "This visualization expects the query result to have rows in one of the following formats:",
+      "option1": "Option 1:",
+      "option2": "Option 2:",
+      "sequenceId": "sequence id",
+      "stageInSequence": "what stage in sequence this is (1, 2, ...)",
+      "stageName": "stage name",
+      "value": "number of times this sequence occurred",
+      "stage1": "stage 1 value",
+      "stageN": "stage value (or null)"
+    },
+    "shared": {
+      "columns": {
+        "title": "Columns",
+        "name": "Name",
+        "title2": "Title",
+        "visible": "Visible",
+        "type": "Type",
+        "format": "Format",
+        "stringPrefix": "Prefix",
+        "stringSuffix": "Suffix",
+        "imageWidth": "Image Width",
+        "imageHeight": "Image Height",
+        "imageTitle": "Image Title",
+        "imageUrl": "Image URL",
+        "linkUrl": "Link URL",
+        "linkText": "Link Text",
+        "linkTitle": "Link Title",
+        "linkOpenInNewTab": "Open in new tab",
+        "useMonospace": "Use Monospace Font",
+        "allowSearch": "Allow Search",
+        "allowHTML": "Allow HTML",
+        "toggleVisibility": "Toggle visibility",
+        "useForSearch": "Use for search",
+        "description": "Description",
+        "displayAs": "Display as:"
+      }
+    }
   },
   "param": {
     "chooseKeyword": "Choose a keyword for this parameter",

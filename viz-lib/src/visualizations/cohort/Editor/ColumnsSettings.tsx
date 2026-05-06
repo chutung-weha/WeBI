@@ -2,6 +2,9 @@ import { map } from "lodash";
 import React from "react";
 import { Section, Select } from "@/components/visualizations/editor";
 import { EditorPropTypes } from "@/visualizations/prop-types";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 export default function ColumnsSettings({ options, data, onOptionsChange }: any) {
   return (
@@ -10,7 +13,7 @@ export default function ColumnsSettings({ options, data, onOptionsChange }: any)
       <Section>
         <Select
           layout="horizontal"
-          label="Date (Bucket)"
+          label={t("viz.cohort.columns.dateBucket", "Date (Bucket)")}
           data-test="Cohort.DateColumn"
           value={options.dateColumn}
           onChange={(dateColumn: any) => onOptionsChange({ dateColumn })}>
@@ -28,7 +31,7 @@ export default function ColumnsSettings({ options, data, onOptionsChange }: any)
       <Section>
         <Select
           layout="horizontal"
-          label="Stage"
+          label={t("viz.cohort.columns.stage", "Stage")}
           data-test="Cohort.StageColumn"
           value={options.stageColumn}
           onChange={(stageColumn: any) => onOptionsChange({ stageColumn })}>
@@ -46,7 +49,7 @@ export default function ColumnsSettings({ options, data, onOptionsChange }: any)
       <Section>
         <Select
           layout="horizontal"
-          label="Bucket Population Size"
+          label={t("viz.cohort.columns.bucketPopulation", "Bucket Population Size")}
           data-test="Cohort.TotalColumn"
           value={options.totalColumn}
           onChange={(totalColumn: any) => onOptionsChange({ totalColumn })}>
@@ -64,7 +67,7 @@ export default function ColumnsSettings({ options, data, onOptionsChange }: any)
       <Section>
         <Select
           layout="horizontal"
-          label="Stage Value"
+          label={t("viz.cohort.columns.stageValue", "Stage Value")}
           data-test="Cohort.ValueColumn"
           value={options.valueColumn}
           onChange={(valueColumn: any) => onOptionsChange({ valueColumn })}>

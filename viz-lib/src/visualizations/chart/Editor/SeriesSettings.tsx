@@ -8,15 +8,18 @@ import Radio from "antd/lib/radio";
 import { sortableElement } from "react-sortable-hoc";
 import { SortableContainer, DragHandle } from "@/components/sortable";
 import { EditorPropTypes } from "@/visualizations/prop-types";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
 import ChartTypeSelect from "./ChartTypeSelect";
 import getChartData from "../getChartData";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 const SortableBodyRow = sortableElement((props: any) => <tr {...props} />);
 
 function getTableColumns(options: any, updateSeriesOption: any, debouncedUpdateSeriesOption: any) {
   const result = [
     {
-      title: "Order",
+      title: t("viz.chart.series.order", "Order"),
       dataIndex: "zIndex",
       render: (unused: any, item: any) => (
         <span className="series-settings-order">
@@ -26,7 +29,7 @@ function getTableColumns(options: any, updateSeriesOption: any, debouncedUpdateS
       ),
     },
     {
-      title: "Label",
+      title: t("viz.chart.series.label", "Label"),
       dataIndex: "name",
       render: (unused: any, item: any) => (
         <Input
@@ -42,7 +45,7 @@ function getTableColumns(options: any, updateSeriesOption: any, debouncedUpdateS
   if (!includes(["pie", "heatmap"], options.globalSeriesType)) {
     if (!options.swappedAxes) {
       result.push({
-        title: "Y Axis",
+        title: t("viz.chart.series.yAxis", "Y Axis"),
         dataIndex: "yAxis",
         render: (unused, item) => (
           <Radio.Group
@@ -50,10 +53,10 @@ function getTableColumns(options: any, updateSeriesOption: any, debouncedUpdateS
             value={item.yAxis === 1 ? 1 : 0}
             onChange={event => updateSeriesOption(item.key, "yAxis", event.target.value)}>
             <Radio value={0} data-test={`Chart.Series.${item.key}.UseLeftAxis`}>
-              left
+              {t("viz.chart.series.left", "left")}
             </Radio>
             <Radio value={1} data-test={`Chart.Series.${item.key}.UseRightAxis`}>
-              right
+              {t("viz.chart.series.right", "right")}
             </Radio>
           </Radio.Group>
         ),
@@ -61,7 +64,7 @@ function getTableColumns(options: any, updateSeriesOption: any, debouncedUpdateS
     }
 
     result.push({
-      title: "Type",
+      title: t("viz.chart.series.type", "Type"),
       dataIndex: "type",
       render: (unused, item) => (
         <ChartTypeSelect

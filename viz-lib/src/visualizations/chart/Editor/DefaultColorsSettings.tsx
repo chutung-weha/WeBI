@@ -6,6 +6,9 @@ import { EditorPropTypes } from "@/visualizations/prop-types";
 import { AllColorPalettes } from "@/visualizations/ColorPalette";
 import getChartData from "../getChartData";
 import { Section, Select } from "@/components/visualizations/editor";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 export default function DefaultColorsSettings({ options, data, onOptionsChange }: any) {
   const colors = useMemo(
@@ -41,11 +44,11 @@ export default function DefaultColorsSettings({ options, data, onOptionsChange }
 
   const columns = [
     {
-      title: "Series",
+      title: t("viz.chart.series.title", "Series"),
       dataIndex: "key",
     },
     {
-      title: "Color",
+      title: t("viz.chart.series.color", "Color"),
       dataIndex: "color",
       width: "1%",
       render: (unused: any, item: any) => (
@@ -73,7 +76,7 @@ export default function DefaultColorsSettings({ options, data, onOptionsChange }
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
           <Select
-            label="Color Scheme"
+            label={t("viz.chart.colors.scheme", "Color Scheme")}
             defaultValue={options.color_scheme}
             data-test="ColorScheme"
             onChange={(val : any) => onOptionsChange({ color_scheme: val })}>

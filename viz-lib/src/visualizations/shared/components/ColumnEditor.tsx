@@ -3,8 +3,21 @@ import React from "react";
 import { useDebouncedCallback } from "use-debounce";
 import * as Grid from "antd/lib/grid";
 import { Section, Select, Input, Checkbox, TextAlignmentSelect } from "@/components/visualizations/editor";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
 
 import ColumnTypes from "../columns";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
+
+const ColumnTypeFriendlyNames: { [key: string]: string } = {
+  string: "Text",
+  number: "Number",
+  datetime: "Date/Time",
+  boolean: "Boolean",
+  link: "Link",
+  image: "Image",
+  json: "JSON",
+};
 
 type Column = {
   name: string;
@@ -75,7 +88,7 @@ export default function ColumnEditor({
             data-test={`${dataTestPrefix}.UseForSearch`}
             defaultChecked={column.allowSearch}
             onChange={event => handleChange({ allowSearch: event.target.checked })}>
-            Use for search
+            {t("viz.shared.columns.useForSearch", "Use for search")}
           </Checkbox>
         </Section>
       )}
@@ -83,7 +96,7 @@ export default function ColumnEditor({
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <Input
-          label="Description"
+          label={t("viz.shared.columns.description", "Description")}
           data-test={`${dataTestPrefix}.Description`}
           defaultValue={column.description}
           onChange={(event: any) => handleChangeDebounced({ description: event.target.value })}
@@ -93,14 +106,14 @@ export default function ColumnEditor({
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <Select
-          label="Display as:"
+          label={t("viz.shared.columns.displayAs", "Display as:")}
           data-test={`${dataTestPrefix}.DisplayAs`}
           defaultValue={column.displayAs}
           onChange={(displayAs: any) => handleChange({ displayAs })}>
           {map(ColumnTypes, ({ friendlyName }, key) => (
             // @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message
             <Select.Option key={key} data-test={`${dataTestPrefix}.DisplayAs.${key}`}>
-              {friendlyName}
+              {t(`viz.table.columnTypes.${key}`, ColumnTypeFriendlyNames[key] || friendlyName)}
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             </Select.Option>
           ))}

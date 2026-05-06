@@ -2,7 +2,10 @@ import React from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { Section, Select, InputNumber, ColorPicker } from "@/components/visualizations/editor";
 import { EditorPropTypes } from "@/visualizations/prop-types";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
 import ColorPalette from "../ColorPalette";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 export default function ColorsSettings({ options, onOptionsChange }: any) {
   const [onOptionsChangeDebounced] = useDebouncedCallback(onOptionsChange, 200);
@@ -13,23 +16,23 @@ export default function ColorsSettings({ options, onOptionsChange }: any) {
       <Section>
         <Select
           layout="horizontal"
-          label="Clustering Mode"
+          label={t("viz.choropleth.colors.clusteringMode", "Clustering Mode")}
           data-test="Choropleth.Editor.ClusteringMode"
           defaultValue={options.clusteringMode}
           onChange={(clusteringMode: any) => onOptionsChange({ clusteringMode })}>
           {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
           <Select.Option value="q" data-test="Choropleth.Editor.ClusteringMode.q">
-            quantile
+            {t("viz.choropleth.colors.quantile", "quantile")}
             {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
           </Select.Option>
           {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
           <Select.Option value="e" data-test="Choropleth.Editor.ClusteringMode.e">
-            equidistant
+            {t("viz.choropleth.colors.equidistant", "equidistant")}
             {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
           </Select.Option>
           {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
           <Select.Option value="k" data-test="Choropleth.Editor.ClusteringMode.k">
-            k-means
+            {t("viz.choropleth.colors.kmeans", "k-means")}
             {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
           </Select.Option>
         </Select>
@@ -39,7 +42,7 @@ export default function ColorsSettings({ options, onOptionsChange }: any) {
       <Section>
         <InputNumber
           layout="horizontal"
-          label="Steps"
+          label={t("viz.choropleth.colors.steps", "Steps")}
           data-test="Choropleth.Editor.ColorSteps"
           min={3}
           max={11}
@@ -52,7 +55,7 @@ export default function ColorsSettings({ options, onOptionsChange }: any) {
       <Section>
         <ColorPicker
           layout="horizontal"
-          label="Min Color"
+          label={t("viz.choropleth.colors.minColor", "Min Color")}
           interactive
           presetColors={ColorPalette}
           placement="topRight"
@@ -68,7 +71,7 @@ export default function ColorsSettings({ options, onOptionsChange }: any) {
       <Section>
         <ColorPicker
           layout="horizontal"
-          label="Max Color"
+          label={t("viz.choropleth.colors.maxColor", "Max Color")}
           interactive
           presetColors={ColorPalette}
           placement="topRight"
@@ -84,7 +87,7 @@ export default function ColorsSettings({ options, onOptionsChange }: any) {
       <Section>
         <ColorPicker
           layout="horizontal"
-          label="No Value Color"
+          label={t("viz.choropleth.colors.noValueColor", "No Value Color")}
           interactive
           presetColors={ColorPalette}
           placement="topRight"
@@ -100,7 +103,7 @@ export default function ColorsSettings({ options, onOptionsChange }: any) {
       <Section>
         <ColorPicker
           layout="horizontal"
-          label="Background Color"
+          label={t("viz.choropleth.colors.backgroundColor", "Background Color")}
           interactive
           presetColors={ColorPalette}
           placement="topRight"
@@ -116,7 +119,7 @@ export default function ColorsSettings({ options, onOptionsChange }: any) {
       <Section>
         <ColorPicker
           layout="horizontal"
-          label="Borders Color"
+          label={t("viz.choropleth.colors.bordersColor", "Borders Color")}
           interactive
           presetColors={ColorPalette}
           placement="topRight"

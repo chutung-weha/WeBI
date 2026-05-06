@@ -2,6 +2,9 @@ import { merge } from "lodash";
 import React from "react";
 import { Section, Switch } from "@/components/visualizations/editor";
 import { EditorPropTypes } from "@/visualizations/prop-types";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 export default function Editor({ options, onOptionsChange }: any) {
   const updateOptions = (updates: any) => {
@@ -21,7 +24,7 @@ export default function Editor({ options, onOptionsChange }: any) {
           defaultChecked={!options.controls.enabled}
           // @ts-expect-error ts-migrate(2322) FIXME: Type '(enabled: any) => void' is not assignable to... Remove this comment to see the full error message
           onChange={(enabled: any) => updateOptions({ controls: { enabled: !enabled } })}>
-          Show Pivot Controls
+          {t("viz.pivot.showControls", "Show Pivot Controls")}
         </Switch>
       </Section>
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
@@ -34,7 +37,7 @@ export default function Editor({ options, onOptionsChange }: any) {
           defaultChecked={options.rendererOptions.table.rowTotals}
           // @ts-expect-error ts-migrate(2322) FIXME: Type '(rowTotals: any) => void' is not assignable ... Remove this comment to see the full error message
           onChange={(rowTotals: any) => updateOptions({ rendererOptions: { table: { rowTotals } } })}>
-          Show Row Totals
+          {t("viz.pivot.showRowTotals", "Show Row Totals")}
         </Switch>
       </Section>
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
@@ -47,7 +50,7 @@ export default function Editor({ options, onOptionsChange }: any) {
           defaultChecked={options.rendererOptions.table.colTotals}
           // @ts-expect-error ts-migrate(2322) FIXME: Type '(colTotals: any) => void' is not assignable ... Remove this comment to see the full error message
           onChange={(colTotals: any) => updateOptions({ rendererOptions: { table: { colTotals } } })}>
-          Show Column Totals
+          {t("viz.pivot.showColumnTotals", "Show Column Totals")}
         </Switch>
       </Section>
     </React.Fragment>

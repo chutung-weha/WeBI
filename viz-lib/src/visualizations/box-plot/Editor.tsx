@@ -1,6 +1,9 @@
 import React from "react";
 import { Section, Input } from "@/components/visualizations/editor";
 import { EditorPropTypes } from "@/visualizations/prop-types";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 export default function Editor({ options, onOptionsChange }: any) {
   const onXAxisLabelChanged = (xAxisLabel: any) => {
@@ -18,7 +21,7 @@ export default function Editor({ options, onOptionsChange }: any) {
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <Input
-          label="X Axis Label"
+          label={t("viz.boxPlot.xAxisLabel", "X Axis Label")}
           data-test="BoxPlot.XAxisLabel"
           value={options.xAxisLabel}
           onChange={(event: any) => onXAxisLabelChanged(event.target.value)}
@@ -28,7 +31,7 @@ export default function Editor({ options, onOptionsChange }: any) {
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <Input
-          label="Y Axis Label"
+          label={t("viz.boxPlot.yAxisLabel", "Y Axis Label")}
           data-test="BoxPlot.YAxisLabel"
           value={options.yAxisLabel}
           onChange={(event: any) => onYAxisLabelChanged(event.target.value)}

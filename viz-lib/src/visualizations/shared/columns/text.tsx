@@ -2,6 +2,9 @@ import React from "react";
 import HtmlContent from "@/components/HtmlContent";
 import { Section, Checkbox } from "@/components/visualizations/editor";
 import { createTextFormatter } from "@/lib/value-format";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 type Props = {
   column: {
@@ -21,7 +24,7 @@ function Editor({ column, onChange }: Props) {
           data-test="Table.ColumnEditor.Text.AllowHTML"
           checked={column.allowHTML}
           onChange={event => onChange({ allowHTML: event.target.checked })}>
-          Allow HTML content
+          {t("viz.table.columnEditor.allowHTML", "Allow HTML content")}
         </Checkbox>
       </Section>
 
@@ -32,7 +35,7 @@ function Editor({ column, onChange }: Props) {
             data-test="Table.ColumnEditor.Text.HighlightLinks"
             checked={column.highlightLinks}
             onChange={event => onChange({ highlightLinks: event.target.checked })}>
-            Highlight links
+            {t("viz.table.columnEditor.highlightLinks", "Highlight links")}
           </Checkbox>
         </Section>
       )}

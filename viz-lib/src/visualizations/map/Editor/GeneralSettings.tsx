@@ -2,6 +2,9 @@ import { isNil, map, filter, difference } from "lodash";
 import React, { useMemo } from "react";
 import { Section, Select } from "@/components/visualizations/editor";
 import { EditorPropTypes } from "@/visualizations/prop-types";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 function getColumns(column: any, unusedColumns: any) {
   return filter([column, ...unusedColumns], v => !isNil(v));
@@ -22,7 +25,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <Select
-          label="Latitude Column Name"
+          label={t("viz.map.general.latitudeColumn", "Latitude Column Name")}
           data-test="Map.Editor.LatitudeColumnName"
           value={options.latColName}
           onChange={(latColName: any) => onOptionsChange({ latColName })}>
@@ -39,7 +42,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <Select
-          label="Longitude Column Name"
+          label={t("viz.map.general.longitudeColumn", "Longitude Column Name")}
           data-test="Map.Editor.LongitudeColumnName"
           value={options.lonColName}
           onChange={(lonColName: any) => onOptionsChange({ lonColName })}>
@@ -56,10 +59,10 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <Select
-          label="Group By"
+          label={t("viz.map.general.groupBy", "Group By")}
           data-test="Map.Editor.GroupBy"
           allowClear
-          placeholder="none"
+          placeholder={t("viz.map.general.none", "none")}
           value={options.classify || undefined}
           onChange={(column: any) => onOptionsChange({ classify: column || null })}>
           {map(getColumns(options.classify, unusedColumns), col => (

@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import Modal from "antd/lib/modal";
 import Select from "antd/lib/select";
 import Input from "antd/lib/input";
+import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
 import { wrap as wrapDialog, DialogPropType } from "@/components/DialogWrapper";
 import Filters, { filterData } from "@/components/Filters";
 import notification from "@/services/notification";
@@ -41,11 +43,11 @@ function saveVisualization(visualization) {
 
   return Visualization.save(visualization)
     .then((result) => {
-      notification.success("Visualization saved");
+      notification.success(i18n.t("viz.saved"));
       return result;
     })
     .catch((error) => {
-      notification.error("Visualization could not be saved");
+      notification.error(i18n.t("viz.saveFailed"));
       return Promise.reject(error);
     });
 }
@@ -54,10 +56,10 @@ function confirmDialogClose(isDirty) {
   return new Promise((resolve, reject) => {
     if (isDirty) {
       Modal.confirm({
-        title: "Visualization Editor",
-        content: "Are you sure you want to close the editor without saving?",
-        okText: "Yes",
-        cancelText: "No",
+        title: i18n.t("viz.editor"),
+        content: i18n.t("viz.closeWithoutSave"),
+        okText: i18n.t("viz.yes"),
+        cancelText: i18n.t("viz.no"),
         onOk: () => resolve(),
         onCancel: () => reject(),
       });
@@ -68,6 +70,7 @@ function confirmDialogClose(isDirty) {
 }
 
 function EditVisualizationDialog({ dialog, visualization, query, queryResult }) {
+  const { t } = useTranslation();
   const errorHandlerRef = useRef();
 
   const isNew = !visualization;
@@ -166,8 +169,9 @@ function EditVisualizationDialog({ dialog, visualization, query, queryResult }) 
     <Modal
       {...dialog.props}
       wrapClassName="ant-modal-fullscreen"
-      title="Visualization Editor"
-      okText="Save"
+      title={t("viz.editor")}
+      okText={t("viz.save")}
+      cancelText={t("viz.cancel")}
       okButtonProps={{
         loading: saveInProgress,
         disabled: saveInProgress,
@@ -179,7 +183,7 @@ function EditVisualizationDialog({ dialog, visualization, query, queryResult }) 
       <div className="edit-visualization-dialog">
         <div className="visualization-settings">
           <div className="m-b-15">
-            <label htmlFor={vizTypeId}>Visualization Type</label>
+            <label htmlFor={vizTypeId}>{t("viz.type")}</label>
             <Select
               data-test="VisualizationType"
               id={vizTypeId}
@@ -197,7 +201,7 @@ function EditVisualizationDialog({ dialog, visualization, query, queryResult }) 
             </Select>
           </div>
           <div className="m-b-15">
-            <label htmlFor={vizNameId}>Visualization Name</label>
+            <label htmlFor={vizNameId}>{t("viz.name")}</label>
             <Input
               data-test="VisualizationName"
               id={vizNameId}
@@ -218,7 +222,7 @@ function EditVisualizationDialog({ dialog, visualization, query, queryResult }) 
         </div>
         <div className="visualization-preview">
           <label htmlFor="visualization-preview" className="invisible hidden-xs">
-            Preview
+            {t("viz.preview")}
           </label>
           <Filters filters={filters} onChange={setFilters} />
           <div className="scrollbox" data-test="VisualizationPreview">

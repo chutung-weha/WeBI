@@ -4,6 +4,7 @@ import HelpTrigger from "@/components/HelpTrigger";
 import Link from "@/components/Link";
 import { Renderer as VisRenderer, Editor as VisEditor, updateVisualizationsSettings } from "@redash/viz/lib";
 import { clientConfig } from "@/services/auth";
+import i18n from "@/i18n";
 
 import countriesDataUrl from "@redash/viz/lib/visualizations/choropleth/maps/countries.geo.json";
 import usaDataUrl from "@redash/viz/lib/visualizations/choropleth/maps/usa-albers.geo.json";
@@ -14,6 +15,7 @@ function wrapComponentWithSettings(WrappedComponent) {
     updateVisualizationsSettings({
       HelpTriggerComponent: HelpTrigger,
       LinkComponent: Link,
+      t: (key, fallback) => (i18n.exists(key) ? i18n.t(key) : fallback || key),
       choroplethAvailableMaps: {
         countries: {
           name: "Countries",

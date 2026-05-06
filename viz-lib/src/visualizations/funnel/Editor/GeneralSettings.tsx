@@ -3,6 +3,9 @@ import React, { useMemo } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { Section, Select, Input, Checkbox } from "@/components/visualizations/editor";
 import { EditorPropTypes } from "@/visualizations/prop-types";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 export default function GeneralSettings({ options, data, onOptionsChange }: any) {
   const columnNames = useMemo(() => map(data.columns, c => c.name), [data]);
@@ -15,9 +18,9 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
       <Section>
         <Select
           layout="horizontal"
-          label="Step Column"
+          label={t("viz.funnel.general.stepColumn", "Step Column")}
           data-test="Funnel.StepColumn"
-          placeholder="Choose column..."
+          placeholder={t("viz.funnel.general.chooseColumn", "Choose column...")}
           defaultValue={options.stepCol.colName || undefined}
           onChange={(colName: any) => onOptionsChange({ stepCol: { colName: colName || null } })}>
           {map(columnNames, col => (
@@ -34,7 +37,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
       <Section>
         <Input
           layout="horizontal"
-          label="Step Column Title"
+          label={t("viz.funnel.general.stepColumnTitle", "Step Column Title")}
           data-test="Funnel.StepColumnTitle"
           defaultValue={options.stepCol.displayAs}
           onChange={(event: any) => onOptionsChangeDebounced({ stepCol: { displayAs: event.target.value } })}
@@ -45,9 +48,9 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
       <Section>
         <Select
           layout="horizontal"
-          label="Value Column"
+          label={t("viz.funnel.general.valueColumn", "Value Column")}
           data-test="Funnel.ValueColumn"
-          placeholder="Choose column..."
+          placeholder={t("viz.funnel.general.chooseColumn", "Choose column...")}
           defaultValue={options.valueCol.colName || undefined}
           onChange={(colName: any) => onOptionsChange({ valueCol: { colName: colName || null } })}>
           {map(columnNames, col => (
@@ -64,7 +67,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
       <Section>
         <Input
           layout="horizontal"
-          label="Value Column Title"
+          label={t("viz.funnel.general.valueColumnTitle", "Value Column Title")}
           data-test="Funnel.ValueColumnTitle"
           defaultValue={options.valueCol.displayAs}
           onChange={(event: any) => onOptionsChangeDebounced({ valueCol: { displayAs: event.target.value } })}
@@ -77,7 +80,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
           data-test="Funnel.CustomSort"
           checked={!options.autoSort}
           onChange={event => onOptionsChange({ autoSort: !event.target.checked })}>
-          Custom Sorting
+          {t("viz.funnel.general.customSorting", "Custom Sorting")}
         </Checkbox>
       </Section>
 
@@ -87,10 +90,10 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
           <Section>
             <Select
               layout="horizontal"
-              label="Sort Column"
+              label={t("viz.funnel.general.sortColumn", "Sort Column")}
               data-test="Funnel.SortColumn"
               allowClear
-              placeholder="Choose column..."
+              placeholder={t("viz.funnel.general.chooseColumn", "Choose column...")}
               defaultValue={options.sortKeyCol.colName || undefined}
               onChange={(colName: any) => onOptionsChange({ sortKeyCol: { colName: colName || null } })}>
               {map(columnNames, col => (
@@ -107,19 +110,19 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
           <Section>
             <Select
               layout="horizontal"
-              label="Sort Order"
+              label={t("viz.funnel.general.sortOrder", "Sort Order")}
               data-test="Funnel.SortDirection"
               disabled={!options.sortKeyCol.colName}
               defaultValue={options.sortKeyCol.reverse ? "desc" : "asc"}
               onChange={(order: any) => onOptionsChange({ sortKeyCol: { reverse: order === "desc" } })}>
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               <Select.Option value="asc" data-test="Funnel.SortDirection.Ascending">
-                ascending
+                {t("viz.funnel.general.ascending", "ascending")}
                 {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               </Select.Option>
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               <Select.Option value="desc" data-test="Funnel.SortDirection.Descending">
-                descending
+                {t("viz.funnel.general.descending", "descending")}
                 {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               </Select.Option>
             </Select>

@@ -4,9 +4,12 @@ import { Section, Select, Checkbox, InputNumber, ContextHelp, Input } from "@/co
 import { UpdateOptionsStrategy } from "@/components/visualizations/editor/createTabbedEditor";
 import { EditorPropTypes } from "@/visualizations/prop-types";
 import { AllColorPalettes } from "@/visualizations/ColorPalette";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
 import ChartTypeSelect from "./ChartTypeSelect";
 import ColumnMappingSelect from "./ColumnMappingSelect";
 import { useDebouncedCallback } from "use-debounce/lib";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 function getAvailableColumnMappingTypes(options: any) {
   const result = ["x", "y"];
@@ -131,7 +134,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
       <Section>
         <ChartTypeSelect
           // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; "data-test": string; defaul... Remove this comment to see the full error message
-          label="Chart Type"
+          label={t("viz.chart.general.chartType", "Chart Type")}
           data-test="Chart.GlobalSeriesType"
           defaultValue={options.globalSeriesType}
           onChange={handleGlobalSeriesTypeChange}
@@ -146,7 +149,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
             defaultChecked={options.swappedAxes}
             checked={options.swappedAxes}
             onChange={handleAxesSwapping}>
-            Horizontal Chart
+            {t("viz.chart.general.horizontal", "Horizontal Chart")}
           </Checkbox>
         </Section>
       )}
@@ -172,7 +175,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
           {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
           <Section>
             <InputNumber
-              label="Bubble Size Coefficient"
+              label={t("viz.chart.general.bubbleSizeCoefficient", "Bubble Size Coefficient")}
               data-test="Chart.BubbleCoefficient"
               defaultValue={options.coefficient}
               onChange={(value: any) => onOptionsChange({ coefficient: toNumber(value) })}
@@ -182,18 +185,18 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
           {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
           <Section>
             <Select
-              label="Bubble Size Proportional To"
+              label={t("viz.chart.general.bubbleSizeProportional", "Bubble Size Proportional To")}
               data-test="Chart.SizeMode"
               defaultValue={options.sizemode}
               onChange={(mode: any) => onOptionsChange({ sizemode: mode })}>
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               <Select.Option value="area" data-test="Chart.SizeMode.Area">
-                Area
+                {t("viz.chart.general.area", "Area")}
                 {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               </Select.Option>
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               <Select.Option value="diameter" data-test="Chart.SizeMode.Diameter">
-                Diameter
+                {t("viz.chart.general.diameter", "Diameter")}
                 {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               </Select.Option>
             </Select>
@@ -205,33 +208,33 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
         // @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message
         <Section>
           <Select
-            label="Direction"
+            label={t("viz.chart.general.direction", "Direction")}
             data-test="Chart.PieDirection"
             defaultValue={options.direction.type}
             onChange={(type: any) => onOptionsChange({ direction: { type } })}>
             {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             <Select.Option value="counterclockwise" data-test="Chart.PieDirection.Counterclockwise">
-              Counterclockwise
+              {t("viz.chart.general.counterclockwise", "Counterclockwise")}
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             </Select.Option>
             {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             <Select.Option value="clockwise" data-test="Chart.PieDirection.Clockwise">
-              Clockwise
+              {t("viz.chart.general.clockwise", "Clockwise")}
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             </Select.Option>
           </Select>
           <Select
-            label="Sort"
+            label={t("viz.chart.general.sort", "Sort")}
             defaultValue={options.piesort}
             onChange={(val: any) => onOptionsChange({ piesort: val })}>
             {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             <Select.Option value={true}>
-              True
+              {t("viz.chart.general.true", "True")}
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             </Select.Option>
             {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             <Select.Option value={false}>
-              False
+              {t("viz.chart.general.false", "False")}
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             </Select.Option>
           </Select>
@@ -243,23 +246,23 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
           {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
           <Section>
             <Select
-              label="Legend Placement"
+              label={t("viz.chart.general.legendPlacement", "Legend Placement")}
               data-test="Chart.LegendPlacement"
               value={options.legend.enabled ? options.legend.placement : "hidden"}
               onChange={handleLegendPlacementChange}>
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               <Select.Option value="hidden" data-test="Chart.LegendPlacement.HideLegend">
-                Hide legend
+                {t("viz.chart.general.hideLegend", "Hide legend")}
                 {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               </Select.Option>
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               <Select.Option value="auto" data-test="Chart.LegendPlacement.Auto">
-                Right
+                {t("viz.chart.general.right", "Right")}
                 {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               </Select.Option>
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               <Select.Option value="below" data-test="Chart.LegendPlacement.Below">
-                Bottom
+                {t("viz.chart.general.bottom", "Bottom")}
                 {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
               </Select.Option>
             </Select>
@@ -269,18 +272,18 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
             // @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message
             <Section>
               <Select
-                label="Legend Items Order"
+                label={t("viz.chart.general.legendItemsOrder", "Legend Items Order")}
                 data-test="Chart.LegendItemsOrder"
                 value={options.legend.traceorder}
                 onChange={(traceorder: any) => onOptionsChange({ legend: { traceorder } })}>
                 {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
                 <Select.Option value="normal" data-test="Chart.LegendItemsOrder.Normal">
-                  Normal
+                  {t("viz.chart.general.normal", "Normal")}
                   {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
                 </Select.Option>
                 {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
                 <Select.Option value="reversed" data-test="Chart.LegendItemsOrder.Reversed">
-                  Reversed
+                  {t("viz.chart.general.reversed", "Reversed")}
                   {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
                 </Select.Option>
               </Select>
@@ -296,7 +299,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
             data-test="Chart.ShowPoints"
             defaultChecked={options.showpoints}
             onChange={event => onOptionsChange({ showpoints: event.target.checked })}>
-            Show All Points
+            {t("viz.chart.general.showAllPoints", "Show All Points")}
           </Checkbox>
         </Section>
       )}
@@ -305,19 +308,19 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
         // @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message
         <Section>
           <Select
-            label="Stacking"
+            label={t("viz.chart.general.stacking", "Stacking")}
             data-test="Chart.Stacking"
             defaultValue={options.series.stacking}
             disabled={!includes(["line", "area", "column"], options.globalSeriesType)}
             onChange={(stacking: any) => onOptionsChange({ series: { stacking } })}>
             {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             <Select.Option value={null} data-test="Chart.Stacking.Disabled">
-              Disabled
+              {t("viz.chart.general.disabled", "Disabled")}
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             </Select.Option>
             {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             <Select.Option value="stack" data-test="Chart.Stacking.Stack">
-              Stack
+              {t("viz.chart.general.stack", "Stack")}
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             </Select.Option>
           </Select>
@@ -331,7 +334,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
             data-test="Chart.NormalizeValues"
             defaultChecked={options.series.percentValues}
             onChange={event => onOptionsChange({ series: { percentValues: event.target.checked } })}>
-            Normalize values to percentage
+            {t("viz.chart.general.normalizePercent", "Normalize values to percentage")}
           </Checkbox>
         </Section>
       )}
@@ -340,28 +343,28 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
         // @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message
         <Section>
           <Select
-            label="Line Shape"
+            label={t("viz.chart.general.lineShape", "Line Shape")}
             data-test="Chart.LineShape"
             defaultValue={options.lineShape}
             onChange={(val: any) => onOptionsChange({ lineShape: val })}>
             {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             <Select.Option value="linear" data-test="Chart.LineShape.Linear">
-              Linear
+              {t("viz.chart.general.linear", "Linear")}
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             </Select.Option>
             {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             <Select.Option value="spline" data-test="Chart.LineShape.Spline">
-              Spline
+              {t("viz.chart.general.spline", "Spline")}
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             </Select.Option>
             {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             <Select.Option value="hv" data-test="Chart.LineShape.HorizontalVertical">
-              Horizontal-Vertical
+              {t("viz.chart.general.horizontalVertical", "Horizontal-Vertical")}
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             </Select.Option>
             {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             <Select.Option value="vh" data-test="Chart.LineShape.VerticalHorizontal">
-              Vertical-Horizontal
+              {t("viz.chart.general.verticalHorizontal", "Vertical-Horizontal")}
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             </Select.Option>
           </Select>
@@ -372,18 +375,18 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
         // @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message
         <Section>
           <Select
-            label="Missing and NULL values"
+            label={t("viz.chart.general.missingValues", "Missing and NULL values")}
             data-test="Chart.MissingValues"
             defaultValue={options.missingValuesAsZero ? 1 : 0}
             onChange={(value: any) => onOptionsChange({ missingValuesAsZero: !!value })}>
             {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             <Select.Option value={0} data-test="Chart.MissingValues.Keep">
-              Do not display in chart
+              {t("viz.chart.general.doNotDisplay", "Do not display in chart")}
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             </Select.Option>
             {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             <Select.Option value={1} data-test="Chart.MissingValues.Zero">
-              Convert to 0 and display in chart
+              {t("viz.chart.general.convertToZero", "Convert to 0 and display in chart")}
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'Option' does not exist on type '({ class... Remove this comment to see the full error message */}
             </Select.Option>
           </Select>
@@ -396,7 +399,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
           data-test="Chart.EnableClickEvents"
           defaultChecked={options.enableLink}
           onChange={event => onOptionsChange({ enableLink: event.target.checked })}>
-          Enable click events
+          {t("viz.chart.general.enableClickEvents", "Enable click events")}
         </Checkbox>
       </Section>
 
@@ -408,7 +411,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
           onChange={event => onOptionsChange({ linkOpenNewTab: event.target.checked })}
           disabled={!(options.enableLink === true)}
         >
-          Open in new tab
+          {t("viz.chart.general.openInNewTab", "Open in new tab")}
         </Checkbox>
       </Section>
 
@@ -417,7 +420,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
         <Input
           label={
             <React.Fragment>
-              URL template
+              {t("viz.chart.general.urlTemplate", "URL template")}
               {/* @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message */}
               <ContextHelp
                 placement="topLeft"

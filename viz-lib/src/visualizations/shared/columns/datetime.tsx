@@ -2,6 +2,9 @@ import React from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { Section, Input, ContextHelp } from "@/components/visualizations/editor";
 import { createDateTimeFormatter } from "@/lib/value-format";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 type Props = {
   column: {
@@ -20,7 +23,7 @@ function Editor({ column, onChange }: Props) {
       <Input
         label={
           <React.Fragment>
-            Date/Time format
+            {t("viz.table.columnEditor.dateTimeFormat", "Date/Time format")}
             <ContextHelp.DateTimeFormatSpecs />
           </React.Fragment>
         }

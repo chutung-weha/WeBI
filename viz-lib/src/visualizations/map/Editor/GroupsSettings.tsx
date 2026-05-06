@@ -3,9 +3,12 @@ import React, { useMemo, useCallback } from "react";
 import Table from "antd/lib/table";
 import ColorPicker from "@/components/ColorPicker";
 import { EditorPropTypes } from "@/visualizations/prop-types";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
 import ColorPalette from "@/visualizations/ColorPalette";
 
 import prepareData from "../prepareData";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 export default function GroupsSettings({ options, data, onOptionsChange }: any) {
   const groups = useMemo(
@@ -36,11 +39,11 @@ export default function GroupsSettings({ options, data, onOptionsChange }: any) 
 
   const columns = [
     {
-      title: "Group",
+      title: t("viz.map.groups.group", "Group"),
       dataIndex: "name",
     },
     {
-      title: "Color",
+      title: t("viz.map.groups.color", "Color"),
       dataIndex: "color",
       width: "1%",
       render: (unused: any, item: any) => (

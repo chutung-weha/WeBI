@@ -3,9 +3,12 @@ import React, { useMemo, useCallback } from "react";
 import Table from "antd/lib/table";
 import ColorPicker from "@/components/ColorPicker";
 import { EditorPropTypes } from "@/visualizations/prop-types";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
 import { AllColorPalettes } from "@/visualizations/ColorPalette";
 import getChartData from "../getChartData";
 import { Section, Select } from "@/components/visualizations/editor";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 function getUniqueValues(chartData: any) {
   const uniqueValuesNames = new Set();
@@ -52,11 +55,11 @@ export default function PieColorsSettings({ options, data, onOptionsChange }: an
 
   const columns = [
     {
-      title: "Values",
+      title: t("viz.chart.pieColors.values", "Values"),
       dataIndex: "key",
     },
     {
-      title: "Color",
+      title: t("viz.chart.pieColors.color", "Color"),
       dataIndex: "color",
       width: "1%",
       render: (unused: any, item: any) => (
@@ -84,7 +87,7 @@ export default function PieColorsSettings({ options, data, onOptionsChange }: an
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
           <Select
-            label="Color Scheme"
+            label={t("viz.chart.colors.scheme", "Color Scheme")}
             defaultValue={options.color_scheme}
             data-test="ColorScheme"
             onChange={(val : any) => onOptionsChange({ color_scheme: val })}>

@@ -8,6 +8,8 @@ import { visualizationsSettings } from "@/visualizations/visualizationsSettings"
 import useLoadGeoJson from "../hooks/useLoadGeoJson";
 import { getGeoJsonFields } from "./utils";
 
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
+
 export default function GeneralSettings({ options, data, onOptionsChange }: any) {
   const [geoJson, isLoadingGeoJson] = useLoadGeoJson(options.mapType);
   const geoJsonFields = useMemo(() => getGeoJsonFields(geoJson), [geoJson]);
@@ -29,7 +31,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <Select
-          label="Map"
+          label={t("viz.choropleth.general.map", "Map")}
           data-test="Choropleth.Editor.MapType"
           defaultValue={options.mapType}
           onChange={handleMapChange}>
@@ -48,7 +50,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
         <Grid.Row gutter={15}>
           <Grid.Col span={12}>
             <Select
-              label="Key Column"
+              label={t("viz.choropleth.general.keyColumn", "Key Column")}
               className="w-100"
               data-test="Choropleth.Editor.KeyColumn"
               disabled={data.columns.length === 0}
@@ -65,7 +67,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
           </Grid.Col>
           <Grid.Col span={12}>
             <Select
-              label="Target Field"
+              label={t("viz.choropleth.general.targetField", "Target Field")}
               className="w-100"
               data-test="Choropleth.Editor.TargetField"
               disabled={isLoadingGeoJson || targetFields.length === 0}
@@ -87,7 +89,7 @@ export default function GeneralSettings({ options, data, onOptionsChange }: any)
       {/* @ts-expect-error ts-migrate(2745) FIXME: This JSX tag's 'children' prop expects type 'never... Remove this comment to see the full error message */}
       <Section>
         <Select
-          label="Value Column"
+          label={t("viz.choropleth.general.valueColumn", "Value Column")}
           data-test="Choropleth.Editor.ValueColumn"
           disabled={data.columns.length === 0}
           defaultValue={options.valueColumn}

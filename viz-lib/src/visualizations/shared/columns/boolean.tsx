@@ -2,6 +2,9 @@ import React from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { Section, Input } from "@/components/visualizations/editor";
 import { createBooleanFormatter } from "@/lib/value-format";
+import { visualizationsSettings } from "@/visualizations/visualizationsSettings";
+
+const t = (key: string, fallback?: string) => visualizationsSettings.t(key, fallback);
 
 type Props = {
   column: {
@@ -28,7 +31,7 @@ function Editor({ column, onChange }: Props) {
         <Input
           label={
             <React.Fragment>
-              Value for <code>false</code>
+              {t("viz.table.columnEditor.valueForFalse", "Value for")} <code>false</code>
             </React.Fragment>
           }
           data-test="Table.ColumnEditor.Boolean.False"
@@ -43,7 +46,7 @@ function Editor({ column, onChange }: Props) {
         <Input
           label={
             <React.Fragment>
-              Value for <code>true</code>
+              {t("viz.table.columnEditor.valueForTrue", "Value for")} <code>true</code>
             </React.Fragment>
           }
           data-test="Table.ColumnEditor.Boolean.True"
