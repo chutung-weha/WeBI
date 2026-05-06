@@ -56,7 +56,7 @@ def login(org_slug=None):
 
             return redirect(next_path or url_for("redash.index"))
         else:
-            flash("Incorrect credentials.")
+            flash("Thông tin đăng nhập không đúng.")
 
     return render_template(
         "login.html",

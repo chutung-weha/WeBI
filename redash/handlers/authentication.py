@@ -63,7 +63,7 @@ def render_token_login_page(template, org_slug, token, invite):
             render_template(
                 "error.html",
                 error_message=(
-                    "This invitation has already been accepted. Please try resetting your password instead."
+                    "Lời mời này đã được chấp nhận. Vui lòng thử đặt lại mật khẩu."
                 ),
             ),
             400,
@@ -72,13 +72,13 @@ def render_token_login_page(template, org_slug, token, invite):
     status_code = 200
     if request.method == "POST":
         if "password" not in request.form:
-            flash("Bad Request")
+            flash("Yêu cầu không hợp lệ.")
             status_code = 400
         elif not request.form["password"]:
-            flash("Cannot use empty password.")
+            flash("Mật khẩu không được để trống.")
             status_code = 400
         elif len(request.form["password"]) < 6:
-            flash("Password length is too short (<6).")
+            flash("Mật khẩu phải có ít nhất 6 ký tự.")
             status_code = 400
         else:
             if invite or user.is_invitation_pending:
@@ -127,7 +127,7 @@ def verify(token, org_slug=None):
         return (
             render_template(
                 "error.html",
-                error_message="Your verification link is invalid. Please ask for a new one.",
+                error_message="Liên kết xác minh không hợp lệ. Vui lòng yêu cầu liên kết mới.",
             ),
             400,
         )
@@ -170,7 +170,7 @@ def verification_email(org_slug=None):
     if not current_user.is_email_verified:
         send_verify_email(current_user, current_org)
 
-    return json_response({"message": "Please check your email inbox in order to verify your email address."})
+    return json_response({"message": "Vui lòng kiểm tra hộp thư để xác minh địa chỉ email của bạn."})
 
 
 @routes.route(org_scoped_rule("/login"), methods=["GET", "POST"])
@@ -198,11 +198,11 @@ def login(org_slug=None):
                 login_user(user, remember=remember)
                 return redirect(next_path)
             else:
-                flash("Wrong email or password.")
+                flash("Email hoặc mật khẩu không đúng.")
         except NoResultFound:
-            flash("Wrong email or password.")
+            flash("Email hoặc mật khẩu không đúng.")
     elif request.method == "POST" and not current_org.get_setting("auth_password_login_enabled"):
-        flash("Password login is not enabled for your organization.")
+        flash("Tổ chức của bạn không bật đăng nhập bằng mật khẩu.")
 
     google_auth_url = get_google_auth_url(next_path)
 

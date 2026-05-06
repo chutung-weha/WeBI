@@ -1,20 +1,20 @@
 {% extends "layouts/signed_out.html" %}
-{% block title %}Password Reset{% endblock %}
+{% block title %}Đặt lại mật khẩu{% endblock %}
 {% block content %}
 <div class="fixed-width-page">
   <div class="bg-white tiled">
     {% if submitted %}
       <div>
-        If we found an account associated with that email address, you will find an email from us in your inbox shortly.
+        Nếu địa chỉ email này có tài khoản trên hệ thống, bạn sẽ nhận được email từ chúng tôi trong giây lát.
       </div>
     {% else %}
       <form role="form" method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <div class="form-group">
-          <label for="email">Enter the email address you used for this account:</label>
+          <label for="email">Nhập địa chỉ email bạn dùng cho tài khoản:</label>
           <input type="email" class="form-control" name="email" value="{{email}}">
         </div>
-        <button type="submit" class="btn btn-primary btn-block m-t-25">Reset my password</button>
+        <button type="submit" class="btn btn-primary btn-block m-t-25">Đặt lại mật khẩu</button>
       </form>
     {% endif %}
   </div>
