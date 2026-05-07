@@ -4,9 +4,14 @@ x-redash-service: &redash-service
   build:
     context: .
     args:
-      skip_frontend_build: "true"  # set to empty string to build
+      skip_frontend_build: ""  # set to "true" to skip frontend build (only when developing locally with `pnpm run watch`)
+  # Mount only backend source so client/dist (built in image) is preserved.
+  # Re-add `- .:/app` if you want full hot-reload during local frontend dev.
   volumes:
-    - .:/app
+    - ./redash:/app/redash
+    - ./bin:/app/bin
+    - ./migrations:/app/migrations
+    - ./tests:/app/tests
   env_file:
     - .env
 x-redash-environment: &redash-environment
